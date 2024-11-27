@@ -1,0 +1,109 @@
+/* Estilo base para el footer */
+.content_footer_main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #a493d3;
+  color: #fff;
+  padding: 20px;
+}
+
+/* Estilo para la primera sección del footer */
+.content_footer_span-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.content_footer_span {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap; /* Asegura que los spans se ajusten en pantallas pequeñas */
+}
+
+.content_footer_span span {
+  cursor: pointer;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.content_footer_span span:hover {
+  color: black;
+}
+
+.content_footer_label_input input {
+  font-family: inherit;
+}
+
+/* Estilo para la barra divisoria */
+.line_footer {
+  display: none; /* Ocultar en móviles */
+}
+
+/* Estilo para la sección del newsletter */
+.content_footer_label_input {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.content_footer_label_input span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.button_footer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_footer input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 250px;
+  max-width: 100%; /* Responsivo */
+  font-size: 14px;
+}
+
+.button_footer button {
+  background-color: #8c52ff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button_footer button:hover {
+  background-color: #c1ff72;
+}
+
+.button_footer img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsividad */
+@media (max-width: 480px) {
+  .content_footer_main {
+    padding: 15px;
+  }
+
+  .content_footer_span span {
+    font-size: 12px;
+  }
+
+  .button_footer input {
+    width: 200px;
+  }
+  .content_footer_span {
+    justify-content: center;
+  }
+}
