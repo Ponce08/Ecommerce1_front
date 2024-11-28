@@ -1,37 +1,27 @@
 .content_img_home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 100rem; /* Equivale a 1800px si la raíz es de 16px */
-    margin: 0 auto; /* Centra el contenedor */
-    padding: 0.625rem; /* Espaciado interno relativo */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100rem;
+}
+
+.content_img_home img {
+  width: 100%; 
+  max-width: 100rem;
+  padding-bottom: 1.25rem; /* Espaciado inferior relativo */
+  height: auto; /* Mantiene la proporción de las imágenes */
+}
+
+/* Ajustes para pantallas pequeñas y tablets */
+@media (max-width: 768px) {
   .content_img_home img {
-    width: 95%; /* Proporción relativa al contenedor */
-    max-width: 100rem; /* Tamaño máximo relativo */
-    border-radius: 4.375rem; /* Equivale a 70px si la raíz es de 16px */
-    padding-bottom: 1.25rem; /* Espaciado inferior relativo */
-    height: auto; /* Mantiene la proporción de las imágenes */
+    width: 100%; /* Más ancho en pantallas pequeñas */
   }
-  
-  /* Ajustes para pantallas pequeñas y tablets */
-  @media (max-width: 768px) {
-    .content_img_home img {
-      width: 99%; /* Más ancho en pantallas pequeñas */
-      border-radius: 1.875rem; /* Equivale a 30px */
-    }
+}
+
+/* Ajustes específicos para pantallas de 360px o mayores */
+@media (min-width: 360px) and (max-width: 480px) {
+  .content_img_home img {
+    width: 100%; /* Ocupa todo el ancho disponible */
   }
-  
-  /* Ajustes específicos para pantallas de 360px o mayores */
-  @media (min-width: 360px) and (max-width: 480px) {
-    .content_img_home img {
-      width: 100%; /* Ocupa todo el ancho disponible */
-      border-radius: 1.25rem; /* Equivale a 20px */
-    }
-  
-    .content_img_home {
-      padding: 0.3125rem; /* Espaciado más compacto */
-    }
-  }
-  
+}
