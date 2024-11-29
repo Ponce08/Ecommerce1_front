@@ -8,7 +8,8 @@ export const theme = {
     colors: {
       colorFooter: '#8c52ff',
       colorText: '#c1ff72',
-      colorBackground: '#d2c4f8'
+      colorBackground: '#d2c4f8',
+      colorBackgroundMain: '#d9d9d9'
     }
   }
 };

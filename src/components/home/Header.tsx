@@ -1,6 +1,6 @@
-import './Header.css';
-import img_header1 from '../../imagenes/img_header1 .webp';
-import icon_header1 from '../../imagenes/shopping-cart-free-15-svgrepo-com.svg';
+import './Home.css';
+import img_header1 from '../imagenes/img_header1 .webp';
+import icon_header1 from '../imagenes/shopping-cart-free-15-svgrepo-com.svg';
 
 export const Header = () => {
   return (

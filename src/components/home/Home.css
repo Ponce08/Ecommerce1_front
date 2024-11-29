@@ -1,5 +1,88 @@
-.styleSeccionImage {
+/*! Styles Header */
+.content_header_main {
   display: flex;
-  width: 50%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
 }
 
+.content_header_main img {
+  width: 30%;
+  height: auto;
+}
+
+.content_header_span {
+  display: flex;
+  align-items: center;
+}
+
+.content_header_span span {
+  margin-right: 3rem;
+  font-size: 1.25rem;
+}
+
+.content_header_span span:hover {
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.content_header_span img {
+  width: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+/* Ajustes para pantallas pequeñas (máximo 768px) */
+@media (max-width: 768px) {
+  .content_header_main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .content_header_main img {
+    width: 50%;
+  }
+
+  .content_header_span {
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .content_header_span span {
+    margin-right: 1.25rem;
+    font-size: 1rem;
+  }
+
+  .content_header_span img {
+    width: 1.25rem;
+    margin-right: 1rem;
+  }
+}
+
+/* Ajustes específicos para pantallas de 360px a 480px */
+@media (min-width: 360px) and (max-width: 480px) {
+  .content_header_main {
+    padding: 1rem;
+  }
+
+  .content_header_span span {
+    margin-right: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .content_header_span img {
+    width: 1.125rem;
+    margin-right: 0.625rem;
+  }
+}
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/*! Styles Seccion2 */
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+
+/*!Styles Footer*/
+@media (max-width: 480px) {
+  .dl_center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
