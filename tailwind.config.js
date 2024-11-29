@@ -6,8 +6,9 @@ export const content = [
 export const theme = {
   extend: {
     colors: {
-      colorFooter: '#a493d3',
-      colorText: '#c1ff72'
+      colorFooter: '#8c52ff',
+      colorText: '#c1ff72',
+      colorBackground: '#d2c4f8'
     }
   }
 };

@@ -1,27 +1,5 @@
-.content_img_home {
+.styleSeccionImage {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 100rem;
+  width: 50%;
 }
 
-.content_img_home img {
-  width: 100%; 
-  max-width: 100rem;
-  padding-bottom: 1.25rem; /* Espaciado inferior relativo */
-  height: auto; /* Mantiene la proporción de las imágenes */
-}
-
-/* Ajustes para pantallas pequeñas y tablets */
-@media (max-width: 768px) {
-  .content_img_home img {
-    width: 100%; /* Más ancho en pantallas pequeñas */
-  }
-}
-
-/* Ajustes específicos para pantallas de 360px o mayores */
-@media (min-width: 360px) and (max-width: 480px) {
-  .content_img_home img {
-    width: 100%; /* Ocupa todo el ancho disponible */
-  }
-}
