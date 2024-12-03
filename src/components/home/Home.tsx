@@ -12,8 +12,8 @@ export const Home = () => {
     <>
       <Header />
       <Seccion1 />
-      <Seccion4 />
       <Seccion2 />
+      <Seccion4 />
       <Seccion3 />
       <Footer />
     </>

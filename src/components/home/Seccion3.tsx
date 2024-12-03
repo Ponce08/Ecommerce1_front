@@ -18,17 +18,17 @@ export const Seccion3 = () => {
           {/* Title and Description */}
           <div className="space-y-6">
             <div className="space-y-2">
-              <p className="text-sm font-medium text-zinc-500">The Best Yoga & Meditation studio</p>
-              <h1 className="text-3xl font-bold tracking-tighter text-zinc-900 md:text-5xl">Transform Your Life With Yoga</h1>
+              <p className="text-sm font-medium text-zinc-500">The best technology within everyone's reach</p>
+              <h1 className="text-3xl font-bold tracking-tighter text-zinc-900 md:text-5xl">Transform Your Life With the Tecnology</h1>
               <p className="text-zinc-500 md:text-lg lg:text-base xl:text-lg">
-                Lorem ipsum dolor sit amet consectetur. Quisque accumsan nunc eget eu.
+              I know of users who want to be at the forefront of technology and enjoy innovative features.
               </p>
             </div>
             {/* Buttons */}
             <div className="flex flex-wrap gap-4">
-              <button className="rounded bg-indigo-600 px-6 py-2 text-white hover:bg-indigo-700">Join Now</button>
+              <button className="rounded bg-[#8c52ff] px-6 py-2 text-white hover:bg-indigo-700">Shop colllection</button>
               <button className="flex items-center gap-2 rounded border border-zinc-300 px-6 py-2 text-zinc-700 hover:bg-zinc-100">
-                Play Video
+                Join Now
               </button>
             </div>
           </div>
