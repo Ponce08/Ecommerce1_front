@@ -1,5 +1,5 @@
-import { Footer } from '../home/Footer.tsx';
-import { Header } from '../home/Header.tsx';
+import { Footer } from '../header&footer/Footer.tsx';
+import { Header } from '../header&footer/Header.tsx';
 import { Cards } from './Cards.tsx';
 // import Filters from './Filters.tsx';
 import { Paginations } from './Paginations.tsx';

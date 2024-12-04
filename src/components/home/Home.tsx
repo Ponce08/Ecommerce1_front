@@ -1,7 +1,7 @@
-import './Home.css';
+import '../Styles.css';
 
-import { Header } from './Header.tsx';
-import { Footer } from './Footer.tsx';
+import { Header } from '../header&footer/Header.tsx';
+import { Footer } from '../header&footer/Footer.tsx';
 import { Seccion1 } from './Seccion1.tsx';
 import { Seccion2 } from './Seccion2.tsx';
 import { Seccion3 } from './Seccion3.tsx';
@@ -10,12 +10,12 @@ import { Seccion4 } from './Seccion4.tsx';
 export const Home = () => {
   return (
     <>
-      <Header />
+      {/* <Header />
       <Seccion1 />
       <Seccion2 />
       <Seccion4 />
       <Seccion3 />
-      <Footer />
+      <Footer /> */}
     </>
   );
 };

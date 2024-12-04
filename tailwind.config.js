@@ -9,7 +9,8 @@ export const theme = {
       colorFooter: '#8c52ff',
       colorText: '#c1ff72',
       colorBackground: '#d2c4f8',
-      colorBackgroundMain: '#d9d9d9'
+      colorBackgroundMain: '#d9d9d9',
+      colorInput: '#8c52ff'
     }
   }
 };

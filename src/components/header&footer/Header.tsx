@@ -1,4 +1,4 @@
-import './Home.css';
+import '../../components/Styles.css';
 import img_header1 from '../imagenes/img_header1 .webp';
 import icon_header1 from '../imagenes/shopping-cart-free-15-svgrepo-com.svg';
 
