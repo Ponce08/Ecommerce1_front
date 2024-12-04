@@ -33,7 +33,12 @@
 
 .img_registerForm {
   background-image: url('./imagenes/img_home1.webp');
-  background-size:cover;
+  background-size: cover;
+}
+
+.img_login {
+  background-image: url('./imagenes/pexels-fauxels-3184405.webp');
+  background-size: cover;
 }
 
 /* Ajustes para pantallas pequeñas (máximo 768px) */

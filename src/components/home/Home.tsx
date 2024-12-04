@@ -6,6 +6,7 @@ import { Seccion1 } from './Seccion1.tsx';
 import { Seccion2 } from './Seccion2.tsx';
 import { Seccion3 } from './Seccion3.tsx';
 import { Seccion4 } from './Seccion4.tsx';
+import { ShoppingCarts } from './ShoppingCarts.tsx';
 
 export const Home = () => {
   return (
@@ -16,6 +17,7 @@ export const Home = () => {
       <Seccion4 />
       <Seccion3 />
       <Footer /> */}
+      <ShoppingCarts />
     </>
   );
 };
