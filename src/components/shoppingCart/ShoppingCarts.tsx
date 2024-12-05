@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import '../Styles.css';
+import { useState, useContext } from 'react';
 import { X, Trash2, ShoppingCart, Plus, Minus } from 'lucide-react';
+import { BooleanContext } from './CartContext.tsx';
 
 interface CartItem {
   id: number;
@@ -10,6 +12,8 @@ interface CartItem {
 }
 
 export const ShoppingCarts = () => {
+  const showCart = useContext(BooleanContext);
+
   const [items, setItems] = useState<CartItem[]>([
     {
       id: 1,
@@ -22,6 +26,20 @@ export const ShoppingCarts = () => {
       id: 2,
       name: 'Producto 2',
       price: 199,
+      quantity: 1,
+      image: 'https://via.placeholder.com/80'
+    },
+    {
+      id: 3,
+      name: 'Producto 3',
+      price: 99,
+      quantity: 1,
+      image: 'https://via.placeholder.com/80'
+    },
+    {
+      id: 3,
+      name: 'Producto 3',
+      price: 99,
       quantity: 1,
       image: 'https://via.placeholder.com/80'
     },
@@ -47,7 +65,11 @@ export const ShoppingCarts = () => {
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="fixed inset-0 bg-gray-800/50 backdrop-blur-sm flex items-center justify-center">
+    <div
+      className={
+        showCart?.isTrue ? 'z-10 fixed inset-0 bg-gray-800/50 backdrop-blur-sm flex items-center justify-center' : 'display_none'
+      }
+    >
       <div className="w-[400px] bg-white rounded-lg shadow-lg flex flex-col">
         {/* Header */}
         <div className="p-4 border-b flex items-center justify-between">
@@ -55,13 +77,13 @@ export const ShoppingCarts = () => {
             <ShoppingCart className="w-5 h-5" />
             Shopping Cart
           </div>
-          <button className="text-gray-500 hover:text-black">
+          <button className="text-gray-500 hover:text-black" onClick={() => showCart?.setIsTrue(false)}>
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Items */}
-        <div className="flex-1 overflow-auto p-4 space-y-4">
+        <div className="flex-1 overflow-auto p-4 space-y-4 cart-items">
           {items.map((item) => (
             <div key={item.id} className="flex items-center gap-4 border-b pb-4">
               <img src={item.image} alt={item.name} className="w-20 h-20 rounded-lg bg-gray-100" />

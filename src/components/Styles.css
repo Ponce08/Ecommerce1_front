@@ -7,13 +7,17 @@
 }
 
 .content_header_main img {
-  width: 30%;
+  width: 100%;
   height: auto;
 }
 
 .content_header_span {
   display: flex;
   align-items: center;
+}
+
+.content_header_span img {
+  cursor: pointer;
 }
 
 .content_header_span span {
@@ -31,16 +35,6 @@
   margin-right: 1.5rem;
 }
 
-.img_registerForm {
-  background-image: url('./imagenes/img_home1.webp');
-  background-size: cover;
-}
-
-.img_login {
-  background-image: url('./imagenes/pexels-fauxels-3184405.webp');
-  background-size: cover;
-}
-
 /* Ajustes para pantallas pequeñas (máximo 768px) */
 @media (max-width: 768px) {
   .content_header_main {
@@ -49,7 +43,7 @@
   }
 
   .content_header_main img {
-    width: 50%;
+    width: 14rem;
   }
 
   .content_header_span {
@@ -83,6 +77,50 @@
     width: 1.125rem;
     margin-right: 0.625rem;
   }
+}
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/*! Styles Register */
+.img_registerForm {
+  background-image: url('./imagenes/img_home1.webp');
+  background-size: cover;
+}
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/*! Styles Login */
+.img_login {
+  background-image: url('./imagenes/pexels-fauxels-3184405.webp');
+  background-size: cover;
+}
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/*! Styles Policies */
+.content_pagePolicies {
+  margin: 3rem;
+}
+
+.content_pagePolicies p {
+  text-align: justify;
+}
+
+.content_pagePolicies h1 {
+  text-align: center;
+  font-weight: bolder;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.content_pagePolicies span {
+  font-weight: bolder;
+}
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/*! Styles Shopping Cart */
+.display_none {
+  display: none;
+}
+
+.cart-items {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 16px;
+  gap: 16px;
 }
 /* ---------------------------------------------------------------------------------------------------------------------------- */
 /*! Styles Seccion2 */

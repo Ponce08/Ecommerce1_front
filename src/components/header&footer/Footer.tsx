@@ -36,7 +36,7 @@ export const Footer = () => {
               </a>
             </div>
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="">
+              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="http://localhost:5173/register">
                 REGISTER
               </a>
             </div>
@@ -46,17 +46,17 @@ export const Footer = () => {
               </a>
             </div>
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="">
+              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="http://localhost:5173/policies">
                 CONTACT
               </a>
             </div>
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="">
+              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="http://localhost:5173/login">
                 SING IN
               </a>
             </div>
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="">
+              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="http://localhost:5173/policies">
                 POLICIES
               </a>
             </div>

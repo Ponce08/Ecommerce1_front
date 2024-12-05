@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import '../Styles.css';
+import { Link } from 'react-router-dom';
 
 const schema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -106,12 +107,14 @@ export const RegisterForm = () => {
           </div>
 
           <div className="mt-5 flex justify-end gap-x-2">
-            <button
-              type="button"
-              className="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm dark:bg-neutral-800 dark:border-neutral-700 dark:text-white hover:bg-colorBackgroundMain hover:border-colorInput"
-            >
-              Cancel
-            </button>
+            <Link to={'/'}>
+              <button
+                type="button"
+                className="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm dark:bg-neutral-800 dark:border-neutral-700 dark:text-white hover:bg-colorBackgroundMain hover:border-colorInput"
+              >
+                Cancel
+              </button>
+            </Link>
             <button
               type="submit"
               className="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg bg-purple-500 text-white hover:bg-purple-600"

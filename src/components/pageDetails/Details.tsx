@@ -1,24 +1,12 @@
-// export const Details = () => {
-//     return (
-//       <>
-
-//       </>
-//     );
-//   };
-
 import { useState } from 'react';
 import { ChevronLeft, Minus, Plus } from 'lucide-react';
+import imgDetails from '../imagenes/pexels-fauxels-3184405.webp';
 
 export const Details = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
-  const images = [
-    'src/components/imagenes/pexels-fauxels-3184405.webp',
-    'src/components/imagenes/pexels-fauxels-3184405.webp',
-    'src/components/imagenes/pexels-fauxels-3184405.webp',
-    'src/components/imagenes/pexels-life-of-pix-7974.webp'
-  ];
+  const images = [imgDetails, imgDetails, imgDetails, imgDetails];
 
   return (
     <div className="min-h-screen bg-colorBackground">
