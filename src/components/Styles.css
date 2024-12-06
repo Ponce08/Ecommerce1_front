@@ -123,7 +123,121 @@
   gap: 16px;
 }
 /* ---------------------------------------------------------------------------------------------------------------------------- */
-/*! Styles Seccion2 */
+/*! Styles Categorys*/
+
+.content_Categorys {
+  display: flex;
+  justify-content: space-around;
+  background: white;
+  margin: 0 3rem 0 3rem;
+  padding: 3rem;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.content_a {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
+.content_Categorys a {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.content_Category_img {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.content_Category_img img {
+  width: 14rem;
+  height: auto;
+}
+
+.content_category_img2 {
+  height: 50%;
+}
+
+.display_none_category {
+  display: none;
+}
+
+/* @media (min-width: 370px) and (max-width: 770px) {
+  .content_Categorys {
+    height: 70%;
+    padding: 2rem;
+    width: 80%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .content_a {
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  .content_Category_img {
+    width: 100%;
+  }
+  .content_category_img2 {
+    padding: 1rem;
+  }
+} */
+
+@media (min-width: 360px) and (max-width: 630px) {
+  .content_Categorys {
+    height: 75%;
+    padding: 1rem;
+    width: 80%;
+    flex-direction: column;
+    align-items: center;
+    inset: 0;
+  }
+  .content_Categorys a {
+    margin-bottom: 0.5rem;
+  }
+  .content_a {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .content_Category_img {
+    width: 100%;
+  }
+  .content_category_img2 {
+    padding: 0.5rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .content_Categorys{
+    height: 85%;
+    padding: 1rem;
+    width: 90%;
+    margin: 0 2rem;
+    inset: 0;
+  }
+  .content_Category_img {
+    width: 50%;
+    flex-wrap: wrap;
+  }
+  .content_category_img2 {
+    margin: 0;
+  }
+  .content_a {
+    width: 100%;
+  }
+  .content_Categorys a {
+    margin-bottom: 0.5rem;
+  }
+  .content_Category_img img {
+    width: 6rem;
+    height: auto;
+    margin: 0;
+  }
+}
+
+
 /* ---------------------------------------------------------------------------------------------------------------------------- */
 
 /*!Styles Footer*/
@@ -134,3 +248,55 @@
     align-items: center;
   }
 }
+
+
+
+
+ /* Teléfonos pequeños (320px - 480px) 
+@media (max-width: 480px) {
+  body {
+    background-color: lightblue;
+  }
+}
+
+ Teléfonos estándar (481px - 768px) 
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    background-color: lightgreen;
+  }
+}
+
+ Tabletas pequeñas (769px - 1024px) 
+@media (min-width: 769px) and (max-width: 1024px) {
+  body {
+    background-color: lightyellow;
+  }
+}
+
+ Tabletas grandes (1025px - 1280px) 
+@media (min-width: 1025px) and (max-width: 1280px) {
+  body {
+    background-color: peachpuff;
+  }
+}
+
+ Portátiles pequeños (1281px - 1440px) 
+@media (min-width: 1281px) and (max-width: 1440px) {
+  body {
+    background-color: lightcoral;
+  }
+}
+
+ Escritorios estándar (1441px - 1920px) 
+@media (min-width: 1441px) and (max-width: 1920px) {
+  body {
+    background-color: lightpink;
+  }
+}
+
+ Pantallas grandes (1921px o más) 
+@media (min-width: 1921px) {
+  body {
+    background-color: lightgoldenrodyellow;
+  }
+} */

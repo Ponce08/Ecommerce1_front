@@ -77,7 +77,7 @@ export const Seccion1 = () => {
               </div>
               <a
                 href="#"
-                className="inline-block rounded-md border border-transparent bg-[#8c52ff] px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
+                className="inline-block rounded-md border border-transparent bg-purple-500 px-8 py-3 text-center font-medium text-white hover:bg-purple-600"
               >
                 Shop Collection
               </a>

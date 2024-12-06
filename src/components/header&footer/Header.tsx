@@ -5,6 +5,7 @@ import img_header1 from '../imagenes/img_header1 .webp';
 import icon_header1 from '../imagenes/shopping-cart-free-15-svgrepo-com.svg';
 import { ShoppingCarts } from '../shoppingCart/ShoppingCarts.tsx';
 import { BooleanContext } from '../shoppingCart/CartContext.tsx';
+import { Categorys } from '../category/Categorys.tsx';
 
 export const Header = () => {
   const showCart = useContext(BooleanContext);
@@ -23,7 +24,8 @@ export const Header = () => {
           <Link to={'/about'}>
             <span>ABOUT</span>
           </Link>
-          <span>CATEGORY</span>
+          {showCart?.isTrue_category ? <Categorys /> : ''}
+          <span onClick={() => showCart?.setIsTrue_category(true)}>CATEGORY</span>
           <Link to={'/login'}>
             <span>LOGIN</span>
           </Link>
