@@ -1,48 +1,38 @@
-import { Briefcase, Linkedin, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-export const About = () => {
+export function About() {
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-8 items-start">
-          {/* Imagen del perfil */}
-          <div className="w-64 h-64 rounded-full overflow-hidden flex-shrink-0 mx-auto md:mx-0 bg-gray-300">
-            <img
-              src="src/components/imagenes/IMG-20240415-WA0021-removebg-preview.jpg"
-              alt="Developer profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Información del desarrollador */}
-          <div className="flex-1 space-y-4">
-            <p className="text-md leading-relaxed">
-              Soy un Desarrollador Full Stack con un enfoque en back-end, especializado en el diseño e implementación de aplicaciones web escalables y robustas. Me apasiona la creación y mantenimiento de APIs RESTful, la gestión de bases
-              de datos como MongoDB y la optimización del rendimiento del servidor. También cuento con experiencia en la
-              implementación de soluciones en entornos multiplataforma y el desarrollo de Single Page Applications (SPA) con
-              JavaScript, TypeScript y Node.js (v16+).
+    <section className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-8 lg:px-8">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),white)] opacity-20" />
+      <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center" />
+      <div className="mx-auto max-w-2xl lg:max-w-4xl">
+        <img alt="" src="src/components/imagenes/wwwww-removebg-preview-removebg-preview.png" className="mx-auto h-[8rem]" />
+        <figure className="mt-10">
+          <blockquote className="text-center text-xl/8 font-semibold text-gray-900 sm:text-2xl/9">
+            <p>
+              Desarrollador Full Stack con enfoque en back-end, especializado en el diseño e implementación de
+              aplicaciones web escalables y robustas. Con experiencia en la implementación y el desarrollo de Single Page
+              Applications (SPA) con JavaScript, TypeScript y Node.js (v16+).
             </p>
-            <p className="text-md leading-relaxed">
-              Mis habilidades técnicas incluyen conocimientos en React.js para el desarrollo de interfaces de usuario dinámicas y
-              eficientes. Me mantengo actualizado con las últimas tendencias y frameworks de JavaScript, lo que me permite
-              desarrollar código limpio, seguro y modular.
-            </p>
-
-            {/* Enlaces sociales */}
-            <div className="flex gap-6 pt-4">
-              <a href="mailto:yonathanponce2019@gmail.com" className="text-gray-600 hover:text-black" aria-label="Email contact">
-                <Mail className="w-8 h-8" />
-              </a>
-              <a href="https://lc.cx/gUBxZP" className="text-gray-600 hover:text-black" aria-label="Portfolio">
-                <Briefcase className="w-8 h-8" />
-              </a>
-              <a href="https://www.linkedin.com/in/yonathan-ponce/" className="text-gray-600 hover:text-black" aria-label="LinkedIn profile">
-                <Linkedin className="w-8 h-8" />
-              </a>
+          </blockquote>
+          <figcaption className="mt-10">
+            <Link to={'https://www.linkedin.com/in/yonathan-ponce/'} target="_blank">
+              <img
+                alt=""
+                src="src/components/imagenes/IMG-20240415-WA0021-removebg-preview.jpg"
+                className="mx-auto size-10 rounded-full transform hover:scale-125 transition-transform duration-300"
+              />
+            </Link>
+            <div className="mt-4 flex items-center justify-center space-x-3 text-base">
+              <div className="font-semibold text-gray-900">Yonathan Ponce</div>
+              <svg width={3} height={3} viewBox="0 0 2 2" aria-hidden="true" className="fill-gray-900">
+                <circle r={1} cx={1} cy={1} />
+              </svg>
+              <div className="text-gray-600">Full Stack Developer</div>
             </div>
-          </div>
-        </div>
+          </figcaption>
+        </figure>
       </div>
-    </div>
+    </section>
   );
-};
+}
