@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { ChevronLeft, Minus, Plus } from 'lucide-react';
-import imgDetails from '../imagenes/pexels-fauxels-3184405.webp';
+import img6 from '../imagenes/img6.jpg';
 
 export const Details = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
-  const images = [imgDetails, imgDetails, imgDetails, imgDetails];
+  const images = [img6, img6, img6, img6];
 
   return (
     <div className="min-h-screen bg-colorBackground">

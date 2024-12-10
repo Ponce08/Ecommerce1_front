@@ -32,9 +32,9 @@ export const Footer = () => {
           </div>
           <dl className="grid grid-cols-1 gap-y-2 sm:grid-cols-2 lg:pt-2 dl_center">
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="">
-                TECNOLOGY
-              </a>
+              <Link to={'/products'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+                <a>TECNOLOGY</a>
+              </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/register'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
@@ -42,7 +42,9 @@ export const Footer = () => {
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText">FASHION</a>
+              <Link to={'/details'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+                <a>FASHION</a>
+              </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
