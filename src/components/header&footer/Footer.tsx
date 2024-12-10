@@ -1,4 +1,5 @@
 import '../../components/Styles.css';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (
@@ -36,29 +37,27 @@ export const Footer = () => {
               </a>
             </div>
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="http://localhost:5173/register">
-                REGISTER
-              </a>
+              <Link to={'/register'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+                <a>REGISTER</a>
+              </Link>
             </div>
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="">
-                FASHION
-              </a>
+              <a className="mt-4 text-base font-semibold text-white hover:text-colorText">FASHION</a>
             </div>
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="http://localhost:5173/policies">
-                CONTACT
-              </a>
+              <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+                <a>CONTACT</a>
+              </Link>
             </div>
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="http://localhost:5173/login">
-                SING IN
-              </a>
+              <Link to={'/login'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+                <a>SING IN</a>
+              </Link>
             </div>
             <div className="flex flex-col items-start">
-              <a className="mt-4 text-base font-semibold text-white hover:text-colorText" href="http://localhost:5173/policies">
-                POLICIES
-              </a>
+              <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+                <a>POLICIES</a>
+              </Link>
             </div>
           </dl>
         </div>

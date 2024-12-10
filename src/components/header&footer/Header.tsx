@@ -1,5 +1,6 @@
 'use client';
 import '../Styles.css';
+import { Link } from 'react-router-dom';
 import img_header1_logo from '../imagenes/img_header1 .webp';
 import { Fragment, useState, useContext } from 'react';
 import { BooleanContext } from '../shoppingCart/CartContext.tsx';
@@ -138,8 +139,8 @@ const navigation = {
     }
   ],
   pages: [
-    { name: 'Home', href: 'http://localhost:5173/' },
-    { name: 'About', href: 'http://localhost:5173/about' }
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' }
   ]
 };
 
@@ -236,26 +237,19 @@ export const Header = () => {
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
-                  <a href={page.href} className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
-                    {page.name}
-                  </a>
+                  <Link to={`${page.href}`}>
+                    <a className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">{page.name}</a>
+                  </Link>
                 </div>
               ))}
             </div>
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               <div className="flow-root">
-                <a href="https://ecommerce1-front.vercel.app/login" className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
-                  Sign in
-                </a>
+                <a className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">Sign in</a>
               </div>
               <div className="flow-root">
-                <a
-                  href="https://ecommerce1-front.vercel.app/register"
-                  className="-m-2 block p-2 font-medium text-bold hover:text-purple-600"
-                >
-                  Create account
-                </a>
+                <a className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">Create account</a>
               </div>
             </div>
 
@@ -284,10 +278,12 @@ export const Header = () => {
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                <a href="https://ecommerce1-front.vercel.app">
-                  <span className="sr-only">Home</span>
-                  <img alt="" src={img_header1_logo} className="h-9 w-auto" />
-                </a>
+                <Link to={'/'}>
+                  <a>
+                    <span className="sr-only">Home</span>
+                    <img alt="" src={img_header1_logo} className="h-9 w-auto" />
+                  </a>
+                </Link>
               </div>
 
               {/* Flyout menus */}
@@ -359,26 +355,24 @@ export const Header = () => {
                   ))}
 
                   {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-black"
-                    >
-                      {page.name}
-                    </a>
+                    <Link to={`${page.href}`} className="flex items-center text-sm font-medium text-gray-700 hover:text-black">
+                      <a key={page.name} >
+                        {page.name}
+                      </a>
+                    </Link>
                   ))}
                 </div>
               </PopoverGroup>
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a href="https://ecommerce1-front.vercel.app/login" className="text-sm font-medium text-gray-700 hover:text-black">
-                    Sign in
-                  </a>
+                  <Link to={'/login'}>
+                    <a className="text-sm font-medium text-gray-700 hover:text-black">Sign in</a>
+                  </Link>
                   <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-                  <a href="https://ecommerce1-front.vercel.app/register" className="text-sm font-medium text-gray-700 hover:text-black">
-                    Create account
-                  </a>
+                  <Link to={'/register'}>
+                    <a className="text-sm font-medium text-gray-700 hover:text-black">Create account</a>
+                  </Link>
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex"></div>
