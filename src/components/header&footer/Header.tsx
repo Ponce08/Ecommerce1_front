@@ -1,7 +1,7 @@
 'use client';
 import '../Styles.css';
+import img2 from '../imagenes/img2.png';
 import { Link } from 'react-router-dom';
-import img_header1_logo from '../imagenes/img_header1 .webp';
 import { Fragment, useState, useContext } from 'react';
 import { BooleanContext } from '../shoppingCart/CartContext.tsx';
 import { ShoppingCarts } from '../shoppingCart/ShoppingCarts.tsx';
@@ -281,7 +281,7 @@ export const Header = () => {
                 <Link to={'/'}>
                   <a>
                     <span className="sr-only">Home</span>
-                    <img alt="" src={img_header1_logo} className="h-9 w-auto" />
+                    <img alt="" src={img2} className="h-9 w-auto" />
                   </a>
                 </Link>
               </div>
@@ -356,9 +356,7 @@ export const Header = () => {
 
                   {navigation.pages.map((page) => (
                     <Link to={`${page.href}`} className="flex items-center text-sm font-medium text-gray-700 hover:text-black">
-                      <a key={page.name} >
-                        {page.name}
-                      </a>
+                      <a key={page.name}>{page.name}</a>
                     </Link>
                   ))}
                 </div>

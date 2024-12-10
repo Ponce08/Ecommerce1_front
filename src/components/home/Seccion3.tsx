@@ -1,4 +1,4 @@
-import img_home2 from '../imagenes/img_home2.webp';
+import img3 from '../imagenes/img3.jpg';
 
 export const Seccion3 = () => {
   let stats = [
@@ -11,7 +11,7 @@ export const Seccion3 = () => {
       <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
         {/* Image Section */}
         <div className="flex items-center justify-center">
-          <img alt="Yoga instructor" className="overflow-hidden rounded-lg object-cover" src={img_home2} />
+          <img alt="Yoga instructor" className="overflow-hidden rounded-lg object-cover" src={img3} />
         </div>
         {/* Text Section */}
         <div className="flex flex-col justify-center space-y-8">
@@ -19,9 +19,11 @@ export const Seccion3 = () => {
           <div className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm font-medium text-zinc-500">The best technology within everyone's reach</p>
-              <h1 className="text-3xl font-bold tracking-tighter text-zinc-900 md:text-5xl">Transform Your Life With the Tecnology</h1>
+              <h1 className="text-3xl font-bold tracking-tighter text-zinc-900 md:text-5xl">
+                Transform Your Life With the Tecnology
+              </h1>
               <p className="text-zinc-500 md:text-lg lg:text-base xl:text-lg">
-              I know of users who want to be at the forefront of technology and enjoy innovative features.
+                I know of users who want to be at the forefront of technology and enjoy innovative features.
               </p>
             </div>
             {/* Buttons */}

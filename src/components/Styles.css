@@ -81,13 +81,13 @@
 /* ---------------------------------------------------------------------------------------------------------------------------- */
 /*! Styles Register */
 .img_registerForm {
-  background-image: url('./imagenes/img_home1.webp');
+  background-image: url('./imagenes/img1.jpg');
   background-size: cover;
 }
 /* ---------------------------------------------------------------------------------------------------------------------------- */
 /*! Styles Login */
 .img_login {
-  background-image: url('./imagenes/pexels-fauxels-3184405.webp');
+  background-image: url('./imagenes/img6.jpg');
   background-size: cover;
 }
 /* ---------------------------------------------------------------------------------------------------------------------------- */
