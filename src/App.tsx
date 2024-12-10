@@ -23,6 +23,7 @@ function App() {
           <Route path="/finishshopping" element={<PageFinishShopping />} />
           <Route path="/policies" element={<PagePolicies />} />
           <Route path="/about" element={<PageAbout />} />
+          <Route path="/products" element={<PageCards />} />
         </Routes>
       </Router>
     </CartProvider>

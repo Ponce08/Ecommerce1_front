@@ -1,3 +1,8 @@
+import { AiOutlineFilter } from 'react-icons/ai';
+import { useContext } from 'react';
+import { BooleanContext } from '../shoppingCart/CartContext.tsx';
+import { Filters } from './Filters.tsx';
+
 export const Cards = () => {
   const products = [
     {
@@ -97,8 +102,20 @@ export const Cards = () => {
       imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.'
     }
   ];
+
+  const showFilters = useContext(BooleanContext);
   return (
-    <div className="bg-colorBackground">
+    <div className="bg-colorBackground relative">
+      {showFilters?.isTrue_filters ? <Filters /> : ''}
+      <div className="absolute w-full h-[1%] md:h-[3.5%] xl:h-[5%] sm:h-[3%] flex justify-center items-center">
+        <button
+          onClick={() => showFilters?.setIsTrue_filters(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-purple-500 text-sm text-white rounded hover:bg-purple-600 transition"
+        >
+          <AiOutlineFilter size={20} />
+          Filters
+        </button>
+      </div>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Products</h2>
 
