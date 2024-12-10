@@ -1,3 +1,4 @@
+import forms from '@tailwindcss/forms';
 /** @type {import('tailwindcss').Config} */
 export const content = [
   './index.html',
@@ -14,4 +15,4 @@ export const theme = {
     }
   }
 };
-export const plugins = [require('@tailwindcss/forms')];
+export const plugins = [forms];
