@@ -1,5 +1,5 @@
 import img4 from '../imagenes/img4.jpg';
-import img5 from '../imagenes/img5.jpg';
+import img5 from '../imagenes/img5.png';
 
 import { Link } from 'react-router-dom';
 
