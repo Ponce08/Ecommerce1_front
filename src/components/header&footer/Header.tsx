@@ -245,13 +245,13 @@ export const Header = () => {
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               <div className="flow-root">
-                <a href="http://localhost:5173/login" className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
+                <a href="https://ecommerce1-front.vercel.app/login" className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
                   Sign in
                 </a>
               </div>
               <div className="flow-root">
                 <a
-                  href="http://localhost:5173/register"
+                  href="https://ecommerce1-front.vercel.app/register"
                   className="-m-2 block p-2 font-medium text-bold hover:text-purple-600"
                 >
                   Create account
@@ -284,7 +284,7 @@ export const Header = () => {
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                <a href="http://localhost:5173">
+                <a href="https://ecommerce1-front.vercel.app">
                   <span className="sr-only">Home</span>
                   <img alt="" src={img_header1_logo} className="h-9 w-auto" />
                 </a>
@@ -372,11 +372,11 @@ export const Header = () => {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a href="http://localhost:5173/login" className="text-sm font-medium text-gray-700 hover:text-black">
+                  <a href="https://ecommerce1-front.vercel.app/login" className="text-sm font-medium text-gray-700 hover:text-black">
                     Sign in
                   </a>
                   <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-                  <a href="http://localhost:5173/register" className="text-sm font-medium text-gray-700 hover:text-black">
+                  <a href="https://ecommerce1-front.vercel.app/register" className="text-sm font-medium text-gray-700 hover:text-black">
                     Create account
                   </a>
                 </div>
