@@ -11,8 +11,8 @@ type Products = {
 };
 
 export const Cards = () => {
-  const { loading, error } = useFetchProducts();
   const contextGlobal = useContext(GlobalContext);
+  const { loading, error } = useFetchProducts(contextGlobal?.page);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
