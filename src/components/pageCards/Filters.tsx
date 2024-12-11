@@ -1,6 +1,6 @@
 import '../Styles.css';
 import { useState, useContext } from 'react';
-import { BooleanContext } from '../shoppingCart/CartContext.tsx';
+import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { FiX, FiArrowRight } from 'react-icons/fi';
 
 export const Filters = () => {
@@ -20,7 +20,7 @@ export const Filters = () => {
     setMaxPrice('');
   };
 
-  const showFilters = useContext(BooleanContext);
+  const showFilters = useContext(GlobalContext);
   return (
     <div className="absolute z-50 w-full h-full flex justify-center bg-gray-800/50 backdrop-blur-sm">
       <div

@@ -1,6 +1,27 @@
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import { gql, useQuery } from '@apollo/client';
+
+const GET_PRODUCTS = gql`
+  query GetProducts {
+    products {
+      id
+      title
+      images
+    }
+  }
+`;
+
+export const allProducts = () => {
+  const { loading, error, data } = useQuery(GET_PRODUCTS);
+  return {
+    loading,
+    error,
+    data
+  };
+};
 
 export const Paginations = () => {
+
   return (
     <div className="bg-colorBackgroundMain p-4 shadow-sm">
       <nav className="flex items-center justify-center gap-2">

@@ -3,7 +3,7 @@ import '../Styles.css';
 import img2 from '../imagenes/img2.png';
 import { Link } from 'react-router-dom';
 import { Fragment, useState, useContext } from 'react';
-import { BooleanContext } from '../shoppingCart/CartContext.tsx';
+import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { ShoppingCarts } from '../shoppingCart/ShoppingCarts.tsx';
 import {
   Dialog,
@@ -145,7 +145,7 @@ const navigation = {
 };
 
 export const Header = () => {
-  const showCart = useContext(BooleanContext);
+  const contextGlobal = useContext(GlobalContext);
 
   const [open, setOpen] = useState(false);
 
@@ -246,10 +246,14 @@ export const Header = () => {
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               <div className="flow-root">
-                <a className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">Sign in</a>
+                <Link to={'/login'} className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
+                  <a>Sign in</a>
+                </Link>
               </div>
               <div className="flow-root">
-                <a className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">Create account</a>
+                <Link to={'/register'} className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
+                  <a>Create account</a>
+                </Link>
               </div>
             </div>
 
@@ -290,7 +294,7 @@ export const Header = () => {
               <PopoverGroup className="hidden lg:ml-8 lg:block lg:self-stretch">
                 <div className="flex h-full space-x-8">
                   {navigation.categories.map((category) => (
-                    <Popover key={category.name} className="flex">
+                    <Popover key={category.id} className="flex">
                       <div className="relative flex">
                         <PopoverButton className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-purple-600 data-[open]:border-purple-600 data-[open]:text-purple-600">
                           {category.name}
@@ -380,9 +384,9 @@ export const Header = () => {
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
-                  {showCart?.isTrue ? <ShoppingCarts /> : ''}
+                  {contextGlobal?.isTrue ? <ShoppingCarts /> : ''}
 
-                  <a href="#" className="group -m-2 flex items-center p-2" onClick={() => showCart?.setIsTrue(true)}>
+                  <a href="#" className="group -m-2 flex items-center p-2" onClick={() => contextGlobal?.setIsTrue(true)}>
                     <ShoppingBagIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-gray-500" />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                     <span className="sr-only">items in cart, view bag</span>

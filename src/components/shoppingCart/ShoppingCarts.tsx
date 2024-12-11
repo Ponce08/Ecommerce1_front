@@ -1,7 +1,7 @@
 import '../Styles.css';
 import { useState, useContext } from 'react';
 import { X, Trash2, ShoppingCart, Plus, Minus } from 'lucide-react';
-import { BooleanContext } from './CartContext.tsx';
+import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 
 interface CartItem {
   id: number;
@@ -12,7 +12,7 @@ interface CartItem {
 }
 
 export const ShoppingCarts = () => {
-  const showCart = useContext(BooleanContext);
+  const contextGlobal = useContext(GlobalContext);
 
   const [items, setItems] = useState<CartItem[]>([
     {
@@ -67,7 +67,9 @@ export const ShoppingCarts = () => {
   return (
     <div
       className={
-        showCart?.isTrue ? 'z-10 fixed inset-0 bg-gray-800/50 backdrop-blur-sm flex items-center justify-center' : 'display_none'
+        contextGlobal?.isTrue
+          ? 'z-10 fixed inset-0 bg-gray-800/50 backdrop-blur-sm flex items-center justify-center'
+          : 'display_none'
       }
     >
       <div className="w-[400px] bg-white rounded-lg shadow-lg flex flex-col">
@@ -77,7 +79,7 @@ export const ShoppingCarts = () => {
             <ShoppingCart className="w-5 h-5" />
             Shopping Cart
           </div>
-          <button className="text-gray-500 hover:text-black" onClick={() => showCart?.setIsTrue(false)}>
+          <button className="text-gray-500 hover:text-black" onClick={() => contextGlobal?.setIsTrue(false)}>
             <X className="w-5 h-5" />
           </button>
         </div>
