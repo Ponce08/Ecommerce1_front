@@ -3,14 +3,14 @@ import '../Styles.css';
 export const Login = () => {
   return (
     <div className="w-full px-4 py-4 bg-black img_login">
-      <div className="max-w-sm mx-auto mt-1 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-700">
+      <div className="max-w-sm mx-auto mt-1 bg-white border border-gray-200 rounded-xl shadow-sm">
         <div className="p-4 sm:p-7">
           <div className="text-center">
-            <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h1>
-            <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400">
+            <h1 className="block text-2xl font-bold text-gray-800">Sign in</h1>
+            <p className="mt-2 text-sm text-gray-600">
               Don't have an account yet?/
               <a
-                className="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
+                className="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium"
                 href="../examples/html/signup.html"
               >
                 Sign up here
@@ -21,7 +21,7 @@ export const Login = () => {
           <div className="mt-5">
             <button
               type="button"
-              className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+              className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
             >
               <svg className="w-4 h-auto" width="46" height="47" viewBox="0 0 46 47" fill="none">
                 <path
@@ -44,14 +44,14 @@ export const Login = () => {
               Sign in with Google
             </button>
 
-            <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-neutral-500 dark:before:border-neutral-600 dark:after:border-neutral-600">
+            <div className="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6">
               Or
             </div>
 
             <form>
               <div className="grid gap-y-4">
                 <div>
-                  <label htmlFor="email" className="block text-sm mb-2 dark:text-white">
+                  <label htmlFor="email" className="block text-sm mb-2">
                     Email address
                   </label>
                   <div className="relative">
@@ -59,7 +59,7 @@ export const Login = () => {
                       type="email"
                       id="email"
                       name="email"
-                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#8c52ff] focus:ring-[#8c52ff] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#8c52ff] focus:ring-[#8c52ff] disabled:opacity-50 disabled:pointer-events-none"
                       required
                       aria-describedby="email-error"
                     />
@@ -83,11 +83,11 @@ export const Login = () => {
 
                 <div>
                   <div className="flex justify-between items-center">
-                    <label htmlFor="password" className="block text-sm mb-2 dark:text-white">
+                    <label htmlFor="password" className="block text-sm mb-2">
                       Password
                     </label>
                     <a
-                      className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
+                      className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium"
                       href="../examples/html/recover-account.html"
                     >
                       Forgot password?
@@ -98,7 +98,7 @@ export const Login = () => {
                       type="password"
                       id="password"
                       name="password"
-                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#8c52ff] focus:ring-[#8c52ff] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#8c52ff] focus:ring-[#8c52ff] disabled:opacity-50 disabled:pointer-events-none"
                       required
                       aria-describedby="password-error"
                     />
@@ -126,11 +126,11 @@ export const Login = () => {
                       id="remember-me"
                       name="remember-me"
                       type="checkbox"
-                      className="shrink-0 mt-0.5 border-gray-200 rounded text-[#8c52ff] focus:ring-[#8c52ff] dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-[#8c52ff] dark:checked:border-[#8c52ff] dark:focus:ring-offset-gray-800"
+                      className="shrink-0 mt-0.5 border-gray-200 rounded text-[#8c52ff] focus:ring-[#8c52ff]"
                     />
                   </div>
                   <div className="ms-3">
-                    <label htmlFor="remember-me" className="text-sm dark:text-white">
+                    <label htmlFor="remember-me" className="text-sm">
                       Remember me
                     </label>
                   </div>

@@ -9,11 +9,13 @@ import { PageLogin } from './components/pageLogin/PageLogin.tsx';
 import { PagePolicies } from './components/pagePolicies/PagePolicies.tsx';
 import { PageRegister } from './components/register/PageRegister.tsx';
 import { CartProvider } from './components/shoppingCart/CartContext.tsx';
+import ScrollToTop from './components/utils/ScrollToTop.tsx';
 
 function App() {
   return (
     <CartProvider>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cards" element={<PageCards />} />

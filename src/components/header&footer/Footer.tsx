@@ -20,7 +20,7 @@ export const Footer = () => {
                 required
                 placeholder="Enter your email"
                 autoComplete="email"
-                className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm/6"
+                className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-purple-500 sm:text-sm/6"
               />
               <button
                 type="submit"
@@ -33,32 +33,32 @@ export const Footer = () => {
           <dl className="grid grid-cols-1 gap-y-2 sm:grid-cols-2 lg:pt-2 dl_center">
             <div className="flex flex-col items-start">
               <Link to={'/products'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>TECNOLOGY</a>
+                <a>Tecnology</a>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/register'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>REGISTER</a>
+                <a>Register</a>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/details'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>FASHION</a>
+                <a>Fashion</a>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>CONTACT</a>
+                <a>Contact</a>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/login'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>SING IN</a>
+                <a>Sign in</a>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>POLICIES</a>
+                <a>Policies</a>
               </Link>
             </div>
           </dl>

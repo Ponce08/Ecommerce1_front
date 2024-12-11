@@ -3,10 +3,10 @@ export const Seccion4 = () => {
     <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 bg-colorBackground">
       <div className="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
         <div>
-          <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">
+          <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight">
             Start your journey with <span className="text-blue-600">Style</span>
           </h1>
-          <p className="mt-3 text-lg text-gray-800 dark:text-neutral-400">
+          <p className="mt-3 text-lg text-gray-800">
             Choose your ideal clothes to travel with comfort and style.
           </p>
 
@@ -18,7 +18,7 @@ export const Seccion4 = () => {
               Shop Collection
             </a>
             <a
-              className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+              className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
               href="mailto:yonathanponce2019@gmail.com"
             >
               Contact us
@@ -29,7 +29,7 @@ export const Seccion4 = () => {
             <div className="py-5">
               <div className="flex gap-x-1">
                 <svg
-                  className="size-4 text-gray-800 dark:text-neutral-200"
+                  className="size-4 text-gray-800"
                   width="51"
                   height="51"
                   viewBox="0 0 51 51"
@@ -42,7 +42,7 @@ export const Seccion4 = () => {
                   />
                 </svg>
                 <svg
-                  className="size-4 text-gray-800 dark:text-neutral-200"
+                  className="size-4 text-gray-800"
                   width="51"
                   height="51"
                   viewBox="0 0 51 51"
@@ -55,7 +55,7 @@ export const Seccion4 = () => {
                   />
                 </svg>
                 <svg
-                  className="size-4 text-gray-800 dark:text-neutral-200"
+                  className="size-4 text-gray-800"
                   width="51"
                   height="51"
                   viewBox="0 0 51 51"
@@ -68,7 +68,7 @@ export const Seccion4 = () => {
                   />
                 </svg>
                 <svg
-                  className="size-4 text-gray-800 dark:text-neutral-200"
+                  className="size-4 text-gray-800"
                   width="51"
                   height="51"
                   viewBox="0 0 51 51"
@@ -81,7 +81,7 @@ export const Seccion4 = () => {
                   />
                 </svg>
                 <svg
-                  className="size-4 text-gray-800 dark:text-neutral-200"
+                  className="size-4 text-gray-800"
                   width="51"
                   height="51"
                   viewBox="0 0 51 51"
@@ -95,13 +95,13 @@ export const Seccion4 = () => {
                 </svg>
               </div>
 
-              <p className="mt-3 text-sm text-gray-800 dark:text-neutral-200">
+              <p className="mt-3 text-sm text-gray-800">
                 <span className="font-bold">4.6</span> /5 - from 12k reviews
               </p>
 
               <div className="mt-5">
                 <svg
-                  className="h-auto w-16 text-gray-800 dark:text-white"
+                  className="h-auto w-16 text-gray-800"
                   width="80"
                   height="27"
                   viewBox="0 0 80 27"
@@ -136,7 +136,7 @@ export const Seccion4 = () => {
             <div className="py-5">
               <div className="flex gap-x-1">
                 <svg
-                  className="size-4 text-gray-800 dark:text-neutral-200"
+                  className="size-4 text-gray-800"
                   width="51"
                   height="51"
                   viewBox="0 0 51 51"
@@ -149,7 +149,7 @@ export const Seccion4 = () => {
                   />
                 </svg>
                 <svg
-                  className="size-4 text-gray-800 dark:text-neutral-200"
+                  className="size-4 text-gray-800"
                   width="51"
                   height="51"
                   viewBox="0 0 51 51"
@@ -162,7 +162,7 @@ export const Seccion4 = () => {
                   />
                 </svg>
                 <svg
-                  className="size-4 text-gray-800 dark:text-neutral-200"
+                  className="size-4 text-gray-800"
                   width="51"
                   height="51"
                   viewBox="0 0 51 51"
@@ -175,7 +175,7 @@ export const Seccion4 = () => {
                   />
                 </svg>
                 <svg
-                  className="size-4 text-gray-800 dark:text-neutral-200"
+                  className="size-4 text-gray-800"
                   width="51"
                   height="51"
                   viewBox="0 0 51 51"
@@ -188,7 +188,7 @@ export const Seccion4 = () => {
                   />
                 </svg>
                 <svg
-                  className="size-4 text-gray-800 dark:text-neutral-200"
+                  className="size-4 text-gray-800"
                   width="51"
                   height="51"
                   viewBox="0 0 51 51"
@@ -206,13 +206,13 @@ export const Seccion4 = () => {
                 </svg>
               </div>
 
-              <p className="mt-3 text-sm text-gray-800 dark:text-neutral-200">
+              <p className="mt-3 text-sm text-gray-800">
                 <span className="font-bold">4.8</span> /5 - from 5k reviews
               </p>
 
               <div className="mt-5">
                 <svg
-                  className="h-auto w-16 text-gray-800 dark:text-white"
+                  className="h-auto w-16 text-gray-800"
                   width="110"
                   height="28"
                   viewBox="0 0 110 28"
@@ -239,11 +239,11 @@ export const Seccion4 = () => {
             src="https://images.unsplash.com/photo-1665686377065-08ba896d16fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&h=800&q=80"
             alt="Hero Image"
           />
-          <div className="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 size-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-neutral-800 dark:via-neutral-900/0 dark:to-neutral-900/0"></div>
+          <div className="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 size-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6"></div>
 
           <div className="absolute bottom-0 start-0">
             <svg
-              className="w-2/3 ms-auto h-auto text-white dark:text-neutral-900"
+              className="w-2/3 ms-auto h-auto text-white"
               width="630"
               height="451"
               viewBox="0 0 630 451"

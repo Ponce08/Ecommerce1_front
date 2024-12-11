@@ -31,19 +31,19 @@ export const RegisterForm = () => {
 
   return (
     <div className="w-full px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto img_registerForm">
-      <div className="max-w-2xl mx-auto bg-colorBackground/50 rounded-xl shadow p-4 sm:p-7 dark:bg-neutral-900">
+      <div className="max-w-2xl mx-auto bg-colorBackground/50 rounded-xl shadow p-4 sm:p-7">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-neutral-200">Register</h2>
-          <p className="text-sm text-gray-600 dark:text-neutral-400">be part of our best offers.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Register</h2>
+          <p className="text-sm text-gray-600">be part of our best offers.</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
             <div className="mt-2 space-y-3">
               <input
                 {...register('firstName')}
                 type="text"
-                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff] dark:bg-neutral-900 dark:border-neutral-700"
+                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                 placeholder="First Name"
               />
               <p className="text-red-500 text-sm">{errors.firstName?.message}</p>
@@ -51,7 +51,7 @@ export const RegisterForm = () => {
               <input
                 {...register('lastName')}
                 type="text"
-                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff] dark:bg-neutral-900 dark:border-neutral-700"
+                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                 placeholder="Last Name"
               />
               <p className="text-red-500 text-sm">{errors.lastName?.message}</p>
@@ -59,7 +59,7 @@ export const RegisterForm = () => {
               <input
                 {...register('phoneNumber')}
                 type="text"
-                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff] dark:bg-neutral-900 dark:border-neutral-700"
+                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                 placeholder="Phone Number"
               />
               <p className="text-red-500 text-sm">{errors.phoneNumber?.message}</p>
@@ -67,31 +67,31 @@ export const RegisterForm = () => {
               <input
                 {...register('email')}
                 type="text"
-                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff] dark:bg-neutral-900 dark:border-neutral-700"
+                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                 placeholder="Email"
               />
               <p className="text-red-500 text-sm">{errors.email?.message}</p>
             </div>
           </div>
 
-          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
             <div className="mt-2 space-y-3">
               <input
                 {...register('address')}
                 type="text"
-                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff] dark:bg-neutral-900 dark:border-neutral-700"
+                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                 placeholder="Address"
               />
               <p className="text-red-500 text-sm">{errors.address?.message}</p>
             </div>
           </div>
 
-          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent">
+          <div className="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200">
             <div className="mt-2 space-y-3">
               <input
                 {...register('password')}
                 type="password"
-                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff] dark:bg-neutral-900 dark:border-neutral-700"
+                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                 placeholder="Password"
               />
               <p className="text-red-500 text-sm">{errors.password?.message}</p>
@@ -99,7 +99,7 @@ export const RegisterForm = () => {
               <input
                 {...register('confirmPassword')}
                 type="password"
-                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff] dark:bg-neutral-900 dark:border-neutral-700"
+                className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                 placeholder="Confirm Password"
               />
               <p className="text-red-500 text-sm">{errors.confirmPassword?.message}</p>
@@ -110,7 +110,7 @@ export const RegisterForm = () => {
             <Link to={'/'}>
               <button
                 type="button"
-                className="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm dark:bg-neutral-800 dark:border-neutral-700 dark:text-white hover:bg-colorBackgroundMain hover:border-colorInput"
+                className="py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-colorBackgroundMain hover:border-colorInput"
               >
                 Cancel
               </button>

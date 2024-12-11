@@ -22,16 +22,16 @@ export const Filters = () => {
 
   const showFilters = useContext(BooleanContext);
   return (
-    <div className="w-full flex justify-center">
+    <div className="absolute z-50 w-full h-full flex justify-center bg-gray-800/50 backdrop-blur-sm">
       <div
         className={
           showFilters?.isTrue_filters
-            ? 'z-40 fixed sm:static lg:fixed w-full max-w-sm bg-purple-100 p-4 rounded-lg border border-black shadow-lg'
+            ? 'z-40 h-[8.5%] w-[95%] md:h-[17%] sm:h-[18%] lg:h-[24%] xl:h-[30.5%] max-w-sm bg-purple-100 p-4 rounded-lg border border-black shadow-lg'
             : 'display_none_filters'
         }
       >
         <div className="relative inset-0 pb-4 border-b border-purple-300">
-          <h2 className="text-center text-xl font-bold text-purple-800">FILTER</h2>
+          <h2 className="text-center text-xl font-bold text-purple-800">Filters</h2>
           <button
             onClick={() => showFilters?.setIsTrue_filters(false)}
             className="absolute right-2 top-2 p-2 rounded-full bg-purple-500 text-white hover:bg-purple-600"
@@ -50,7 +50,7 @@ export const Filters = () => {
                 onChange={(e) => setFashion(e.target.checked)}
                 className="form-checkbox border-purple-500 text-purple-500 focus:ring-purple-400"
               />
-              <span className="text-sm font-medium">FASHION</span>
+              <span className="text-sm font-medium">Fashion</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
@@ -59,13 +59,13 @@ export const Filters = () => {
                 onChange={(e) => setTechnology(e.target.checked)}
                 className="form-checkbox border-purple-500 text-purple-500 focus:ring-purple-400"
               />
-              <span className="text-sm font-medium">TECHNOLOGY</span>
+              <span className="text-sm font-medium">Tecnology</span>
             </label>
           </div>
 
           {/* Precio */}
           <div className="space-y-2">
-            <h3 className="text-center font-medium text-purple-800">PRICE</h3>
+            <h3 className="text-center font-medium text-purple-800">Price</h3>
             <div className="flex items-center gap-2">
               <input
                 type="number"
@@ -96,7 +96,7 @@ export const Filters = () => {
                   onChange={() => setRating('upward')}
                   className="form-radio border-purple-500 text-purple-500 focus:ring-purple-400"
                 />
-                <span className="text-sm font-medium">UPWARD</span>
+                <span className="text-sm font-medium">Upward</span>
               </label>
               <label className="flex items-center space-x-2">
                 <input
@@ -105,7 +105,7 @@ export const Filters = () => {
                   onChange={() => setRating('falling')}
                   className="form-radio border-purple-500 text-purple-500 focus:ring-purple-400"
                 />
-                <span className="text-sm font-medium">FALLING</span>
+                <span className="text-sm font-medium">Falling</span>
               </label>
             </div>
           </div>
@@ -119,7 +119,7 @@ export const Filters = () => {
               className="w-full px-2 py-1 rounded bg-purple-200 text-purple-800"
             >
               <option value="" disabled>
-                -- SELECT --
+                -- Select --
               </option>
               <option value="nike">Nike</option>
               <option value="adidas">Adidas</option>
@@ -134,13 +134,13 @@ export const Filters = () => {
               onClick={() => console.log('Applied filters')}
               className="flex-1 bg-purple-500 text-white py-2 rounded hover:bg-purple-600"
             >
-              APPLY
+              Apply
             </button>
             <button
               onClick={handleClean}
               className="flex-1 border border-purple-500 text-purple-800 py-2 rounded hover:bg-purple-100"
             >
-              CLEAN
+              Clean
             </button>
           </div>
         </div>
