@@ -1,44 +1,27 @@
-import React, { createContext, useReducer, useState } from 'react';
-import { initialState, productsReducer, productsAction, productsState } from './reducer.tsx';
+import React, { createContext, useReducer, useMemo } from 'react';
+import { State, Action, reducer, initialState } from './reducer.tsx';
 
 type GlobalContextType = {
-  state: productsState;
-  dispatch: (action: productsAction) => void;
-  page: number;
-  isTrue: boolean;
-  isTrue_category: boolean;
-  isTrue_filters: boolean;
-  setPage: (value: number | ((prev: number) => number)) => void;
-  setIsTrue: (value: boolean) => void;
-  setIsTrue_category: (value: boolean) => void;
-  setIsTrue_filters: (value: boolean) => void;
+  state: State;
+  dispatch: (action: Action) => void;
 };
 
-export const GlobalContext = createContext<GlobalContextType | null>(null);
+const defaultContextValue: GlobalContextType = {
+  state: initialState,
+  dispatch: () => {
+    // Este es un placeholder, advertimos en desarrollo si se usa fuera del proveedor.
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('dispatch no está disponible fuera de GlobalProvider.');
+    }
+  }
+};
+
+export const GlobalContext = createContext<GlobalContextType>(defaultContextValue);
 
 export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(productsReducer, initialState);
-  const [isTrue, setIsTrue] = useState<boolean>(false);
-  const [isTrue_category, setIsTrue_category] = useState<boolean>(false);
-  const [isTrue_filters, setIsTrue_filters] = useState<boolean>(false);
-  const [page, setPage] = useState(1);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  return (
-    <GlobalContext.Provider
-      value={{
-        state,
-        dispatch,
-        isTrue,
-        setIsTrue,
-        isTrue_filters,
-        setIsTrue_filters,
-        isTrue_category,
-        setIsTrue_category,
-        page,
-        setPage
-      }}
-    >
-      {children}
-    </GlobalContext.Provider>
-  );
+  const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+
+  return <GlobalContext.Provider value={contextValue}>{children}</GlobalContext.Provider>;
 };

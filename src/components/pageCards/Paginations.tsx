@@ -10,8 +10,8 @@ export const Paginations = () => {
         {/* Botón de página anterior */}
         <button
           className="flex items-center text-gray-500 hover:text-gray-700 px-3 py-1 rounded-lg"
-          onClick={() => contextGlobal?.setPage((prev) => Math.max(prev - 1, 1))}
-          disabled={contextGlobal?.page === 1}
+          onClick={() => contextGlobal.dispatch({ type: 'DECREMENT_PAGE' })}
+          disabled={contextGlobal.state.page === 1}
         >
           <FiArrowLeft className="mr-1" />
           Previous
@@ -30,7 +30,7 @@ export const Paginations = () => {
         {/* Botón de página siguiente */}
         <button
           className="flex items-center text-gray-500 hover:text-gray-700 px-3 py-1 rounded-lg"
-          onClick={() => contextGlobal?.setPage((prev) => prev + 1)}
+          onClick={() => contextGlobal.dispatch({ type: 'INCREMENT_PAGE' })}
         >
           Next
           <FiArrowRight className="ml-1" />

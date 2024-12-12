@@ -67,7 +67,7 @@ export const ShoppingCarts = () => {
   return (
     <div
       className={
-        contextGlobal?.isTrue
+        contextGlobal.state.isTrue
           ? 'z-10 fixed inset-0 bg-gray-800/50 backdrop-blur-sm flex items-center justify-center'
           : 'display_none'
       }
@@ -79,7 +79,7 @@ export const ShoppingCarts = () => {
             <ShoppingCart className="w-5 h-5" />
             Shopping Cart
           </div>
-          <button className="text-gray-500 hover:text-black" onClick={() => contextGlobal?.setIsTrue(false)}>
+          <button className="text-gray-500 hover:text-black" onClick={() => contextGlobal.dispatch({ type: 'SET_FALSE' })}>
             <X className="w-5 h-5" />
           </button>
         </div>

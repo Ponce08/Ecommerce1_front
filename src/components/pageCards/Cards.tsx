@@ -2,28 +2,28 @@ import { AiOutlineFilter } from 'react-icons/ai';
 import { useContext } from 'react';
 import { Filters } from './Filters.tsx';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
-import useFetchProducts from '../utils/useFetchProducts.tsx';
+import { useProducts } from '../zustand/store.tsx';
 
 type Products = {
   id: number;
   title: string;
-  images: [string];
+  images: string[];
 };
 
 export const Cards = () => {
   const contextGlobal = useContext(GlobalContext);
-  const { loading, error } = useFetchProducts(contextGlobal?.page);
+  const { products, loading, error } = useProducts(contextGlobal.state.page);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="bg-colorBackground relative">
-      {contextGlobal?.isTrue_filters && <Filters />}
+      {contextGlobal.state.isTrue_filters && <Filters />}
 
       <div className="absolute w-full h-[1%] md:h-[3.5%] xl:h-[5%] sm:h-[3%] flex justify-center items-center">
         <button
-          onClick={() => contextGlobal?.setIsTrue_filters(true)}
+          onClick={() => contextGlobal.dispatch({ type: 'SET_TRUE_FILTERS' })}
           className="flex items-center gap-2 px-4 py-2 bg-purple-500 text-sm text-white rounded hover:bg-purple-600 transition"
         >
           <AiOutlineFilter size={20} />
@@ -34,7 +34,7 @@ export const Cards = () => {
         <h2 className="sr-only">Products</h2>
 
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {contextGlobal?.state.products.map((product: Products) => (
+          {products.map((product: Products) => (
             <a key={product.id} className="group">
               <img
                 alt=""

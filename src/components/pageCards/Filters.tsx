@@ -4,6 +4,7 @@ import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { FiX, FiArrowRight } from 'react-icons/fi';
 
 export const Filters = () => {
+  const contextGlobal = useContext(GlobalContext);
   const [fashion, setFashion] = useState(false);
   const [technology, setTechnology] = useState(false);
   const [rating, setRating] = useState('');
@@ -20,12 +21,11 @@ export const Filters = () => {
     setMaxPrice('');
   };
 
-  const showFilters = useContext(GlobalContext);
   return (
     <div className="absolute z-50 w-full h-full flex justify-center bg-gray-800/50 backdrop-blur-sm">
       <div
         className={
-          showFilters?.isTrue_filters
+          contextGlobal.state.isTrue_filters
             ? 'z-40 h-[8.5%] w-[95%] md:h-[17%] sm:h-[18%] lg:h-[24%] xl:h-[30.5%] max-w-sm bg-purple-100 p-4 rounded-lg border border-black shadow-lg'
             : 'display_none_filters'
         }
@@ -33,7 +33,7 @@ export const Filters = () => {
         <div className="relative inset-0 pb-4 border-b border-purple-300">
           <h2 className="text-center text-xl font-bold text-purple-800">Filters</h2>
           <button
-            onClick={() => showFilters?.setIsTrue_filters(false)}
+            onClick={() => contextGlobal.dispatch({ type: 'SET_FALSE_FILTERS' })}
             className="absolute right-2 top-2 p-2 rounded-full bg-purple-500 text-white hover:bg-purple-600"
           >
             <FiX className="w-4 h-4" />
