@@ -5,6 +5,7 @@ import { gql, useQuery } from '@apollo/client';
 interface Product {
   id: number;
   title: string;
+  
   images: string[];
 }
 
@@ -44,7 +45,6 @@ export const useProducts = (page: number) => {
       setProducts(data.products);
     }
   }, [data, setProducts]);
-  console.log(data);
 
   return { products: useStore((state) => state.products), loading, error };
 };

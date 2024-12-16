@@ -12,7 +12,6 @@ export const initialState: State = {
 
 // Define las acciones posibles
 export type Action =
-  | { type: 'TOGGLE' }
   | { type: 'SET_TRUE' }
   | { type: 'SET_FALSE' }
   | { type: 'SET_TRUE_FILTERS' }
@@ -24,14 +23,10 @@ export type Action =
 // Reducer para manejar el estado
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'TOGGLE':
-      return { ...state, isTrue: !state.isTrue };
     case 'SET_TRUE':
       return { ...state, isTrue: true };
     case 'SET_FALSE':
       return { ...state, isTrue: false };
-    case 'TOGGLE':
-      return { ...state, isTrue_filters: !state.isTrue_filters };
     case 'SET_TRUE_FILTERS':
       return { ...state, isTrue_filters: true };
     case 'SET_FALSE_FILTERS':
@@ -39,7 +34,7 @@ export const reducer = (state: State, action: Action): State => {
     case 'INCREMENT_PAGE':
       return { ...state, page: state.page + 1 };
     case 'DECREMENT_PAGE':
-      return { ...state, page: Math.max(1, state.page - 1) }; // No baja de 1
+      return { ...state, page: Math.max(1, state.page - 1) };
     case 'SET_PAGE':
       return { ...state, page: action.payload };
     default:
