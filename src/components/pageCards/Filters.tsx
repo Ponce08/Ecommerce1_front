@@ -2,9 +2,10 @@ import '../Styles.css';
 import { useState, useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { FiX, FiArrowRight } from 'react-icons/fi';
+import { stateCategorys } from '../utils/ObjectCategorys.tsx';
 
 export const Filters = () => {
-  const contextGlobal = useContext(GlobalContext);
+  const { state, dispatch } = useContext(GlobalContext);
   const [fashion, setFashion] = useState(false);
   const [technology, setTechnology] = useState(false);
   const [rating, setRating] = useState('');
@@ -21,11 +22,18 @@ export const Filters = () => {
     setMaxPrice('');
   };
 
+  const applyFilters = () => {
+    dispatch({ type: 'SET_PAGE', payload: 1 });
+    dispatch({ type: 'SET_CATEGORY', payload: brand });
+    dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
+    dispatch({ type: 'SET_FINALPAGE', payload: stateCategorys(brand) });
+  };
+
   return (
     <div className="absolute z-50 w-full h-full flex justify-center bg-gray-800/50 backdrop-blur-sm">
       <div
         className={
-          contextGlobal.state.isTrue_filters
+          state.isTrue_filters
             ? 'z-40 h-[8.5%] w-[95%] md:h-[17%] sm:h-[18%] lg:h-[24%] xl:h-[30.5%] max-w-sm bg-purple-100 p-4 rounded-lg border border-black shadow-lg'
             : 'display_none_filters'
         }
@@ -33,7 +41,7 @@ export const Filters = () => {
         <div className="relative inset-0 pb-4 border-b border-purple-300">
           <h2 className="text-center text-xl font-bold text-purple-800">Filters</h2>
           <button
-            onClick={() => contextGlobal.dispatch({ type: 'SET_FALSE_FILTERS' })}
+            onClick={() => dispatch({ type: 'SET_FALSE_FILTERS' })}
             className="absolute right-2 top-2 p-2 rounded-full bg-purple-500 text-white hover:bg-purple-600"
           >
             <FiX className="w-4 h-4" />
@@ -72,7 +80,7 @@ export const Filters = () => {
                 placeholder="MIN"
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
-                className="w-full px-2 py-1 rounded bg-purple-200 placeholder:text-purple-700"
+                className="w-full px-2 py-1 rounded bg-purple-200 placeholder:text-purple-700 focus:ring-purple-500"
               />
               <FiArrowRight className="text-purple-500" />
               <input
@@ -80,7 +88,7 @@ export const Filters = () => {
                 placeholder="MAX"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
-                className="w-full px-2 py-1 rounded bg-purple-200 placeholder:text-purple-700"
+                className="w-full px-2 py-1 rounded bg-purple-200 placeholder:text-purple-700 focus:ring-purple-500"
               />
             </div>
           </div>
@@ -112,28 +120,37 @@ export const Filters = () => {
 
           {/* Marca */}
           <div className="space-y-2">
-            <h3 className="font-medium text-purple-800">BRAND</h3>
+            <h3 className="font-medium text-purple-800">Category</h3>
             <select
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
-              className="w-full px-2 py-1 rounded bg-purple-200 text-purple-800"
+              className="w-full px-2 py-1 rounded bg-purple-200 text-purple-800 focus:ring-purple-500"
             >
               <option value="" disabled>
                 -- Select --
               </option>
-              <option value="nike">Nike</option>
-              <option value="adidas">Adidas</option>
-              <option value="puma">Puma</option>
-              <option value="reebok">Reebok</option>
+              <option>Beauty</option>
+              <option>Fragrances</option>
+              <option>Laptops</option>
+              <option>Mens_shirts</option>
+              <option>Mens_shoes</option>
+              <option>Mens_watches</option>
+              <option>Mobile_accessories</option>
+              <option>Smartphones</option>
+              <option>Sunglasses</option>
+              <option>Tablets</option>
+              <option>Tops</option>
+              <option>Womens_bags</option>
+              <option>Womens_dresses</option>
+              <option>Womens_jewellery</option>
+              <option>Womens_shoes</option>
+              <option>Womens_watches</option>
             </select>
           </div>
 
           {/* Botones */}
           <div className="flex gap-4">
-            <button
-              onClick={() => console.log('Applied filters')}
-              className="flex-1 bg-purple-500 text-white py-2 rounded hover:bg-purple-600"
-            >
+            <button onClick={applyFilters} className="flex-1 bg-purple-500 text-white py-2 rounded hover:bg-purple-600">
               Apply
             </button>
             <button

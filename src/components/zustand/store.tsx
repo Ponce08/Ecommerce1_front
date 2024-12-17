@@ -5,8 +5,32 @@ import { gql, useQuery } from '@apollo/client';
 interface Product {
   id: number;
   title: string;
-  
+  description: string;
+  category: string;
+  price: number;
+  discountPercentage: number;
+  rating: 0 | 1 | 2 | 3 | 4 | 5;
+  stock: number;
+  tags: string[];
+  brand: string;
+  sku: string;
+  weight: number;
+  dimensions: { width: number; height: number; depth: number };
+  warrantyInformation?: string;
+  shippingInformation?: string;
+  availabilityStatus?: string;
+  reviews: {
+    rating: number;
+    comment: string;
+    date: string;
+    reviewerName: string;
+    reviewerEmail: string;
+  }[];
+  returnPolicy?: string;
+  minimumOrderQuantity: number;
+  meta: { createdAt: string; updatedAt: string; barcode: string; qrCode: string };
   images: string[];
+  thumbnail: string;
 }
 
 interface ProductsState {
@@ -22,19 +46,20 @@ const useStore = create<ProductsState>((set) => ({
 
 // Query de Apollo para obtener productos
 const GET_PRODUCTS = gql`
-  query GetProducts($page: Int) {
-    products(page: $page) {
+  query GetProducts($page: Int, $category: String) {
+    products(page: $page, category: $category) {
       id
       title
       images
+      category
     }
   }
 `;
 
 // Hook personalizado para sincronizar Apollo con Zustand
-export const useProducts = (page: number) => {
+export const useProducts = (page: number, category: string | null) => {
   const { data, loading, error } = useQuery(GET_PRODUCTS, {
-    variables: { page }
+    variables: { page, category }
   });
 
   const setProducts = useStore((state) => state.setProducts);
