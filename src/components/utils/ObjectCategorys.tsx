@@ -14,7 +14,7 @@ const OBJ_CATEGORYS: Record<string, number> = {
   Womens_dresses: 55,
   Womens_jewellery: 33,
   Womens_shoes: 55,
-  Womens_watches: 55
+  Womens_watches: 55,
 };
 
 export const stateCategorys = (category: string): number => {

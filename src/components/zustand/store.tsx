@@ -46,18 +46,26 @@ const useStore = create<ProductsState>((set) => ({
 
 // Query de Apollo para obtener productos
 const GET_PRODUCTS = gql`
-  query GetProducts($page: Int, $category: String) {
-    products(page: $page, category: $category) {
+  query GetProducts($page: Int, $category: String, $priceMin: Float, $priceMax: Float, $ratingOrder: String) {
+    products(page: $page, category: $category, priceMin: $priceMin, priceMax: $priceMax, ratingOrder: $ratingOrder) {
       id
       title
       images
       category
+      price
+      rating
     }
   }
 `;
 
-// Hook personalizado para sincronizar Apollo con Zustand
-export const useProducts = (page: number, category: string | null) => {
+export const useProducts = (
+  page: number,
+  category: string | null,
+  priceMin: number | null = null,
+  priceMax: number | null = null,
+  ratingOrder: 'asc' | 'desc' | null = null
+) => {
+  // Llamar al resolver con todas las variables
   const { data, loading, error } = useQuery(GET_PRODUCTS, {
     variables: { page, category }
   });

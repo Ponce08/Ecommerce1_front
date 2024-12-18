@@ -3,6 +3,7 @@ export type State = {
   isTrue_filters: boolean;
   page: number;
   currentPage: number;
+  firstPage: number;
   finalPage: number;
   category: string;
 };
@@ -12,11 +13,11 @@ export const initialState: State = {
   isTrue_filters: false,
   page: 1,
   currentPage: 0,
-  finalPage: 20,
+  firstPage: 1,
+  finalPage: 85,
   category: ''
 };
 
-// Define las acciones posibles
 export type Action =
   | { type: 'SET_TRUE' }
   | { type: 'SET_FALSE' }
@@ -26,6 +27,7 @@ export type Action =
   | { type: 'DECREMENT_PAGE' }
   | { type: 'SET_PAGE'; payload: number }
   | { type: 'SET_CURRENTPAGE'; payload: number }
+  | { type: 'SET_FIRSTPAGE'; payload: number }
   | { type: 'SET_FINALPAGE'; payload: number }
   | { type: 'SET_CATEGORY'; payload: string };
 
@@ -48,6 +50,8 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, page: action.payload };
     case 'SET_CURRENTPAGE':
       return { ...state, currentPage: action.payload };
+    case 'SET_FIRSTPAGE':
+      return { ...state, firstPage: action.payload };
     case 'SET_FINALPAGE':
       return { ...state, finalPage: action.payload };
     case 'SET_CATEGORY':
