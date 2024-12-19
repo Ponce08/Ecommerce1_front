@@ -2,8 +2,10 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { useContext, useEffect } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import ContextCardsGlobal from './ContextCardsGlobal.tsx';
+import useStore from '../zustand/store.tsx';
 
 export const Paginations = () => {
+  const { products } = useStore((state) => state);
   const { nextPage, previousPage, setCurrentPage, firstPPage, lastPage, stylePage } = ContextCardsGlobal();
   const { state, dispatch } = useContext(GlobalContext);
 
@@ -13,7 +15,7 @@ export const Paginations = () => {
 
   useEffect(() => {
     return () => {
-      dispatch({ type: 'SET_CATEGORY', payload: '' });
+      dispatch({ type: 'SET_CATEGORY', payload: null });
       dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
       dispatch({ type: 'SET_PAGE', payload: 1 });
       dispatch({ type: 'SET_FINALPAGE', payload: 85 });
@@ -72,7 +74,7 @@ export const Paginations = () => {
         <button
           className="flex items-center text-gray-500 hover:text-gray-700 px-3 py-1 rounded-lg"
           onClick={() => nextPage(currentPage2)}
-          disabled={state.page === 20}
+          disabled={state.page === state.finalPage || products.length < 12}
         >
           Next
           <FiArrowRight className="ml-1" />

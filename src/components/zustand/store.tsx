@@ -61,13 +61,13 @@ const GET_PRODUCTS = gql`
 export const useProducts = (
   page: number,
   category: string | null,
-  priceMin: number | null = null,
-  priceMax: number | null = null,
-  ratingOrder: 'asc' | 'desc' | null = null
+  priceMin: number | null,
+  priceMax: number | null,
+  ratingOrder: 'upward' | 'falling' | string
 ) => {
   // Llamar al resolver con todas las variables
   const { data, loading, error } = useQuery(GET_PRODUCTS, {
-    variables: { page, category }
+    variables: { page, category, priceMin, priceMax, ratingOrder }
   });
 
   const setProducts = useStore((state) => state.setProducts);

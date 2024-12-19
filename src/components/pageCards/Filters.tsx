@@ -2,36 +2,21 @@ import '../Styles.css';
 import { useState, useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { FiX, FiArrowRight } from 'react-icons/fi';
-import { stateCategorys } from '../utils/ObjectCategorys.tsx';
+import ContextCardsGlobal from './ContextCardsGlobal.tsx';
 
 export const Filters = () => {
   const { state, dispatch } = useContext(GlobalContext);
+  const { applyFilters, allProducts } = ContextCardsGlobal();
   const [rating, setRating] = useState('');
-  const [brand, setBrand] = useState('');
+  const [category, setCategory] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
   const handleClean = () => {
     setRating('');
-    setBrand('');
+    setCategory('');
     setMinPrice('');
     setMaxPrice('');
-  };
-
-  const applyFilters = () => {
-    dispatch({ type: 'SET_PAGE', payload: 1 });
-    dispatch({ type: 'SET_CATEGORY', payload: brand });
-    dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
-    dispatch({ type: 'SET_FINALPAGE', payload: stateCategorys(brand) });
-    dispatch({ type: 'SET_FALSE_FILTERS' });
-  };
-
-  const allProducts = () => {
-    dispatch({ type: 'SET_CATEGORY', payload: '' });
-    dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
-    dispatch({ type: 'SET_PAGE', payload: 1 });
-    dispatch({ type: 'SET_FINALPAGE', payload: 85 });
-    dispatch({ type: 'SET_FALSE_FILTERS' });
   };
 
   return (
@@ -57,11 +42,11 @@ export const Filters = () => {
         <div className="space-y-2 mt-4">
           <h3 className="text-center text-purple-800 font-bold">Category</h3>
           <select
-            value={brand}
-            onChange={(e) => setBrand(e.target.value)}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             className="w-full px-2 py-1 rounded bg-purple-200 text-purple-800 focus:ring-purple-500"
           >
-            <option value="" disabled className='text-center'>
+            <option value="" disabled className="text-center">
               -- Select --
             </option>
             <option>Beauty</option>
@@ -88,6 +73,7 @@ export const Filters = () => {
             <h3 className="text-center font-bold text-purple-800">Price</h3>
             <div className="flex items-center gap-2">
               <input
+                min="0"
                 type="number"
                 placeholder="MIN"
                 value={minPrice}
@@ -96,6 +82,7 @@ export const Filters = () => {
               />
               <FiArrowRight className="text-purple-500" />
               <input
+                min="0"
                 type="number"
                 placeholder="MAX"
                 value={maxPrice}
@@ -132,7 +119,10 @@ export const Filters = () => {
 
           {/* Botones */}
           <div className="flex gap-4">
-            <button onClick={applyFilters} className="flex-1 bg-purple-500 text-white py-2 rounded hover:bg-purple-600">
+            <button
+              onClick={() => applyFilters(category, minPrice, maxPrice, rating)}
+              className="flex-1 bg-purple-500 text-white py-2 rounded hover:bg-purple-600"
+            >
               Apply
             </button>
             <button
@@ -141,7 +131,10 @@ export const Filters = () => {
             >
               Clean
             </button>
-            <button onClick={allProducts} className="flex-1 bg-purple-500 text-white py-2 rounded hover:bg-purple-600">
+            <button
+              onClick={() => allProducts(rating)}
+              className="flex-1 bg-purple-500 text-white py-2 rounded hover:bg-purple-600"
+            >
               All Products
             </button>
           </div>

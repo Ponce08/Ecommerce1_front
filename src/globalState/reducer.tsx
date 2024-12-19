@@ -5,7 +5,10 @@ export type State = {
   currentPage: number;
   firstPage: number;
   finalPage: number;
-  category: string;
+  category: string | null;
+  priceMin: number | null;
+  priceMax: number | null;
+  ratingOrder: 'upward' | 'falling' | string;
 };
 
 export const initialState: State = {
@@ -15,7 +18,10 @@ export const initialState: State = {
   currentPage: 0,
   firstPage: 1,
   finalPage: 85,
-  category: ''
+  category: null,
+  priceMin: null,
+  priceMax: null,
+  ratingOrder: ''
 };
 
 export type Action =
@@ -29,7 +35,10 @@ export type Action =
   | { type: 'SET_CURRENTPAGE'; payload: number }
   | { type: 'SET_FIRSTPAGE'; payload: number }
   | { type: 'SET_FINALPAGE'; payload: number }
-  | { type: 'SET_CATEGORY'; payload: string };
+  | { type: 'SET_CATEGORY'; payload: string | null }
+  | { type: 'SET_MINPRICE'; payload: number | null }
+  | { type: 'SET_MAXPRICE'; payload: number | null }
+  | { type: 'SET_RATING_ORDER'; payload: 'upward' | 'falling' | string };
 
 // Reducer para manejar el estado
 export const reducer = (state: State, action: Action): State => {
@@ -56,6 +65,12 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, finalPage: action.payload };
     case 'SET_CATEGORY':
       return { ...state, category: action.payload };
+    case 'SET_MINPRICE':
+      return { ...state, priceMin: action.payload };
+    case 'SET_MAXPRICE':
+      return { ...state, priceMax: action.payload };
+    case 'SET_RATING_ORDER':
+      return { ...state, ratingOrder: action.payload };
     default:
       return state;
   }

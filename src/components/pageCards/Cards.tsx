@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { Filters } from './Filters.tsx';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { useProducts } from '../zustand/store.tsx';
+import { LoadingProducts } from './LoadingProducts.tsx';
+import { NotFoundProducts } from './NotFoundProducts.tsx';
 
 type Products = {
   id: number;
@@ -15,10 +17,12 @@ type Products = {
 
 export const Cards = () => {
   const { state, dispatch } = useContext(GlobalContext);
-  const { products, loading, error } = useProducts(state.page, state.category);
+  const { page, category, priceMin, priceMax, ratingOrder } = state;
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  const { products, loading } = useProducts(page, category, priceMin, priceMax, ratingOrder);
+
+  if (loading) return <LoadingProducts />;
+  if (products.length === 0) return <NotFoundProducts />;
 
   return (
     <div className="bg-colorBackground relative">
@@ -43,10 +47,11 @@ export const Cards = () => {
                 <img
                   alt=""
                   src={product.images[0]}
-                  className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8]"
+                  className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8] cursor-pointer"
                 />
                 <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
-                <p className="mt-1 text-lg font-medium text-gray-900">{product.price}</p>
+                <p className="mt-1 text-lg font-medium text-gray-900">${product.price}</p>
+                <p className="mt-1 text-lg font-medium text-gray-900">Rating: {product.rating}</p>
               </a>
             );
           })}

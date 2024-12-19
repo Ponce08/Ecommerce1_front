@@ -1,4 +1,4 @@
-const OBJ_CATEGORYS: Record<string, number> = {
+const OBJ_PRODUCTS: Record<string, number> = {
   Beauty: 15,
   Fragrances: 42,
   Laptops: 55,
@@ -14,17 +14,17 @@ const OBJ_CATEGORYS: Record<string, number> = {
   Womens_dresses: 55,
   Womens_jewellery: 33,
   Womens_shoes: 55,
-  Womens_watches: 55,
+  Womens_watches: 55
 };
 
-export const stateCategorys = (category: string): number => {
-  const value = OBJ_CATEGORYS[category];
+export const stateProductsPagination = (category: string): number => {
+  const valueAmount = Number(OBJ_PRODUCTS[category]);
 
-  const resultFloat = value / 12;
-
+  const resultFloat = valueAmount / 12;
   const result = Math.ceil(resultFloat);
   if (resultFloat < result) {
     return result;
   }
+
   return 0;
 };
