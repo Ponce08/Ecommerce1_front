@@ -53,14 +53,16 @@ export const Paginations = () => {
           {currentPage2}
         </button>
 
-        <button className={stylePage(currentPage3)} onClick={() => setCurrentPage(currentPage3)}>
-          {currentPage3}
-        </button>
+        {!(state.finalPage < currentPage3) && (
+          <button className={stylePage(currentPage3)} onClick={() => setCurrentPage(currentPage3)}>
+            {currentPage3}
+          </button>
+        )}
 
         {/* Elipsis 2 */}
         <span className="px-3 py-1 text-gray-500">{!(currentPage3 === state.finalPage) && '...'}</span>
 
-        {!(currentPage3 === state.finalPage) && (
+        {!(currentPage3 === state.finalPage || state.priceMax || state.finalPage < currentPage3) && (
           <button
             className="px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border"
             onClick={lastPage}

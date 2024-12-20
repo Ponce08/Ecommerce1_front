@@ -1,8 +1,10 @@
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { stateProductsPagination } from '../utils/ObjectCategorys.tsx';
 
 const ContextCardsGlobal = () => {
+  const navigate = useNavigate();
   const { state, dispatch } = useContext(GlobalContext);
 
   return {
@@ -40,6 +42,7 @@ const ContextCardsGlobal = () => {
         : 'px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border';
     },
     applyFilters: (category: string, minPrice: string, maxPrice: string, rating: string) => {
+      navigate(`/products/${category}`)
       dispatch({ type: 'SET_FALSE_FILTERS' });
       dispatch({ type: 'SET_PAGE', payload: 1 });
       dispatch({ type: 'SET_CATEGORY', payload: category === '' ? null : category });
@@ -54,6 +57,7 @@ const ContextCardsGlobal = () => {
     },
 
     allProducts: (rating: string) => {
+      navigate('/products')
       dispatch({ type: 'SET_CATEGORY', payload: null });
       dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
       dispatch({ type: 'SET_PAGE', payload: 1 });

@@ -24,19 +24,19 @@ import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outli
 const navigation = {
   categories: [
     {
-      id: 'women',
+      id: '1',
       name: 'Fashion',
       featured: [
         {
           name: 'New Arrivals',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-category-01.jpg',
+          category: 'Womens_bags',
+          imageSrc: "https://cdn.dummyjson.com/products/images/womens-bags/Blue%20Women's%20Handbag/1.png",
           imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.'
         },
         {
-          name: 'Basic Tees',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/mega-menu-category-02.jpg',
+          name: 'Basic Dress',
+          category: 'Womens_bags',
+          imageSrc: 'https://cdn.dummyjson.com/products/images/womens-dresses/Dress%20Pea/1.png',
           imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.'
         }
       ],
@@ -45,56 +45,56 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Dresses', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Denim', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' }
+            { name: 'Tops', href: '' },
+            { name: 'Dresses', href: '' },
+            { name: 'Pants', href: '' },
+            { name: 'Denim', href: '' },
+            { name: 'Sweaters', href: '' },
+            { name: 'T-Shirts', href: '' },
+            { name: 'Jackets', href: '' },
+            { name: 'Activewear', href: '' },
+            { name: 'Browse All', href: '' }
           ]
         },
         {
           id: 'accessories',
           name: 'Accessories',
           items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' }
+            { name: 'Watches', href: '' },
+            { name: 'Wallets', href: '' },
+            { name: 'Bags', href: '' },
+            { name: 'Sunglasses', href: '' },
+            { name: 'Hats', href: '' },
+            { name: 'Belts', href: '' }
           ]
         },
         {
           id: 'brands',
           name: 'Brands',
           items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' }
+            { name: 'Full Nelson', href: '' },
+            { name: 'My Way', href: '' },
+            { name: 'Re-Arranged', href: '' },
+            { name: 'Counterfeit', href: '' },
+            { name: 'Significant Other', href: '' }
           ]
         }
       ]
     },
     {
-      id: 'men',
+      id: '2',
       name: 'Tecnology',
       featured: [
         {
-          name: 'New Arrivals',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
+          name: 'Latest in technology',
+          category: 'Womens_bags',
+          imageSrc: 'https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/1.png',
           imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.'
         },
         {
-          name: 'Artwork Tees',
-          href: '#',
-          imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/category-page-02-image-card-06.jpg',
+          name: 'Creative tools',
+          category: 'Womens_bags',
+          imageSrc: 'https://cdn.dummyjson.com/products/images/mobile-accessories/Selfie%20Stick%20Monopod/1.png',
           imageAlt:
             'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.'
         }
@@ -104,35 +104,35 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' }
+            { name: 'Tops', href: '' },
+            { name: 'Pants', href: '' },
+            { name: 'Sweaters', href: '' },
+            { name: 'T-Shirts', href: '' },
+            { name: 'Jackets', href: '' },
+            { name: 'Activewear', href: '' },
+            { name: 'Browse All', href: '' }
           ]
         },
         {
           id: 'accessories',
           name: 'Accessories',
           items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' }
+            { name: 'Watches', href: '' },
+            { name: 'Wallets', href: '' },
+            { name: 'Bags', href: '' },
+            { name: 'Sunglasses', href: '' },
+            { name: 'Hats', href: '' },
+            { name: 'Belts', href: '' }
           ]
         },
         {
           id: 'brands',
           name: 'Brands',
           items: [
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' }
+            { name: 'Re-Arranged', href: '' },
+            { name: 'Counterfeit', href: '' },
+            { name: 'Full Nelson', href: '' },
+            { name: 'My Way', href: '' }
           ]
         }
       ]
@@ -145,9 +145,13 @@ const navigation = {
 };
 
 export const Header = () => {
-  const contextGlobal = useContext(GlobalContext);
+  const { state, dispatch } = useContext(GlobalContext);
 
   const [open, setOpen] = useState(false);
+
+  const handleClick = (to: string) => {
+    window.location.href = to;
+  };
 
   return (
     <div className="bg-colorBackgroundMain">
@@ -193,20 +197,22 @@ export const Header = () => {
                   <TabPanel key={category.name} className="space-y-10 px-4 pb-8 pt-10">
                     <div className="grid grid-cols-2 gap-x-4">
                       {category.featured.map((item) => (
-                        <div key={item.name} className="group relative text-sm">
-                          <img
-                            alt={item.imageAlt}
-                            src={item.imageSrc}
-                            className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
-                          />
-                          <a href={item.href} className="mt-6 block font-bold text-gray-900">
-                            <span aria-hidden="true" className="absolute inset-0 z-10" />
-                            {item.name}
-                          </a>
-                          <p aria-hidden="true" className="mt-1">
-                            Shop now
-                          </p>
-                        </div>
+                        <Link to={`/products/:${item.category}`}>
+                          <div className="group relative text-sm">
+                            <img
+                              alt={item.imageAlt}
+                              src={item.imageSrc}
+                              className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
+                            />
+                            <a className="mt-6 block font-bold text-gray-900">
+                              <span aria-hidden="true" className="absolute inset-0 z-10" />
+                              {item.name}
+                            </a>
+                            <p aria-hidden="true" className="mt-1">
+                              Shop now
+                            </p>
+                          </div>
+                        </Link>
                       ))}
                     </div>
                     {category.sections.map((section) => (
@@ -313,20 +319,25 @@ export const Header = () => {
                             <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
                               <div className="col-start-2 grid grid-cols-2 gap-x-8">
                                 {category.featured.map((item) => (
-                                  <div key={item.name} className="group relative text-base sm:text-sm">
-                                    <img
-                                      alt={item.imageAlt}
-                                      src={item.imageSrc}
-                                      className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
-                                    />
-                                    <a href={item.href} className="mt-6 block font-medium text-gray-900">
-                                      <span aria-hidden="true" className="absolute inset-0 z-10" />
-                                      {item.name}
-                                    </a>
-                                    <p aria-hidden="true" className="mt-1">
-                                      Shop now
-                                    </p>
-                                  </div>
+                                  <Link
+                                    to={`/products/${item.category}`}
+                                    onClick={() => handleClick(`/products/${item.category}`)}
+                                  >
+                                    <div key={item.name} className="group relative text-base sm:text-sm">
+                                      <img
+                                        alt={item.imageAlt}
+                                        src={item.imageSrc}
+                                        className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
+                                      />
+                                      <a className="mt-6 block font-medium text-gray-900">
+                                        <span aria-hidden="true" className="absolute inset-0 z-10" />
+                                        {item.name}
+                                      </a>
+                                      <p aria-hidden="true" className="mt-1">
+                                        Shop now
+                                      </p>
+                                    </div>
+                                  </Link>
                                 ))}
                               </div>
                               <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
@@ -384,13 +395,9 @@ export const Header = () => {
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
-                  {contextGlobal.state.isTrue && <ShoppingCarts />}
+                  {state.isTrue && <ShoppingCarts />}
 
-                  <a
-                    href="#"
-                    className="group -m-2 flex items-center p-2"
-                    onClick={() => contextGlobal.dispatch({ type: 'SET_TRUE' })}
-                  >
+                  <a href="#" className="group -m-2 flex items-center p-2" onClick={() => dispatch({ type: 'SET_TRUE' })}>
                     <ShoppingBagIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-gray-500" />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                     <span className="sr-only">items in cart, view bag</span>

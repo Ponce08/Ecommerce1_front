@@ -1,29 +1,40 @@
-import { AiOutlineFilter } from 'react-icons/ai';
-import { useContext } from 'react';
-import { Filters } from './Filters.tsx';
+import { useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { useProducts } from '../zustand/store.tsx';
-import { LoadingProducts } from './LoadingProducts.tsx';
-import { NotFoundProducts } from './NotFoundProducts.tsx';
+import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
+import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
+import { Filters } from '../pageCards/Filters.tsx';
+import { AiOutlineFilter } from 'react-icons/ai';
+import { stateProductsPagination } from '../utils/ObjectCategorys.tsx';
 
-type Products = {
-  id: number;
-  title: string;
-  category: string;
-  price: number;
-  rating: number;
-  images: string[];
-};
+export const CardsCategory = () => {
+  const { categorys } = useParams();
 
-export const Cards = () => {
   const { state, dispatch } = useContext(GlobalContext);
 
-  const { page, category, priceMin, priceMax, ratingOrder } = state;
+  useEffect(() => {
+    dispatch({
+      type: 'SET_FINALPAGE',
+      payload: stateProductsPagination(categorys || '')
+    });
+  }, [categorys]);
 
-  const { products, loading } = useProducts(page, category, priceMin, priceMax, ratingOrder);
+  const { page, priceMin, priceMax, ratingOrder } = state;
+
+  const { products, loading } = useProducts(page, categorys || null, priceMin, priceMax, ratingOrder);
 
   if (loading) return <LoadingProducts />;
   if (products.length === 0) return <NotFoundProducts />;
+
+  type Products = {
+    id: number;
+    title: string;
+    category: string;
+    price: number;
+    rating: number;
+    images: string[];
+  };
 
   return (
     <div className="bg-colorBackground relative">

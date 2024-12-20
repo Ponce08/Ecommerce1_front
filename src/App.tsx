@@ -11,6 +11,7 @@ import { PagePolicies } from './components/pagePolicies/PagePolicies.tsx';
 import { PageRegister } from './components/register/PageRegister.tsx';
 import ScrollToTop from './components/utils/ScrollToTop.tsx';
 import { GlobalProvider } from './globalState/GlobalContext.tsx';
+import { PageCategory } from './components/category/PageCategory.tsx';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
@@ -33,6 +34,7 @@ function App() {
             <Route path="/policies" element={<PagePolicies />} />
             <Route path="/about" element={<PageAbout />} />
             <Route path="/products" element={<PageCards />} />
+            <Route path="products/:categorys" element={<PageCategory />} />
           </Routes>
         </Router>
       </GlobalProvider>
