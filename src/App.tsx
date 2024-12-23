@@ -15,6 +15,7 @@ import { PageCategory } from './components/category/PageCategory.tsx';
 
 const client = new ApolloClient({
   uri: 'https://ecommerce1-back.onrender.com/graphql',
+  // uri: 'http://localhost:4000/graphql',
   cache: new InMemoryCache()
 });
 
@@ -29,12 +30,12 @@ function App() {
             <Route path="/cards" element={<PageCards />} />
             <Route path="/register" element={<PageRegister />} />
             <Route path="/login" element={<PageLogin />} />
-            <Route path="/details" element={<PageDetails />} />
             <Route path="/finishshopping" element={<PageFinishShopping />} />
             <Route path="/policies" element={<PagePolicies />} />
             <Route path="/about" element={<PageAbout />} />
             <Route path="/products" element={<PageCards />} />
-            <Route path="products/:categorys" element={<PageCategory />} />
+            <Route path="/product/:id" element={<PageDetails />} />
+            <Route path="/products/:categorys" element={<PageCategory />} />
           </Routes>
         </Router>
       </GlobalProvider>

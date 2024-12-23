@@ -33,32 +33,32 @@ export const Footer = () => {
           <dl className="grid grid-cols-1 gap-y-2 sm:grid-cols-2 lg:pt-2 dl_center">
             <div className="flex flex-col items-start">
               <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>Policies</a>
+                <span>Policies</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/products'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>Tecnology</a>
+                <span>Tecnology</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/register'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>Register</a>
+                <span>Register</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/details'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>Fashion</a>
+                <span>Fashion</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/login'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>Sign in</a>
+                <span>Sign in</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
-                <a>Contact</a>
+                <span>Contact</span>
               </Link>
             </div>
           </dl>

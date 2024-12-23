@@ -7,6 +7,7 @@ import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
 import { Filters } from '../pageCards/Filters.tsx';
 import { AiOutlineFilter } from 'react-icons/ai';
 import { stateProductsPagination } from '../utils/ObjectCategorys.tsx';
+import { Link } from 'react-router-dom';
 
 export const CardsCategory = () => {
   const { categorys } = useParams();
@@ -14,13 +15,16 @@ export const CardsCategory = () => {
   const { state, dispatch } = useContext(GlobalContext);
 
   useEffect(() => {
-    dispatch({
-      type: 'SET_FINALPAGE',
-      payload: stateProductsPagination(categorys || '')
-    });
-  }, [categorys]);
+    if (categorys) {
+      dispatch({
+        type: 'SET_FINALPAGE',
+        payload: stateProductsPagination(categorys)
+      });
+    }
+  }, [categorys, dispatch]);
 
   const { page, priceMin, priceMax, ratingOrder } = state;
+  console.log(state.category);
 
   const { products, loading } = useProducts(page, categorys || null, priceMin, priceMax, ratingOrder);
 
@@ -55,7 +59,7 @@ export const CardsCategory = () => {
         <div className="grid grid-cols-1 grid-rows-12 gap-x-6 gap-y-10 sm:grid-cols-2 sm:grid-rows-6 lg:grid-cols-3 xl:grid-cols-4 xl:grid-rows-3 xl:gap-x-8">
           {products.map((product: Products) => {
             return (
-              <a key={product.id} className="group">
+              <Link to={`/product/${product.id}`} className="group" key={product.id}>
                 <img
                   alt=""
                   src={product.images[0]}
@@ -64,7 +68,7 @@ export const CardsCategory = () => {
                 <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
                 <p className="mt-1 text-lg font-medium text-gray-900">${product.price}</p>
                 <p className="mt-1 text-lg font-medium text-gray-900">Rating: {product.rating}</p>
-              </a>
+              </Link>
             );
           })}
         </div>

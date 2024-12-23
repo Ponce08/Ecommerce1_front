@@ -5,6 +5,7 @@ import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { useProducts } from '../zustand/store.tsx';
 import { LoadingProducts } from './LoadingProducts.tsx';
 import { NotFoundProducts } from './NotFoundProducts.tsx';
+import { Link } from 'react-router-dom';
 
 type Products = {
   id: number;
@@ -44,7 +45,7 @@ export const Cards = () => {
         <div className="grid grid-cols-1 grid-rows-12 gap-x-6 gap-y-10 sm:grid-cols-2 sm:grid-rows-6 lg:grid-cols-3 xl:grid-cols-4 xl:grid-rows-3 xl:gap-x-8">
           {products.map((product: Products) => {
             return (
-              <a key={product.id} className="group">
+              <Link to={`/product/${product.id}`} className="group" key={product.id}>
                 <img
                   alt=""
                   src={product.images[0]}
@@ -53,7 +54,7 @@ export const Cards = () => {
                 <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
                 <p className="mt-1 text-lg font-medium text-gray-900">${product.price}</p>
                 <p className="mt-1 text-lg font-medium text-gray-900">Rating: {product.rating}</p>
-              </a>
+              </Link>
             );
           })}
         </div>

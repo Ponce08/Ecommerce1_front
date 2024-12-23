@@ -86,8 +86,8 @@ export const ShoppingCarts = () => {
 
         {/* Items */}
         <div className="flex-1 overflow-auto p-4 space-y-4 cart-items">
-          {items.map((item) => (
-            <div key={item.id} className="flex items-center gap-4 border-b pb-4">
+          {items.map((item, index) => (
+            <div key={`${item.id}-${index}`} className="flex items-center gap-4 border-b pb-4">
               <img src={item.image} alt={item.name} className="w-20 h-20 rounded-lg bg-gray-100" />
               <div className="flex-1">
                 <h3 className="font-medium">{item.name}</h3>

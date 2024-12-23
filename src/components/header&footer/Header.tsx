@@ -35,7 +35,7 @@ const navigation = {
         },
         {
           name: 'Basic Dress',
-          category: 'Womens_bags',
+          category: 'Womens_dresses',
           imageSrc: 'https://cdn.dummyjson.com/products/images/womens-dresses/Dress%20Pea/1.png',
           imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.'
         }
@@ -45,38 +45,19 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', href: '' },
-            { name: 'Dresses', href: '' },
-            { name: 'Pants', href: '' },
-            { name: 'Denim', href: '' },
-            { name: 'Sweaters', href: '' },
-            { name: 'T-Shirts', href: '' },
-            { name: 'Jackets', href: '' },
-            { name: 'Activewear', href: '' },
-            { name: 'Browse All', href: '' }
+            { name: 'Tops', category: 'Tops' },
+            { name: 'Dresses', category: 'Womens_dresses' },
+            { name: 'T-Shirts', category: 'Mens_shirts' },
+            { name: 'Browse All', category: '' }
           ]
         },
         {
           id: 'accessories',
           name: 'Accessories',
           items: [
-            { name: 'Watches', href: '' },
-            { name: 'Wallets', href: '' },
-            { name: 'Bags', href: '' },
-            { name: 'Sunglasses', href: '' },
-            { name: 'Hats', href: '' },
-            { name: 'Belts', href: '' }
-          ]
-        },
-        {
-          id: 'brands',
-          name: 'Brands',
-          items: [
-            { name: 'Full Nelson', href: '' },
-            { name: 'My Way', href: '' },
-            { name: 'Re-Arranged', href: '' },
-            { name: 'Counterfeit', href: '' },
-            { name: 'Significant Other', href: '' }
+            { name: 'Watches', category: 'Womens_watches' },
+            { name: 'Bags', category: 'Womens_bags' },
+            { name: 'Sunglasses', category: 'Sunglasses' }
           ]
         }
       ]
@@ -87,13 +68,13 @@ const navigation = {
       featured: [
         {
           name: 'Latest in technology',
-          category: 'Womens_bags',
+          category: 'Laptops',
           imageSrc: 'https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/1.png',
           imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.'
         },
         {
           name: 'Creative tools',
-          category: 'Womens_bags',
+          category: 'Mobile_accessories',
           imageSrc: 'https://cdn.dummyjson.com/products/images/mobile-accessories/Selfie%20Stick%20Monopod/1.png',
           imageAlt:
             'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.'
@@ -104,35 +85,19 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', href: '' },
-            { name: 'Pants', href: '' },
-            { name: 'Sweaters', href: '' },
-            { name: 'T-Shirts', href: '' },
-            { name: 'Jackets', href: '' },
-            { name: 'Activewear', href: '' },
-            { name: 'Browse All', href: '' }
+            { name: 'Tops', category: 'Tops' },
+            { name: 'Dresses', category: 'Womens_dresses' },
+            { name: 'T-Shirts', category: 'Mens_shirts' },
+            { name: 'Browse All', category: '' }
           ]
         },
         {
           id: 'accessories',
           name: 'Accessories',
           items: [
-            { name: 'Watches', href: '' },
-            { name: 'Wallets', href: '' },
-            { name: 'Bags', href: '' },
-            { name: 'Sunglasses', href: '' },
-            { name: 'Hats', href: '' },
-            { name: 'Belts', href: '' }
-          ]
-        },
-        {
-          id: 'brands',
-          name: 'Brands',
-          items: [
-            { name: 'Re-Arranged', href: '' },
-            { name: 'Counterfeit', href: '' },
-            { name: 'Full Nelson', href: '' },
-            { name: 'My Way', href: '' }
+            { name: 'Watches', category: 'Mens_watches' },
+            { name: 'Bags', category: 'Womens_bags' },
+            { name: 'Sunglasses', category: 'Sunglasses' }
           ]
         }
       ]
@@ -197,17 +162,20 @@ export const Header = () => {
                   <TabPanel key={category.name} className="space-y-10 px-4 pb-8 pt-10">
                     <div className="grid grid-cols-2 gap-x-4">
                       {category.featured.map((item) => (
-                        <Link to={`/products/:${item.category}`}>
+                        <Link
+                          to={`/products/:${item.category}`}
+                          className="mt-6 block font-bold text-gray-900"
+                          onClick={() => handleClick(`/products/${item.category}`)}
+                          key={item.name}
+                        >
                           <div className="group relative text-sm">
                             <img
                               alt={item.imageAlt}
                               src={item.imageSrc}
                               className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
                             />
-                            <a className="mt-6 block font-bold text-gray-900">
-                              <span aria-hidden="true" className="absolute inset-0 z-10" />
-                              {item.name}
-                            </a>
+                            <span aria-hidden="true" className="absolute inset-0 z-10" />
+                            {item.name}
                             <p aria-hidden="true" className="mt-1">
                               Shop now
                             </p>
@@ -227,9 +195,13 @@ export const Header = () => {
                         >
                           {section.items.map((item) => (
                             <li key={item.name} className="flow-root">
-                              <a href={item.href} className="-m-2 block p-2 text-gray-500 hover:text-black">
-                                {item.name}
-                              </a>
+                              <Link
+                                to={item.category === '' ? '/products' : `/products/:${item.category}`}
+                                onClick={() => handleClick(`/products/${item.category}`)}
+                                className="-m-2 block p-2 text-gray-500 hover:text-black"
+                              >
+                                <span>{item.name}</span>
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -243,8 +215,8 @@ export const Header = () => {
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
-                  <Link to={`${page.href}`}>
-                    <a className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">{page.name}</a>
+                  <Link to={`${page.href}`} className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
+                    <span>{page.name}</span>
                   </Link>
                 </div>
               ))}
@@ -253,12 +225,12 @@ export const Header = () => {
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               <div className="flow-root">
                 <Link to={'/login'} className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
-                  <a>Sign in</a>
+                  <span>Sign in</span>
                 </Link>
               </div>
               <div className="flow-root">
                 <Link to={'/register'} className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
-                  <a>Create account</a>
+                  <span>Create account</span>
                 </Link>
               </div>
             </div>
@@ -289,18 +261,16 @@ export const Header = () => {
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 <Link to={'/'}>
-                  <a>
-                    <span className="sr-only">Home</span>
-                    <img alt="" src={img2} className="h-9 w-auto" />
-                  </a>
+                  <span className="sr-only">Home</span>
+                  <img alt="" src={img2} className="h-9 w-auto" />
                 </Link>
               </div>
 
               {/* Flyout menus */}
               <PopoverGroup className="hidden lg:ml-8 lg:block lg:self-stretch">
                 <div className="flex h-full space-x-8">
-                  {navigation.categories.map((category) => (
-                    <Popover key={category.id} className="flex">
+                  {navigation.categories.map((category, index) => (
+                    <Popover className="flex" key={`${category.name}-${index}`}>
                       <div className="relative flex">
                         <PopoverButton className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-purple-600 data-[open]:border-purple-600 data-[open]:text-purple-600">
                           {category.name}
@@ -318,21 +288,21 @@ export const Header = () => {
                           <div className="mx-auto max-w-7xl px-8">
                             <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
                               <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                {category.featured.map((item) => (
+                                {category.featured.map((item, index) => (
                                   <Link
                                     to={`/products/${item.category}`}
                                     onClick={() => handleClick(`/products/${item.category}`)}
+                                    className="mt-6 block font-medium text-gray-900"
+                                    key={`${item.name}-${index}`}
                                   >
-                                    <div key={item.name} className="group relative text-base sm:text-sm">
+                                    <div className="group relative text-base sm:text-sm">
                                       <img
                                         alt={item.imageAlt}
                                         src={item.imageSrc}
                                         className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
                                       />
-                                      <a className="mt-6 block font-medium text-gray-900">
-                                        <span aria-hidden="true" className="absolute inset-0 z-10" />
-                                        {item.name}
-                                      </a>
+                                      <span aria-hidden="true" className="absolute inset-0 z-10" />
+                                      {item.name}
                                       <p aria-hidden="true" className="mt-1">
                                         Shop now
                                       </p>
@@ -341,8 +311,8 @@ export const Header = () => {
                                 ))}
                               </div>
                               <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
-                                {category.sections.map((section) => (
-                                  <div key={section.name}>
+                                {category.sections.map((section, index) => (
+                                  <div key={`${section.name}-${index}`}>
                                     <p id={`${section.name}-heading`} className="font-medium text-gray-900">
                                       {section.name}
                                     </p>
@@ -351,11 +321,15 @@ export const Header = () => {
                                       aria-labelledby={`${section.name}-heading`}
                                       className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
                                     >
-                                      {section.items.map((item) => (
-                                        <li key={item.name} className="flex">
-                                          <a href={item.href} className="hover:text-gray-800">
-                                            {item.name}
-                                          </a>
+                                      {section.items.map((item, index) => (
+                                        <li key={`${item.name}-${index}`} className="flex">
+                                          <Link
+                                            to={item.category === '' ? '/products' : `/products/:${item.category}`}
+                                            onClick={() => handleClick(`/products/${item.category}`)}
+                                            className="hover:text-gray-800"
+                                          >
+                                            <span>{item.name}</span>
+                                          </Link>
                                         </li>
                                       ))}
                                     </ul>
@@ -369,9 +343,13 @@ export const Header = () => {
                     </Popover>
                   ))}
 
-                  {navigation.pages.map((page) => (
-                    <Link to={`${page.href}`} className="flex items-center text-sm font-medium text-gray-700 hover:text-black">
-                      <a key={page.name}>{page.name}</a>
+                  {navigation.pages.map((page, index) => (
+                    <Link
+                      to={`${page.href}`}
+                      className="flex items-center text-sm font-medium text-gray-700 hover:text-black"
+                      key={`${page.name}-${index}`}
+                    >
+                      <span>{page.name}</span>
                     </Link>
                   ))}
                 </div>
@@ -379,12 +357,12 @@ export const Header = () => {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <Link to={'/login'}>
-                    <a className="text-sm font-medium text-gray-700 hover:text-black">Sign in</a>
+                  <Link to={'/login'} className="text-sm font-medium text-gray-700 hover:text-black">
+                    <span>Sign in</span>
                   </Link>
                   <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-                  <Link to={'/register'}>
-                    <a className="text-sm font-medium text-gray-700 hover:text-black">Create account</a>
+                  <Link to={'/register'} className="text-sm font-medium text-gray-700 hover:text-black">
+                    <span>Create account</span>
                   </Link>
                 </div>
 

@@ -1,36 +1,50 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { ChevronLeft, Minus, Plus } from 'lucide-react';
-import img6 from '../imagenes/img6.jpg';
+import { useParams } from 'react-router-dom';
+import { useProductsById } from '../zustand/store.tsx';
+import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
+import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
+import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 
 export const Details = () => {
+  const { id } = useParams();
+  const { state } = useContext(GlobalContext);
+  console.log(state.category);
+
+  const { selectedProduct, loading } = useProductsById(Number(id));
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
-  const images = [img6, img6, img6, img6];
+  if (loading) return <LoadingProducts />;
+  if (!selectedProduct) return <NotFoundProducts />;
 
   return (
     <div className="min-h-screen bg-colorBackground">
       <div className="max-w-4xl mx-auto p-4">
         {/* Back Button */}
-        <a href="#" className="inline-flex items-center text-purple-600 mb-6 hover:text-blue-900">
+        <a
+          href={state.category !== null ? `/products/${state.category}` : '/products'}
+          className="inline-flex items-center text-purple-600 mb-6 hover:font-semibold"
+        >
           <ChevronLeft className="w-5 h-5" />
           <span>BACK</span>
         </a>
 
         {/* Product Title & Price */}
+
         <div className="mb-4">
-          <h1 className="text-2xl font-semibold mb-2">VR Pro Headset X1</h1>
-          <p className="text-xl">$299.99</p>
+          <h1 className="text-2xl font-semibold mb-2">{selectedProduct?.title}</h1>
+          <p className="text-xl">${selectedProduct?.price}</p>
         </div>
 
         {/* Main Image */}
         <div className="relative aspect-[4/3] mb-4 rounded-lg overflow-hidden">
-          <img src={images[selectedImage]} alt="Product image" className="object-cover w-full h-full" />
+          <img src={selectedProduct?.images[selectedImage]} alt="Product image" className="object-cover w-[70%] h-auto" />
         </div>
 
         {/* Thumbnail Gallery */}
         <div className="grid grid-cols-4 gap-2 mb-6">
-          {images.map((image, index) => (
+          {selectedProduct?.images.map((image, index) => (
             <button
               key={index}
               onClick={() => setSelectedImage(index)}
@@ -47,10 +61,7 @@ export const Details = () => {
         <div className="space-y-4 mb-6">
           <div>
             <h2 className="font-semibold mb-2">Descripción</h2>
-            <p className="text-black-600">
-              Experience virtual reality like never before with our premium VR headset. Featuring advanced optics, comfortable
-              fit, and immersive audio.
-            </p>
+            <p className="text-black-600">{selectedProduct?.description}</p>
           </div>
           <div>
             <h2 className="font-semibold mb-2">Talla</h2>

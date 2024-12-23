@@ -17,7 +17,7 @@ export const ErrorPage = ({ messageError }: MessageError) => {
           to={'/'}
           className="mt-6 inline-block rounded bg-purple-600 px-5 py-3 text-sm font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring"
         >
-          <a>Go Back Home</a>
+          <span>Go Back Home</span>
         </Link>
       </div>
     </div>

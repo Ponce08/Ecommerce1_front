@@ -35,13 +35,17 @@ interface Product {
 
 interface ProductsState {
   products: Product[];
+  selectedProduct: Product | null;
   setProducts: (products: Product[]) => void;
+  setSelectedProduct: (product: Product | null) => void;
 }
 
 // Crear el store con Zustand
 const useStore = create<ProductsState>((set) => ({
   products: [],
-  setProducts: (products) => set({ products })
+  selectedProduct: null,
+  setProducts: (products) => set({ products }),
+  setSelectedProduct: (product) => set({ selectedProduct: product })
 }));
 
 // Query de Apollo para obtener productos
@@ -82,4 +86,34 @@ export const useProducts = (
   return { products: useStore((state) => state.products), loading, error };
 };
 
+// Query de Apollo para obtener productos por ID
+const GET_PRODUCTS_BY_ID = gql`
+  query GetProductById($id: Int!) {
+    getProductById(id: $id) {
+      id
+      title
+      description
+      price
+      images
+    }
+  }
+`;
+
+export const useProductsById = (id: number | null) => {
+  // Llamar al resolver con todas las variables
+  const { data, loading, error } = useQuery(GET_PRODUCTS_BY_ID, {
+    variables: { id }
+  });
+
+  const setProduct = useStore((state) => state.setSelectedProduct);
+
+  // Sincronizar datos de Apollo con Zustand
+  useEffect(() => {
+    if (data?.getProductById) {
+      setProduct(data.getProductById);
+    }
+  }, [data, setProduct]);
+
+  return { selectedProduct: useStore((state) => state.selectedProduct), loading, error };
+};
 export default useStore;
