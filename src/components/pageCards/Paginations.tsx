@@ -27,7 +27,7 @@ export const Paginations = () => {
       <nav className="flex items-center justify-center gap-2">
         {/* Botón de página anterior */}
         <button
-          className="flex items-center text-gray-500 hover:text-gray-700 px-3 py-1 rounded-lg"
+          className="flex items-center text-gray-500 text-xs lg:text-lg hover:text-gray-700 px-2 py-1 rounded-lg"
           onClick={() => previousPage(currentPage2)}
           disabled={state.page === 1}
         >
@@ -44,7 +44,7 @@ export const Paginations = () => {
             {state.firstPage}
           </button>
         )}
-        <span className="px-3 py-1 text-gray-500">{!(currentPage1 === state.firstPage) && '...'}</span>
+        <span className="px-1 py-1 text-gray-500">{!(currentPage1 === state.firstPage) && '...'}</span>
         {/* Números de página */}
         <button className={stylePage(currentPage1)} onClick={() => setCurrentPage(currentPage1)}>
           {currentPage1}
@@ -60,11 +60,11 @@ export const Paginations = () => {
         )}
 
         {/* Elipsis 2 */}
-        <span className="px-3 py-1 text-gray-500">{!(currentPage3 === state.finalPage) && '...'}</span>
+        <span className="px-1 py-1 text-gray-500">{!(currentPage3 === state.finalPage) && '...'}</span>
 
         {!(currentPage3 === state.finalPage || state.priceMax || state.finalPage < currentPage3) && (
           <button
-            className="px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border"
+            className="text-xs lg:text-lg px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border"
             onClick={lastPage}
           >
             {state.finalPage}
@@ -74,7 +74,7 @@ export const Paginations = () => {
         {/* Botón de página siguiente */}
 
         <button
-          className="flex items-center text-gray-500 hover:text-gray-700 px-3 py-1 rounded-lg"
+          className="flex items-center text-gray-500 text-xs lg:text-lg hover:text-gray-700 px-2 py-1 rounded-lg"
           onClick={() => nextPage(currentPage2)}
           disabled={state.page === state.finalPage || products.length < 12}
         >

@@ -12,6 +12,15 @@ export const theme = {
       colorBackground: '#d2c4f8',
       colorBackgroundMain: '#d9d9d9',
       colorInput: '#8c52ff'
+    },
+    keyframes: {
+      slide: {
+        '0%': { transform: 'translateX(100%)' },
+        '100%': { transform: 'translateX(-100%)' }
+      }
+    },
+    animation: {
+      slide: 'slide 20s linear infinite'
     }
   }
 };

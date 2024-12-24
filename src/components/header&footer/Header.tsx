@@ -163,8 +163,8 @@ export const Header = () => {
                     <div className="grid grid-cols-2 gap-x-4">
                       {category.featured.map((item) => (
                         <Link
-                          to={`/products/:${item.category}`}
-                          className="mt-6 block font-bold text-gray-900"
+                          to={`/products/${item.category}`}
+                          className="mt-6 block text-gray-900"
                           onClick={() => handleClick(`/products/${item.category}`)}
                           key={item.name}
                         >
@@ -176,7 +176,7 @@ export const Header = () => {
                             />
                             <span aria-hidden="true" className="absolute inset-0 z-10" />
                             {item.name}
-                            <p aria-hidden="true" className="mt-1">
+                            <p aria-hidden="true" className="mt-1 font-bold">
                               Shop now
                             </p>
                           </div>
@@ -196,9 +196,9 @@ export const Header = () => {
                           {section.items.map((item) => (
                             <li key={item.name} className="flow-root">
                               <Link
-                                to={item.category === '' ? '/products' : `/products/:${item.category}`}
+                                to={item.category === '' ? '/products' : `/products/${item.category}`}
                                 onClick={() => handleClick(`/products/${item.category}`)}
-                                className="-m-2 block p-2 text-gray-500 hover:text-black"
+                                className="-m-2 block p-2 text-gray-500 hover:text-purple-600 hover:font-semibold"
                               >
                                 <span>{item.name}</span>
                               </Link>
@@ -241,8 +241,8 @@ export const Header = () => {
       </Dialog>
 
       <header className="relative bg-colorBackgroundMain z-40">
-        <p className="flex h-10 items-center justify-center bg-purple-500 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-          Get free delivery on orders over $100
+        <p className="flex h-10 items-center justify-center overflow-hidden bg-purple-500 px-4 text-md font-medium text-white sm:px-6 lg:px-8">
+          <span className="animate-slide w-full">🎁 Get free delivery on orders over $100</span>
         </p>
 
         <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -303,7 +303,7 @@ export const Header = () => {
                                       />
                                       <span aria-hidden="true" className="absolute inset-0 z-10" />
                                       {item.name}
-                                      <p aria-hidden="true" className="mt-1">
+                                      <p aria-hidden="true" className="mt-1 font-bold">
                                         Shop now
                                       </p>
                                     </div>
@@ -324,9 +324,9 @@ export const Header = () => {
                                       {section.items.map((item, index) => (
                                         <li key={`${item.name}-${index}`} className="flex">
                                           <Link
-                                            to={item.category === '' ? '/products' : `/products/:${item.category}`}
+                                            to={item.category === '' ? '/products' : `/products/${item.category}`}
                                             onClick={() => handleClick(`/products/${item.category}`)}
-                                            className="hover:text-gray-800"
+                                            className="hover:text-purple-600 hover:font-semibold"
                                           >
                                             <span>{item.name}</span>
                                           </Link>

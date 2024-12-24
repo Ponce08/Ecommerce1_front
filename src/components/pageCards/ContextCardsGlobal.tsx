@@ -38,11 +38,11 @@ const ContextCardsGlobal = () => {
 
     stylePage: (currentPage: number) => {
       return state.page === currentPage
-        ? 'px-3 py-1 rounded-lg text-white bg-[#8c52ff] hover:bg-[#8c52ff]/90'
-        : 'px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border';
+        ? 'px-3 py-1 rounded-lg text-xs lg:text-lg text-white bg-[#8c52ff] hover:bg-[#8c52ff]/90'
+        : 'px-3 py-1 rounded-lg text-gray-700 text-xs lg:text-lg hover:text-[#8c52ff] hover:border-[#8c52ff] border';
     },
     applyFilters: (category: string, minPrice: string, maxPrice: string, rating: string) => {
-      navigate(`/products/${category}`)
+      navigate(`/products/${category}`);
       dispatch({ type: 'SET_FALSE_FILTERS' });
       dispatch({ type: 'SET_PAGE', payload: 1 });
       dispatch({ type: 'SET_CATEGORY', payload: category === '' ? null : category });
@@ -57,7 +57,7 @@ const ContextCardsGlobal = () => {
     },
 
     allProducts: (rating: string) => {
-      navigate('/products')
+      navigate('/products');
       dispatch({ type: 'SET_CATEGORY', payload: null });
       dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
       dispatch({ type: 'SET_PAGE', payload: 1 });

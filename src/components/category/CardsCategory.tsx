@@ -8,6 +8,20 @@ import { Filters } from '../pageCards/Filters.tsx';
 import { AiOutlineFilter } from 'react-icons/ai';
 import { stateProductsPagination } from '../utils/ObjectCategorys.tsx';
 import { Link } from 'react-router-dom';
+import { StarIcon } from '@heroicons/react/20/solid';
+
+type Products = {
+  id: number;
+  title: string;
+  category: string;
+  price: number;
+  rating: number;
+  images: string[];
+};
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
 
 export const CardsCategory = () => {
   const { categorys } = useParams();
@@ -30,15 +44,6 @@ export const CardsCategory = () => {
 
   if (loading) return <LoadingProducts />;
   if (products.length === 0) return <NotFoundProducts />;
-
-  type Products = {
-    id: number;
-    title: string;
-    category: string;
-    price: number;
-    rating: number;
-    images: string[];
-  };
 
   return (
     <div className="bg-colorBackground relative">
@@ -65,9 +70,17 @@ export const CardsCategory = () => {
                   src={product.images[0]}
                   className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8] cursor-pointer"
                 />
-                <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
-                <p className="mt-1 text-lg font-medium text-gray-900">${product.price}</p>
-                <p className="mt-1 text-lg font-medium text-gray-900">Rating: {product.rating}</p>
+                <h3 className="mt-4 text-lg text-gray-700 group-hover:text-purple-600">{product.title}</h3>
+                <p className="mt-1 text-lg font-semibold text-gray-900">${product.price}</p>
+                <div className="flex items-center">
+                  {[0, 1, 2, 3, 4].map((rating) => (
+                    <StarIcon
+                      key={rating}
+                      aria-hidden="true"
+                      className={classNames(product.rating > rating ? 'text-gray-900' : 'text-gray-200', 'size-5 shrink-0')}
+                    />
+                  ))}
+                </div>
               </Link>
             );
           })}

@@ -37,7 +37,7 @@ export const Footer = () => {
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <Link to={'/products'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+              <Link to={'/products/Laptops'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
                 <span>Tecnology</span>
               </Link>
             </div>
@@ -47,7 +47,7 @@ export const Footer = () => {
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <Link to={'/details'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+              <Link to={'/products/Womens_shoes'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
                 <span>Fashion</span>
               </Link>
             </div>

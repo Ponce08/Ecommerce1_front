@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import img3 from '../imagenes/img3.jpg';
 
 export const Seccion3 = () => {
@@ -28,10 +29,15 @@ export const Seccion3 = () => {
             </div>
             {/* Buttons */}
             <div className="flex flex-wrap gap-4">
-              <button className="rounded bg-purple-500 px-6 py-2 text-white hover:bg-purple-600">Shop colllection</button>
-              <button className="flex items-center gap-2 rounded border border-zinc-300 px-6 py-2 text-zinc-700 hover:bg-zinc-100">
-                Join Now
-              </button>
+              <Link to={'products/Smartphones'} className="rounded bg-purple-500 px-6 py-2 text-white hover:bg-purple-600">
+                <button>Shop colllection</button>
+              </Link>
+              <Link
+                to={'/register'}
+                className="flex items-center gap-2 rounded border border-zinc-300 px-6 py-2 text-zinc-700 hover:bg-zinc-100"
+              >
+                <button>Join Now</button>
+              </Link>
             </div>
           </div>
           {/* Stats */}

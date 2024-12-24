@@ -13,7 +13,7 @@ export function About() {
         <figure className="mt-10">
           <blockquote className="text-center text-xl/8 font-semibold text-gray-900 sm:text-2xl/9">
             <p>
-              Desarrollador Full Stack con enfoque en back-end, especializado en el diseño e implementación de aplicaciones web
+              Desarrollador Full Stack con enfoque en back-end, especializado en el diseño de aplicaciones web
               escalables y robustas. Con experiencia en la implementación y el desarrollo de Single Page Applications (SPA) con
               JavaScript, TypeScript y Node.js (v16+).
             </p>

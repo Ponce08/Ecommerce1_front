@@ -94,6 +94,14 @@ const GET_PRODUCTS_BY_ID = gql`
       title
       description
       price
+      rating
+      stock
+      reviews {
+        comment
+        reviewerName
+        reviewerEmail
+        rating
+      }
       images
     }
   }

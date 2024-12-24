@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const Seccion1 = () => {
   return (
     <div className="relative overflow-hidden bg-colorBackground">
@@ -75,12 +77,12 @@ export const Seccion1 = () => {
                   </div>
                 </div>
               </div>
-              <a
-                href="#"
+              <Link
+                to={'/products/Mens_shirts'}
                 className="inline-block rounded-md border border-transparent bg-purple-500 px-8 py-3 text-center font-medium text-white hover:bg-purple-600"
               >
-                Shop Collection
-              </a>
+                <span>Shop Collection</span>
+              </Link>
             </div>
           </div>
         </div>
