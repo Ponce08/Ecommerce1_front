@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { ChevronLeft, Minus, Plus, Star } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import { useProductsById } from '../zustand/store.tsx';
 import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
 import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
+import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 
 export const Details = () => {
   const { id } = useParams();
+  const { state } = useContext(GlobalContext);
+  console.log(state.category);
+
   const { selectedProduct, loading } = useProductsById(Number(id));
 
   const [quantity, setQuantity] = useState(1);
@@ -17,7 +21,7 @@ export const Details = () => {
   if (!selectedProduct) return <NotFoundProducts />;
 
   return (
-    <div className="min-h-screen bg-colorBackground p-4">
+    <div className="min-h-screen bg-colorBackground p-4 mt-[100px]">
       <div className="max-w-2xl mx-auto">
         <a href="#" className="flex items-center text-purple-600 mb-4 hover:font-bold">
           <ChevronLeft className="w-6 h-6" />
@@ -30,8 +34,8 @@ export const Details = () => {
         </div>
 
         <div className="space-y-4 mb-6 mt-10">
-          <div className="relative aspect-[3/2] rounded-lg overflow-hidden">
-            <img src={selectedProduct.images[selectedImage]} alt="Product image" className="object-cover w-full h-full" />
+          <div className="relative aspect-[3/2] bg-gray-200 rounded-lg overflow-hidden">
+            <img src={selectedProduct.images[selectedImage]} alt="Product image" className="object-cover w-full h-full p-4" />
           </div>
 
           <div className="grid grid-cols-4 gap-2">
@@ -39,7 +43,7 @@ export const Details = () => {
               <button
                 key={index}
                 onClick={() => setSelectedImage(index)}
-                className={`relative aspect-[3/2] rounded-lg overflow-hidden mt-8 ${
+                className={`relative aspect-[3/2] rounded-lg bg-gray-200 p-2 overflow-hidden mt-8 ${
                   selectedImage === index ? 'ring-2 ring-purple-600' : ''
                 }`}
               >
@@ -69,7 +73,11 @@ export const Details = () => {
               <Minus className="w-4 h-4 hover:text-purple-600" />
             </button>
             <div className="flex items-center justify-center w-12 h-8 bg-white">{quantity}</div>
-            <button onClick={() => setQuantity(quantity + 1)} className="rounded-r-full bg-gray-200 px-4 py-2">
+            <button
+              onClick={() => setQuantity(quantity + 1)}
+              className="rounded-r-full bg-gray-200 px-4 py-2"
+              disabled={quantity >= selectedProduct.stock}
+            >
               <Plus className="w-4 h-4 hover:text-purple-600" />
             </button>
           </div>
@@ -77,15 +85,14 @@ export const Details = () => {
         </div>
         <div className="mb-8 mt-10">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="font-semibold text-xl ml-4">Reviews</h2>
-            <button onClick={() => setShowReviews(!showReviews)} className="text-purple-600 hover:underline">
+            <button onClick={() => setShowReviews(!showReviews)} className="text-purple-600 ml-2 font-bold hover:underline">
               {showReviews ? 'Hide Reviews' : 'Show Reviews'}
             </button>
           </div>
           {showReviews && (
             <div className="space-y-4">
               {selectedProduct.reviews?.map((review, index) => (
-                <div key={index} className="space-y-2 bg-white rounded-lg p-4">
+                <div key={index} className="space-y-2 bg-gray-200 rounded-lg p-4">
                   <p className="text-purple-600 font-bold">{review.reviewerName}</p>
                   <p className="text-gray-600 font-bold">{review.reviewerEmail}</p>
                   <p className="text-gray-600">

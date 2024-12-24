@@ -30,7 +30,7 @@ export const RegisterForm = () => {
   }
 
   return (
-    <div className="w-full px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto img_registerForm">
+    <div className="w-full px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-[100px] img_registerForm">
       <div className="max-w-2xl mx-auto bg-colorBackground/50 rounded-xl shadow p-4 sm:p-7">
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Register</h2>

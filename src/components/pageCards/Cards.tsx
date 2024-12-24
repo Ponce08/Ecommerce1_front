@@ -32,7 +32,7 @@ export const Cards = () => {
   if (products.length === 0) return <NotFoundProducts />;
 
   return (
-    <div className="bg-colorBackground relative">
+    <div className="bg-colorBackground relative mt-[100px]">
       <div>{state.isTrue_filters && <Filters />}</div>
 
       <div className="absolute w-full h-[1%] md:h-[3.5%] xl:h-[5%] sm:h-[3%] flex justify-center items-center">

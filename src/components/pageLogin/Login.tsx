@@ -2,7 +2,7 @@ import '../Styles.css';
 
 export const Login = () => {
   return (
-    <div className="w-full px-4 py-4 bg-black img_login">
+    <div className="w-full px-4 py-4 bg-black mt-[100px] img_login">
       <div className="max-w-sm mx-auto mt-1 bg-white border border-gray-200 rounded-xl shadow-sm">
         <div className="p-4 sm:p-7">
           <div className="text-center">

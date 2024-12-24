@@ -240,7 +240,7 @@ export const Header = () => {
         </div>
       </Dialog>
 
-      <header className="relative bg-colorBackgroundMain z-40">
+      <header className="fixed top-0 left-0 w-full bg-colorBackgroundMain z-40">
         <p className="flex h-10 items-center justify-center overflow-hidden bg-purple-500 px-4 text-md font-medium text-white sm:px-6 lg:px-8">
           <span className="animate-slide w-full">🎁 Get free delivery on orders over $100</span>
         </p>

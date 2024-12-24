@@ -94,6 +94,8 @@
 /*! Styles Policies */
 .content_pagePolicies {
   margin: 3rem;
+  margin-top: 170px;
+
 }
 
 .content_pagePolicies p {
@@ -104,7 +106,7 @@
   text-align: center;
   font-weight: bolder;
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .content_pagePolicies span {

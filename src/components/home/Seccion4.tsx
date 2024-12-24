@@ -5,11 +5,10 @@ export const Seccion4 = () => {
     <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 bg-colorBackground">
       <div className="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
         <div>
-          <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight mt-6">
+          <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight mt-16 lg:mt-2">
             Start your journey with <span className="text-purple-600">Style</span>
           </h1>
           <p className="mt-3 text-lg text-gray-800">Choose your ideal accessories to travel with comfort and style.</p>
-
           <div className="mt-7 grid gap-3 w-full sm:inline-flex">
             <Link
               to={'/products/Sunglasses'}
@@ -24,7 +23,6 @@ export const Seccion4 = () => {
               Contact us
             </a>
           </div>
-
           <div className="mt-6 lg:mt-10 grid grid-cols-2 gap-x-5">
             <div className="py-5">
               <div className="flex gap-x-1">
@@ -233,7 +231,7 @@ export const Seccion4 = () => {
           </div>
         </div>
 
-        <div className="relative ms-4">
+        <div className="relative m-2">
           <img
             className="w-full rounded-md"
             src="https://images.unsplash.com/photo-1665686377065-08ba896d16fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&h=800&q=80"
