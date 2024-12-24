@@ -1,14 +1,12 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { ChevronLeft, Minus, Plus, Star } from 'lucide-react';
 import { useParams } from 'react-router-dom';
-import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { useProductsById } from '../zustand/store.tsx';
 import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
 import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
 
 export const Details = () => {
   const { id } = useParams();
-  const { state } = useContext(GlobalContext);
   const { selectedProduct, loading } = useProductsById(Number(id));
 
   const [quantity, setQuantity] = useState(1);
