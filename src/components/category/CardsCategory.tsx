@@ -9,6 +9,7 @@ import { AiOutlineFilter } from 'react-icons/ai';
 import { stateProductsPagination } from '../utils/ObjectCategorys.tsx';
 import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/20/solid';
+import useStore from '../zustand/store.tsx';
 
 type Products = {
   id: number;
@@ -24,9 +25,13 @@ function classNames(...classes: string[]) {
 }
 
 export const CardsCategory = () => {
+  const { products } = useStore();
+
   const { categorys } = useParams();
 
   const { state, dispatch } = useContext(GlobalContext);
+
+  const { page, priceMin, priceMax, ratingOrder } = state;
 
   useEffect(() => {
     if (categorys) {
@@ -37,10 +42,7 @@ export const CardsCategory = () => {
     }
   }, [categorys, dispatch]);
 
-  const { page, priceMin, priceMax, ratingOrder } = state;
-  console.log(state.category);
-
-  const { products, loading } = useProducts(page, categorys || null, priceMin, priceMax, ratingOrder);
+  const { loading } = useProducts({ page, category: categorys, priceMin, priceMax, ratingOrder });
 
   if (loading) return <LoadingProducts />;
   if (products.length === 0) return <NotFoundProducts />;

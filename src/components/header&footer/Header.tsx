@@ -163,7 +163,7 @@ export const Header = () => {
                     <div className="grid grid-cols-2 gap-x-4">
                       {category.featured.map((item) => (
                         <Link
-                          to={`/products/${item.category}`}
+                          to={`/products/${item.category}/`}
                           className="mt-6 block text-gray-900"
                           onClick={() => handleClick(`/products/${item.category}`)}
                           key={item.name}
@@ -215,7 +215,7 @@ export const Header = () => {
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
-                  <Link to={`${page.href}`} className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
+                  <Link to={`${page.href}`} className="-m-2 block p-2 font-bold text-bold hover:text-purple-600">
                     <span>{page.name}</span>
                   </Link>
                 </div>
@@ -224,12 +224,12 @@ export const Header = () => {
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               <div className="flow-root">
-                <Link to={'/login'} className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
+                <Link to={'/login'} className="-m-2 block p-2 font-bold text-bold hover:text-purple-600">
                   <span>Sign in</span>
                 </Link>
               </div>
               <div className="flow-root">
-                <Link to={'/register'} className="-m-2 block p-2 font-medium text-bold hover:text-purple-600">
+                <Link to={'/register'} className="-m-2 block p-2 font-bold text-bold hover:text-purple-600">
                   <span>Create account</span>
                 </Link>
               </div>

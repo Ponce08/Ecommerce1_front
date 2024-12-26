@@ -7,6 +7,7 @@ import { LoadingProducts } from './LoadingProducts.tsx';
 import { NotFoundProducts } from './NotFoundProducts.tsx';
 import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/20/solid';
+import useStore from '../zustand/store.tsx';
 
 type Products = {
   id: number;
@@ -22,11 +23,13 @@ function classNames(...classes: string[]) {
 }
 
 export const Cards = () => {
+  const { products } = useStore();
+
   const { state, dispatch } = useContext(GlobalContext);
 
   const { page, category, priceMin, priceMax, ratingOrder } = state;
 
-  const { products, loading } = useProducts(page, category, priceMin, priceMax, ratingOrder);
+  const { loading } = useProducts({ page, category, priceMin, priceMax, ratingOrder });
 
   if (loading) return <LoadingProducts />;
   if (products.length === 0) return <NotFoundProducts />;

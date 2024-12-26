@@ -1,5 +1,5 @@
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import ContextCardsGlobal from './ContextCardsGlobal.tsx';
 import useStore from '../zustand/store.tsx';
@@ -7,20 +7,11 @@ import useStore from '../zustand/store.tsx';
 export const Paginations = () => {
   const { products } = useStore((state) => state);
   const { nextPage, previousPage, setCurrentPage, firstPPage, lastPage, stylePage } = ContextCardsGlobal();
-  const { state, dispatch } = useContext(GlobalContext);
+  const { state } = useContext(GlobalContext);
 
   let currentPage1 = state.currentPage + 1;
   let currentPage2 = state.currentPage + 2;
   let currentPage3 = state.currentPage + 3;
-
-  useEffect(() => {
-    return () => {
-      dispatch({ type: 'SET_CATEGORY', payload: null });
-      dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
-      dispatch({ type: 'SET_PAGE', payload: 1 });
-      dispatch({ type: 'SET_FINALPAGE', payload: 85 });
-    };
-  }, []);
 
   return (
     <div className="bg-colorBackgroundMain p-4 shadow-sm">
@@ -38,7 +29,7 @@ export const Paginations = () => {
 
         {!(currentPage1 === state.firstPage) && (
           <button
-            className="px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border"
+            className="text-xs lg:text-lg px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border"
             onClick={firstPPage}
           >
             {state.firstPage}

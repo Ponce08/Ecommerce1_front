@@ -63,12 +63,22 @@ const GET_PRODUCTS = gql`
 `;
 
 export const useProducts = (
-  page: number,
-  category: string | null,
-  priceMin: number | null,
-  priceMax: number | null,
-  ratingOrder: 'upward' | 'falling' | string
+  params: Partial<{
+    page: number;
+    category: string | null;
+    priceMin: number | null;
+    priceMax: number | null;
+    ratingOrder: 'upward' | 'falling' | string;
+  }> = {}
 ) => {
+  const {
+    page = 1, // Valor por defecto
+    category = null,
+    priceMin = null,
+    priceMax = null,
+    ratingOrder = ''
+  } = params;
+
   // Llamar al resolver con todas las variables
   const { data, loading, error } = useQuery(GET_PRODUCTS, {
     variables: { page, category, priceMin, priceMax, ratingOrder }
@@ -94,6 +104,7 @@ const GET_PRODUCTS_BY_ID = gql`
       title
       description
       price
+      category
       rating
       stock
       reviews {

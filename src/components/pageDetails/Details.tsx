@@ -1,17 +1,23 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { ChevronLeft, Minus, Plus, Star } from 'lucide-react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useProductsById } from '../zustand/store.tsx';
 import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
 import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
-import { GlobalContext } from '../../globalState/GlobalContext.tsx';
+import useStore from '../zustand/store.tsx';
 
 export const Details = () => {
-  const { id } = useParams();
-  const { state } = useContext(GlobalContext);
-  console.log(state.category);
+  const { selectedProduct } = useStore();
 
-  const { selectedProduct, loading } = useProductsById(Number(id));
+  const navigate = useNavigate();
+  const handleBack = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    navigate(-1);
+  };
+
+  const { id } = useParams();
+
+  const { loading } = useProductsById(Number(id));
 
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -23,7 +29,7 @@ export const Details = () => {
   return (
     <div className="min-h-screen bg-colorBackground p-4 mt-[100px]">
       <div className="max-w-2xl mx-auto">
-        <a href="#" className="flex items-center text-purple-600 mb-4 hover:font-bold">
+        <a onClick={handleBack} className="flex items-center text-purple-600 mb-4 cursor-pointer hover:font-bold">
           <ChevronLeft className="w-6 h-6" />
           <span>BACK</span>
         </a>
