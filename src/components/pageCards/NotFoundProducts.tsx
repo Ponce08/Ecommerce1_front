@@ -8,7 +8,7 @@ export const NotFoundProducts = () => {
   const { allProducts } = ContextCardsGlobal();
 
   return (
-    <div className="flex h-screen flex-col bg-white">
+    <div className="flex h-screen flex-col bg-white mt-[100px]">
       <img
         src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80"
         alt=""

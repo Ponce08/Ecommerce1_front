@@ -6,7 +6,9 @@ import useStore from '../zustand/store.tsx';
 
 export const Paginations = () => {
   const { products } = useStore((state) => state);
+
   const { nextPage, previousPage, setCurrentPage, firstPPage, lastPage, stylePage } = ContextCardsGlobal();
+
   const { state } = useContext(GlobalContext);
 
   let currentPage1 = state.currentPage + 1;
@@ -18,7 +20,7 @@ export const Paginations = () => {
       <nav className="flex items-center justify-center gap-2">
         {/* Botón de página anterior */}
         <button
-          className="flex items-center text-gray-500 text-xs lg:text-lg hover:text-gray-700 px-2 py-1 rounded-lg"
+          className="flex items-center text-gray-500 text-xs lg:text-lg hover:text-purple-600 hover:font-bold px-2 py-1 rounded-lg"
           onClick={() => previousPage(currentPage2)}
           disabled={state.page === 1}
         >
@@ -65,7 +67,7 @@ export const Paginations = () => {
         {/* Botón de página siguiente */}
 
         <button
-          className="flex items-center text-gray-500 text-xs lg:text-lg hover:text-gray-700 px-2 py-1 rounded-lg"
+          className="flex items-center text-gray-500 text-xs lg:text-lg hover:text-purple-600 hover:font-bold px-2 py-1 rounded-lg"
           onClick={() => nextPage(currentPage2)}
           disabled={state.page === state.finalPage || products.length < 12}
         >

@@ -1,5 +1,5 @@
 import { AiOutlineFilter } from 'react-icons/ai';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Filters } from './Filters.tsx';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { useProducts } from '../zustand/store.tsx';
@@ -31,6 +31,12 @@ export const Cards = () => {
 
   const { loading } = useProducts({ page, category, priceMin, priceMax, ratingOrder });
 
+  const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
+
+  const handleImageLoad = (id: number) => {
+    setLoadedImages((prev) => ({ ...prev, [id]: true }));
+  };
+
   if (loading) return <LoadingProducts />;
   if (products.length === 0) return <NotFoundProducts />;
 
@@ -54,11 +60,24 @@ export const Cards = () => {
           {products.map((product: Products) => {
             return (
               <Link to={`/product/${product.id}`} className="group" key={product.id}>
-                <img
-                  alt=""
-                  src={product.images[0]}
-                  className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8] cursor-pointer"
-                />
+                <div className="relative aspect-square w-full rounded-lg bg-gray-200 xl:aspect-[7/8]">
+                  {!loadedImages[product.id] && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="relative">
+                        <div className="h-20 w-20 rounded-full border-t-4 border-b-4 border-gray-200"></div>
+                        <div className="absolute top-0 left-0 h-20 w-20 rounded-full border-t-4 border-b-4 border-purple-500 animate-spin"></div>
+                      </div>
+                    </div>
+                  )}
+                  <img
+                    alt=""
+                    src={product.images[0]}
+                    className={`aspect-square w-full rounded-lg object-cover group-hover:opacity-75 xl:aspect-[7/8] cursor-pointer ${
+                      loadedImages[product.id] ? '' : 'hidden'
+                    } transition-transform duration-300 ease-in-out transform group-hover:scale-105`}
+                    onLoad={() => handleImageLoad(product.id)}
+                  />
+                </div>
                 <h3 className="mt-4 text-lg text-gray-700 group-hover:text-purple-600">{product.title}</h3>
                 <p className="mt-1 text-lg font-semibold text-gray-900">${product.price}</p>
                 <div className="flex items-center">

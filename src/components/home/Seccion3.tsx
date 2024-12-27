@@ -29,7 +29,7 @@ export const Seccion3 = () => {
             </div>
             {/* Buttons */}
             <div className="flex flex-wrap gap-4">
-              <Link to={'products/Smartphones'} className="rounded bg-purple-500 px-6 py-2 text-white hover:bg-purple-600">
+              <Link to={'products/smartphones'} className="rounded bg-purple-500 px-6 py-2 text-white hover:bg-purple-600">
                 <button>Shop colllection</button>
               </Link>
               <Link

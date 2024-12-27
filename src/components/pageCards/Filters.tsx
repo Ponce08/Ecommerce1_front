@@ -28,14 +28,16 @@ export const Filters = () => {
             : 'display_none_filters'
         }
       >
-        <div className="relative inset-0 pb-4 border-b border-purple-300">
-          <h2 className="text-center text-xl font-bold text-purple-800">Filters</h2>
-          <button
-            onClick={() => dispatch({ type: 'SET_FALSE_FILTERS' })}
-            className="absolute right-2 top-2 p-2 rounded-full bg-purple-500 text-white hover:bg-purple-600"
-          >
-            <FiX className="w-4 h-4" />
-          </button>
+        <div className="relative flex justify-center pb-4 border-b border-purple-300">
+          <h2 className="text-xl font-bold text-purple-800">Filters</h2>
+          <div className='absolute right-2'>
+            <button
+              onClick={() => dispatch({ type: 'SET_FALSE_FILTERS' })}
+              className="p-2 rounded-full bg-purple-500 text-white hover:bg-purple-600"
+            >
+              <FiX className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* Category*/}
@@ -52,19 +54,19 @@ export const Filters = () => {
             <option>Beauty</option>
             <option>Fragrances</option>
             <option>Laptops</option>
-            <option>Mens_shirts</option>
-            <option>Mens_shoes</option>
-            <option>Mens_watches</option>
-            <option>Mobile_accessories</option>
+            <option>Mens shirts</option>
+            <option>Mens shoes</option>
+            <option>Mens watches</option>
+            <option>Mobile accessories</option>
             <option>Smartphones</option>
             <option>Sunglasses</option>
             <option>Tablets</option>
             <option>Tops</option>
-            <option>Womens_bags</option>
-            <option>Womens_dresses</option>
-            <option>Womens_jewellery</option>
-            <option>Womens_shoes</option>
-            <option>Womens_watches</option>
+            <option>Womens bags</option>
+            <option>Womens dresses</option>
+            <option>Womens jewellery</option>
+            <option>Womens shoes</option>
+            <option>Womens watches</option>
           </select>
         </div>
         <div className="space-y-6 mt-6">

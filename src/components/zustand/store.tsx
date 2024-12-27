@@ -71,13 +71,7 @@ export const useProducts = (
     ratingOrder: 'upward' | 'falling' | string;
   }> = {}
 ) => {
-  const {
-    page = 1, // Valor por defecto
-    category = null,
-    priceMin = null,
-    priceMax = null,
-    ratingOrder = ''
-  } = params;
+  const { page = 1, category = null, priceMin = null, priceMax = null, ratingOrder = '' } = params;
 
   // Llamar al resolver con todas las variables
   const { data, loading, error } = useQuery(GET_PRODUCTS, {

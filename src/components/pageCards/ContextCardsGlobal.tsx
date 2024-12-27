@@ -42,10 +42,11 @@ const ContextCardsGlobal = () => {
         : 'px-3 py-1 rounded-lg text-gray-700 text-xs lg:text-lg hover:text-[#8c52ff] hover:border-[#8c52ff] border';
     },
     applyFilters: (category: string, minPrice: string, maxPrice: string, rating: string) => {
-      navigate(`/products/${category}`);
+      const normalizedCategory = category.toLowerCase().replace(/\s+/g, '-');
+      navigate(`/products/${normalizedCategory}`);
       dispatch({ type: 'SET_FALSE_FILTERS' });
       dispatch({ type: 'SET_PAGE', payload: 1 });
-      dispatch({ type: 'SET_CATEGORY', payload: category === '' ? null : category });
+      dispatch({ type: 'SET_CATEGORY', payload: category === '' ? null : normalizedCategory });
       dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
       dispatch({
         type: 'SET_FINALPAGE',

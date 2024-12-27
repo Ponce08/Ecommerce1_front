@@ -11,7 +11,7 @@ export const Login = () => {
               Don't have an account yet?/
               <a
                 className="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium"
-                href="../examples/html/signup.html"
+                href="/register"
               >
                 Sign up here
               </a>

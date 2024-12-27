@@ -11,7 +11,7 @@ export const Seccion4 = () => {
           <p className="mt-3 text-lg text-gray-800">Choose your ideal accessories to travel with comfort and style.</p>
           <div className="mt-7 grid gap-3 w-full sm:inline-flex">
             <Link
-              to={'/products/Sunglasses'}
+              to={'/products/sunglasses'}
               className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-purple-500 text-white hover:bg-purple-600 focus:outline-none disabled:opacity-50 disabled:pointer-events-none"
             >
               <span>Shop Collection</span>

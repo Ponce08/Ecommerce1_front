@@ -6,21 +6,21 @@ const callouts = [
     description: 'Work from home accessories',
     imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg',
     imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
-    category: 'Laptops'
+    category: 'laptops'
   },
   {
     name: 'Self-Improvement',
     description: 'Journals and note-taking',
     imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg',
     imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
-    category: 'Tablets'
+    category: 'tablets'
   },
   {
     name: 'Travel',
     description: 'Daily commute essentials',
     imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg',
     imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-    category: 'Mobile_accessories'
+    category: 'mobile-accessories'
   }
 ];
 
@@ -38,7 +38,7 @@ export const Seccion2 = () => {
                   <img
                     alt={callout.imageAlt}
                     src={callout.imageSrc}
-                    className="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square"
+                    className="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square transition-transform duration-300 ease-in-out transform group-hover:scale-105"
                   />
                   <h3 className="mt-6 text-sm text-gray-500">
                     <span className="absolute inset-0" />

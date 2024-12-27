@@ -29,13 +29,13 @@ const navigation = {
       featured: [
         {
           name: 'New Arrivals',
-          category: 'Womens_bags',
+          category: 'womens-bags',
           imageSrc: "https://cdn.dummyjson.com/products/images/womens-bags/Blue%20Women's%20Handbag/1.png",
           imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.'
         },
         {
           name: 'Basic Dress',
-          category: 'Womens_dresses',
+          category: 'womens-dresses',
           imageSrc: 'https://cdn.dummyjson.com/products/images/womens-dresses/Dress%20Pea/1.png',
           imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.'
         }
@@ -45,9 +45,9 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', category: 'Tops' },
-            { name: 'Dresses', category: 'Womens_dresses' },
-            { name: 'T-Shirts', category: 'Mens_shirts' },
+            { name: 'Tops', category: 'tops' },
+            { name: 'Dresses', category: 'womens-dresses' },
+            { name: 'T-Shirts', category: 'mens-shirts' },
             { name: 'Browse All', category: '' }
           ]
         },
@@ -55,9 +55,9 @@ const navigation = {
           id: 'accessories',
           name: 'Accessories',
           items: [
-            { name: 'Watches', category: 'Womens_watches' },
-            { name: 'Bags', category: 'Womens_bags' },
-            { name: 'Sunglasses', category: 'Sunglasses' }
+            { name: 'Watches', category: 'womens-watches' },
+            { name: 'Bags', category: 'womens-bags' },
+            { name: 'Sunglasses', category: 'sunglasses' }
           ]
         }
       ]
@@ -68,13 +68,13 @@ const navigation = {
       featured: [
         {
           name: 'Latest in technology',
-          category: 'Laptops',
+          category: 'laptops',
           imageSrc: 'https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/1.png',
           imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.'
         },
         {
           name: 'Creative tools',
-          category: 'Mobile_accessories',
+          category: 'mobile-accessories',
           imageSrc: 'https://cdn.dummyjson.com/products/images/mobile-accessories/Selfie%20Stick%20Monopod/1.png',
           imageAlt:
             'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.'
@@ -85,9 +85,9 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Tops', category: 'Tops' },
-            { name: 'Dresses', category: 'Womens_dresses' },
-            { name: 'T-Shirts', category: 'Mens_shirts' },
+            { name: 'Tops', category: 'tops' },
+            { name: 'Dresses', category: 'womens-dresses' },
+            { name: 'T-Shirts', category: 'mens-shirts' },
             { name: 'Browse All', category: '' }
           ]
         },
@@ -95,9 +95,9 @@ const navigation = {
           id: 'accessories',
           name: 'Accessories',
           items: [
-            { name: 'Watches', category: 'Mens_watches' },
-            { name: 'Bags', category: 'Womens_bags' },
-            { name: 'Sunglasses', category: 'Sunglasses' }
+            { name: 'Watches', category: 'mens-watches' },
+            { name: 'Bags', category: 'womens-bags' },
+            { name: 'Sunglasses', category: 'sunglasses' }
           ]
         }
       ]
@@ -272,7 +272,7 @@ export const Header = () => {
                   {navigation.categories.map((category, index) => (
                     <Popover className="flex" key={`${category.name}-${index}`}>
                       <div className="relative flex">
-                        <PopoverButton className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-purple-600 data-[open]:border-purple-600 data-[open]:text-purple-600">
+                        <PopoverButton className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:font-semibold data-[open]:border-purple-600 data-[open]:text-purple-600 data-[open]:font-semibold">
                           {category.name}
                         </PopoverButton>
                       </div>
@@ -313,7 +313,7 @@ export const Header = () => {
                               <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
                                 {category.sections.map((section, index) => (
                                   <div key={`${section.name}-${index}`}>
-                                    <p id={`${section.name}-heading`} className="font-medium text-gray-900">
+                                    <p id={`${section.name}-heading`} className="font-bold text-gray-900">
                                       {section.name}
                                     </p>
                                     <ul
@@ -346,7 +346,7 @@ export const Header = () => {
                   {navigation.pages.map((page, index) => (
                     <Link
                       to={`${page.href}`}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-black"
+                      className="flex items-center text-sm font-medium text-gray-700 hover:hover:font-semibold"
                       key={`${page.name}-${index}`}
                     >
                       <span>{page.name}</span>
@@ -357,11 +357,11 @@ export const Header = () => {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <Link to={'/login'} className="text-sm font-medium text-gray-700 hover:text-black">
+                  <Link to={'/login'} className="text-sm font-medium text-gray-700 hover:font-semibold">
                     <span>Sign in</span>
                   </Link>
                   <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-                  <Link to={'/register'} className="text-sm font-medium text-gray-700 hover:text-black">
+                  <Link to={'/register'} className="text-sm font-medium text-gray-700 hover:font-semibold">
                     <span>Create account</span>
                   </Link>
                 </div>
@@ -375,8 +375,8 @@ export const Header = () => {
                 <div className="ml-4 flow-root lg:ml-6">
                   {state.isTrue && <ShoppingCarts />}
 
-                  <a href="#" className="group -m-2 flex items-center p-2" onClick={() => dispatch({ type: 'SET_TRUE' })}>
-                    <ShoppingBagIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-gray-500" />
+                  <a className="group -m-2 flex items-center p-2 cursor-pointer" onClick={() => dispatch({ type: 'SET_TRUE' })}>
+                    <ShoppingBagIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-purple-600" />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>

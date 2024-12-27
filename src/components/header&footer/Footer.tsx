@@ -2,6 +2,10 @@ import '../../components/Styles.css';
 import { Link } from 'react-router-dom';
 
 export const Footer = () => {
+  const handleClick = (to: string) => {
+    window.location.href = to;
+  };
+
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -32,32 +36,40 @@ export const Footer = () => {
           </div>
           <dl className="grid grid-cols-1 gap-y-2 sm:grid-cols-2 lg:pt-2 dl_center">
             <div className="flex flex-col items-start">
-              <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+              <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-purple-600">
                 <span>Policies</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <Link to={'/products/Laptops'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+              <Link
+                to={'/products/laptops'}
+                className="mt-4 text-base font-semibold text-white hover:text-purple-600"
+                onClick={() => handleClick('/products/laptops')}
+              >
                 <span>Tecnology</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <Link to={'/register'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+              <Link to={'/register'} className="mt-4 text-base font-semibold text-white hover:text-purple-600">
                 <span>Register</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <Link to={'/products/Womens_shoes'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+              <Link
+                to={'/products/womens-shoes'}
+                className="mt-4 text-base font-semibold text-white hover:text-purple-600"
+                onClick={() => handleClick('/products/womens-shoes')}
+              >
                 <span>Fashion</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <Link to={'/login'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+              <Link to={'/login'} className="mt-4 text-base font-semibold text-white hover:text-purple-600">
                 <span>Sign in</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-colorText">
+              <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-purple-600">
                 <span>Contact</span>
               </Link>
             </div>

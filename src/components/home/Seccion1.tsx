@@ -24,14 +24,14 @@ export const Seccion1 = () => {
                         <img
                           alt=""
                           src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
-                          className="size-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+                          className="size-full object-cover"
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <img
                           alt=""
                           src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
-                          className="size-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+                          className="size-full object-cover"
                         />
                       </div>
                     </div>
@@ -78,7 +78,7 @@ export const Seccion1 = () => {
                 </div>
               </div>
               <Link
-                to={'/products/Mens_shirts'}
+                to={'/products/mens-shirts'}
                 className="inline-block rounded-md border border-transparent bg-purple-500 px-8 py-3 text-center font-medium text-white hover:bg-purple-600"
               >
                 <span>Shop Collection</span>
@@ -114,7 +114,7 @@ export const Seccion1 = () => {
 //                         <img
 //                           alt=""
 //                           src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
-//                           className="size-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+//                           className="size-full object-cover"
 //                         />
 //                       </div>
 //                       <div className="h-64 w-44 overflow-hidden rounded-lg group">

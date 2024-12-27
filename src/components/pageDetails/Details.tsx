@@ -15,6 +15,12 @@ export const Details = () => {
     navigate(-1);
   };
 
+  const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
+
+  const handleImageLoad = (id: number) => {
+    setLoadedImages((prev) => ({ ...prev, [id]: true }));
+  };
+
   const { id } = useParams();
 
   const { loading } = useProductsById(Number(id));
@@ -53,7 +59,20 @@ export const Details = () => {
                   selectedImage === index ? 'ring-2 ring-purple-600' : ''
                 }`}
               >
-                <img src={image} alt={`Product thumbnail ${index + 1}`} className="object-cover w-full h-full" />
+                {!loadedImages[index] && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative">
+                      <div className="h-10 w-10 rounded-full border-t-4 border-b-4 border-gray-200"></div>
+                      <div className="absolute top-0 left-0 h-10 w-10 rounded-full border-t-4 border-b-4 border-purple-500 animate-spin"></div>
+                    </div>
+                  </div>
+                )}
+                <img
+                  src={image}
+                  alt={`Product thumbnail ${index + 1}`}
+                  className={`object-cover w-full h-full ${loadedImages[index] ? '' : 'hidden'}`}
+                  onLoad={() => handleImageLoad(index)}
+                />
               </button>
             ))}
           </div>
@@ -95,7 +114,11 @@ export const Details = () => {
               {showReviews ? 'Hide Reviews' : 'Show Reviews'}
             </button>
           </div>
-          {showReviews && (
+          <div
+            className={`overflow-hidden transition-[max-height,opacity] duration-[1000ms] ease-in-out ${
+              showReviews ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+            }`}
+          >
             <div className="space-y-4">
               {selectedProduct.reviews?.map((review, index) => (
                 <div key={index} className="space-y-2 bg-gray-200 rounded-lg p-4">
@@ -115,7 +138,7 @@ export const Details = () => {
                 </div>
               ))}
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

@@ -13,6 +13,9 @@ export const theme = {
       colorBackgroundMain: '#d9d9d9',
       colorInput: '#8c52ff'
     },
+    maxHeight: {
+      '1000px': '1000px'
+    },
     keyframes: {
       slide: {
         '0%': { transform: 'translateX(100%)' },
@@ -21,6 +24,11 @@ export const theme = {
     },
     animation: {
       slide: 'slide 20s linear infinite'
+    }
+  },
+  variants: {
+    extend: {
+      transitionProperty: ['responsive', 'motion-safe', 'motion-reduce']
     }
   }
 };
