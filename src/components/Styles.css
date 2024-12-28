@@ -95,7 +95,6 @@
 .content_pagePolicies {
   margin: 3rem;
   margin-top: 170px;
-
 }
 
 .content_pagePolicies p {
@@ -142,4 +141,40 @@
 /*! Styles Filters*/
 .display_none_filters {
   display: none;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/*! Styles Cards*/
+
+/* Define la animación */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.content_cards_imgs {
+  animation: fadeInScale 1s ease-in-out;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/*! Styles CategoryCards*/
+
+/* Define la animación */
+@keyframes fadeInScaleCategory {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.content_category_imgs {
+  animation: fadeInScaleCategory 1s ease-in-out;
 }

@@ -1,17 +1,17 @@
 import './App.css';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { PageAbout } from './components/about/PageAbout.tsx';
+import { About } from './components/about/About.tsx';
 import { Home } from './components/home/Home.tsx';
-import { PageCards } from './components/pageCards/PageCards.tsx';
-import { PageDetails } from './components/pageDetails/PageDetails.tsx';
-import { PageFinishShopping } from './components/pageFinishShopping/PageFinishShopping.tsx';
-import { PageLogin } from './components/pageLogin/PageLogin.tsx';
+import { Cards } from './components/pageCards/Cards.tsx';
+import { Details } from './components/pageDetails/Details.tsx';
+import { FinishShopping } from './components/pageFinishShopping/FinishShopping.tsx';
+import { Login } from './components/pageLogin/Login.tsx';
 import { PagePolicies } from './components/pagePolicies/PagePolicies.tsx';
-import { PageRegister } from './components/register/PageRegister.tsx';
+import { RegisterForm } from './components/register/RegisterForm.tsx';
 import ScrollToTop from './components/utils/ScrollToTop.tsx';
 import { GlobalProvider } from './globalState/GlobalContext.tsx';
-import { PageCategory } from './components/category/PageCategory.tsx';
+import { CardsCategory } from './components/category/CardsCategory.tsx';
 
 const client = new ApolloClient({
   uri: 'https://ecommerce1-back.onrender.com/graphql',
@@ -27,15 +27,14 @@ function App() {
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/cards" element={<PageCards />} />
-            <Route path="/register" element={<PageRegister />} />
-            <Route path="/login" element={<PageLogin />} />
-            <Route path="/finishshopping" element={<PageFinishShopping />} />
+            <Route path="/register" element={<RegisterForm />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/finishshopping" element={<FinishShopping />} />
             <Route path="/policies" element={<PagePolicies />} />
-            <Route path="/about" element={<PageAbout />} />
-            <Route path="/products" element={<PageCards />} />
-            <Route path="/product/:id" element={<PageDetails />} />
-            <Route path="/products/:categorys" element={<PageCategory />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/products" element={<Cards />} />
+            <Route path="/product/:id" element={<Details />} />
+            <Route path="/products/:categorys" element={<CardsCategory />} />
           </Routes>
         </Router>
       </GlobalProvider>
