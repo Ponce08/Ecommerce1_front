@@ -123,6 +123,21 @@
   padding: 16px;
   gap: 16px;
 }
+
+/* Define la animación */
+@keyframes fadeInScaleCart {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.class_transition_cart {
+  animation: fadeInScaleCart 1s ease-in-out;
+}
 /* ---------------------------------------------------------------------------------------------------------------------------- */
 /*! Styles Categorys*/
 
@@ -143,6 +158,20 @@
   display: none;
 }
 
+/* Define la animación */
+@keyframes fadeInScaleFilters {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.class_transition {
+  animation: fadeInScaleFilters 1s ease-in-out;
+}
 /* ---------------------------------------------------------------------------------------------------------------------------- */
 /*! Styles Cards*/
 

@@ -24,7 +24,7 @@ export const Filters = () => {
       <div
         className={
           state.isTrue_filters
-            ? 'z-40 h-[7.5%] w-[95%] md:h-[16%] sm:h-[18%] lg:h-[17%] xl:h-[28.5%] max-w-sm bg-purple-100 p-4 rounded-lg border border-black shadow-lg'
+            ? 'z-40 h-[7.5%] w-[95%] md:h-[16%] sm:h-[18%] lg:h-[17%] xl:h-[28.5%] max-w-sm bg-purple-100 p-4 rounded-lg border border-black shadow-lg class_transition'
             : 'display_none_filters'
         }
       >

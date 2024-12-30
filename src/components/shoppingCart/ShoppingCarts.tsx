@@ -72,7 +72,7 @@ export const ShoppingCarts = () => {
           : 'display_none'
       }
     >
-      <div className="w-[400px] bg-white rounded-lg shadow-lg flex flex-col">
+      <div className="w-[400px] bg-white rounded-lg shadow-lg flex flex-col class_transition_cart">
         {/* Header */}
         <div className="p-4 border-b flex items-center justify-between">
           <div className="flex items-center gap-2 text-lg font-semibold">
