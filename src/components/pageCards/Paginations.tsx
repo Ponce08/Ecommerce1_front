@@ -42,11 +42,13 @@ export const Paginations = () => {
         <button className={stylePage(currentPage1)} onClick={() => setCurrentPage(currentPage1)}>
           {currentPage1}
         </button>
-        <button className={stylePage(currentPage2)} onClick={() => setCurrentPage(currentPage2)}>
-          {currentPage2}
-        </button>
+        {!(state.priceMax && products.length < 12) && (
+          <button className={stylePage(currentPage2)} onClick={() => setCurrentPage(currentPage2)}>
+            {currentPage2}
+          </button>
+        )}
 
-        {!(state.finalPage < currentPage3) && (
+        {!(state.finalPage < currentPage3 || (state.priceMax && products.length < 12)) && (
           <button className={stylePage(currentPage3)} onClick={() => setCurrentPage(currentPage3)}>
             {currentPage3}
           </button>

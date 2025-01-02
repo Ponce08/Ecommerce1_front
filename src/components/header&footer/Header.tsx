@@ -17,9 +17,13 @@ import {
   TabGroup,
   TabList,
   TabPanel,
-  TabPanels
+  TabPanels,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems
 } from '@headlessui/react';
-import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, ShoppingBagIcon, XMarkIcon, HeartIcon } from '@heroicons/react/24/outline';
 
 const navigation = {
   categories: [
@@ -113,6 +117,8 @@ export const Header = () => {
   const { state, dispatch } = useContext(GlobalContext);
 
   const [open, setOpen] = useState(false);
+
+  const token = localStorage.getItem('token');
 
   const handleClick = (to: string) => {
     window.location.href = to;
@@ -357,13 +363,64 @@ export const Header = () => {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <Link to={'/login'} className="text-sm font-medium text-gray-700 hover:font-semibold">
-                    <span>Sign in</span>
-                  </Link>
+                  {token ? (
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200">
+                      <HeartIcon className="h-6 w-6 text-red-500" />
+                    </div>
+                  ) : (
+                    <Link to={'/login'} className="text-sm font-medium text-gray-700 hover:font-semibold">
+                      <span>Sign in</span>
+                    </Link>
+                  )}
                   <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-                  <Link to={'/register'} className="text-sm font-medium text-gray-700 hover:font-semibold">
-                    <span>Create account</span>
-                  </Link>
+                  {token ? (
+                    <Menu as="div" className="relative ml-3">
+                      <div>
+                        <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <span className="absolute -inset-1.5" />
+                          <span className="sr-only">Open user menu</span>
+                          <img
+                            alt=""
+                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            className="size-8 rounded-full"
+                          />
+                        </MenuButton>
+                      </div>
+                      <MenuItems
+                        transition
+                        className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                      >
+                        <MenuItem>
+                          <a
+                            href="#"
+                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                          >
+                            Your Profile
+                          </a>
+                        </MenuItem>
+                        <MenuItem>
+                          <a
+                            href="#"
+                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                          >
+                            Settings
+                          </a>
+                        </MenuItem>
+                        <MenuItem>
+                          <a
+                            href="#"
+                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                          >
+                            Sign out
+                          </a>
+                        </MenuItem>
+                      </MenuItems>
+                    </Menu>
+                  ) : (
+                    <Link to={'/register'} className="text-sm font-medium text-gray-700 hover:font-semibold">
+                      <span>Create account</span>
+                    </Link>
+                  )}
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex"></div>

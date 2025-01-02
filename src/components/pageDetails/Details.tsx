@@ -4,10 +4,11 @@ import { ErrorPage } from '../pageCards/ErrorPage.tsx';
 import { useState } from 'react';
 import { ChevronLeft, Minus, Plus, Star } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useProductsById } from '../zustand/store.tsx';
+import { useProductsById } from '../zustand/hooks/useProductsById.tsx';
 import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
 import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
 import useStore from '../zustand/store.tsx';
+import { HeartIcon } from '@heroicons/react/24/outline';
 
 export const Details = () => {
   const { selectedProduct } = useStore();
@@ -113,6 +114,9 @@ export const Details = () => {
               </button>
             </div>
             <button className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded flex-2">ADD TO CART</button>
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200">
+              <HeartIcon className="h-6 w-6 text-red-500" />
+            </div>
           </div>
           <div className="mb-8 mt-10">
             <div className="flex justify-between items-center mb-4">

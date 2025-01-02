@@ -14,12 +14,32 @@ import { GlobalProvider } from './globalState/GlobalContext.tsx';
 import { CardsCategory } from './components/category/CardsCategory.tsx';
 
 const client = new ApolloClient({
-  uri: 'https://ecommerce1-back.onrender.com/graphql',
-  // uri: 'http://localhost:4000/graphql',
+  // uri: 'https://ecommerce1-back.onrender.com/graphql',
+  uri: 'http://localhost:4000/graphql',
   cache: new InMemoryCache()
 });
 
 function App() {
+  const sessionInactive = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+    localStorage.setItem('sessionInactive', 'true'); // Bandera
+    alert('Sesión cerrada automáticamente por tiempo de inactividad');
+    window.location.href = '/login';
+  };
+
+  const expiration = localStorage.getItem('expiration');
+  const sessionInactiveFlag = localStorage.getItem('sessionInactive');
+
+  if (!expiration || Date.now() > Number(expiration)) {
+    if (!sessionInactiveFlag) {
+      sessionInactive();
+    }
+  } else {
+    // Limpia la bandera si la sesión sigue activa
+    localStorage.removeItem('sessionInactive');
+  }
+
   return (
     <ApolloProvider client={client}>
       <GlobalProvider>

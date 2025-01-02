@@ -1,8 +1,85 @@
+import '../Styles.css';
 import { Footer } from '../header&footer/Footer.tsx';
 import { Header } from '../header&footer/Header.tsx';
-import '../Styles.css';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@apollo/client';
+import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
+import { LOGIN } from '../zustand/graphql/mutations.tsx';
+import { useNavigate } from 'react-router-dom';
+
+const schema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      'Password must include at least one lowercase letter, one uppercase letter, one number, and one special character'
+    )
+});
+
+type FormData = z.infer<typeof schema>;
 
 export const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormData>({
+    resolver: zodResolver(schema)
+  });
+
+  const [login, { loading }] = useMutation(LOGIN);
+  const navigate = useNavigate();
+
+  async function onSubmit(values: z.infer<typeof schema>) {
+    try {
+      const user = await login({
+        variables: {
+          email: values.email,
+          password: values.password
+        }
+      });
+
+      localStorage.setItem('token', user.data.login.user.token);
+      localStorage.setItem('expiration', (Date.now() + 60000).toString());
+
+      Swal.fire({
+        title: 'Login successful',
+        text: `! Welcome ${user.data.login.user.firstName}`,
+        icon: 'success'
+      });
+
+      navigate('/');
+    } catch (err: any) {
+      console.error('Error al ingresar:', err);
+
+      // Determina el icono y el mensaje según el tipo de error
+      let errorMessage = 'An unexpected error occurred';
+      let icon: SweetAlertIcon = 'error';
+
+      if (err.message.includes('User not found')) {
+        errorMessage = 'User not found';
+        icon = 'warning';
+      } else if (err.message.includes('Wrong password')) {
+        errorMessage = 'Wrong password';
+        icon = 'error';
+      }
+
+      // Muestra el error usando Swal con el icono adecuado
+      Swal.fire({
+        title: `Oops... ${errorMessage}`,
+        text: 'Please try again',
+        icon: icon
+      });
+    }
+  }
+
+  if (loading) return <LoadingProducts />;
+
   return (
     <>
       <Header />
@@ -52,7 +129,7 @@ export const Login = () => {
                 Or
               </div>
 
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid gap-y-4">
                   <div>
                     <label htmlFor="email" className="block text-sm mb-2">
@@ -60,12 +137,9 @@ export const Login = () => {
                     </label>
                     <div className="relative">
                       <input
+                        {...register('email')}
                         type="email"
-                        id="email"
-                        name="email"
                         className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#8c52ff] focus:ring-[#8c52ff] disabled:opacity-50 disabled:pointer-events-none"
-                        required
-                        aria-describedby="email-error"
                       />
                       <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                         <svg
@@ -80,9 +154,7 @@ export const Login = () => {
                         </svg>
                       </div>
                     </div>
-                    <p className="hidden text-xs text-red-600 mt-2" id="email-error">
-                      Please include a valid email address so we can get back to you
-                    </p>
+                    <p className="text-red-500 text-xs font-bold mt-2">{errors.email?.message}</p>
                   </div>
 
                   <div>
@@ -99,12 +171,9 @@ export const Login = () => {
                     </div>
                     <div className="relative">
                       <input
+                        {...register('password')}
                         type="password"
-                        id="password"
-                        name="password"
                         className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-[#8c52ff] focus:ring-[#8c52ff] disabled:opacity-50 disabled:pointer-events-none"
-                        required
-                        aria-describedby="password-error"
                       />
                       <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                         <svg
@@ -119,9 +188,7 @@ export const Login = () => {
                         </svg>
                       </div>
                     </div>
-                    <p className="hidden text-xs text-red-600 mt-2" id="password-error">
-                      8+ characters required
-                    </p>
+                    <p className="text-red-500 text-xs font-bold mt-2">{errors.password?.message}</p>
                   </div>
 
                   <div className="flex items-center">
@@ -142,7 +209,7 @@ export const Login = () => {
 
                   <button
                     type="submit"
-                    className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-purple-500 text-white hover:bg-purple-600 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                    className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-purple-500 text-white hover:bg-purple-600 focus:outline-none disabled:opacity-50 disabled:pointer-events-none"
                   >
                     Sign in
                   </button>

@@ -2,13 +2,13 @@ import '../Styles.css'
 import { Header } from '../header&footer/Header.tsx';
 import { Footer } from '../header&footer/Footer.tsx';
 import { ErrorPage } from '../pageCards/ErrorPage.tsx';
+import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
+import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
 import { Paginations } from '../pageCards/Paginations.tsx';
 import { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
-import { useProducts } from '../zustand/store.tsx';
-import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
-import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
+import { useProducts } from '../zustand/hooks/useProducts.tsx'; 
 import { Filters } from '../pageCards/Filters.tsx';
 import { AiOutlineFilter } from 'react-icons/ai';
 import { stateProductsPagination } from '../utils/ObjectCategorys.tsx';

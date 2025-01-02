@@ -1,10 +1,15 @@
-import { Footer } from '../header&footer/Footer.tsx';
-import { Header } from '../header&footer/Header.tsx';
 import '../Styles.css';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
+import { useNavigate } from 'react-router-dom';
+import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { Footer } from '../header&footer/Footer.tsx';
+import { Header } from '../header&footer/Header.tsx';
 import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { CREATE_NEW_USER } from '../zustand/graphql/mutations.tsx';
 
 const schema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -12,7 +17,13 @@ const schema = z.object({
   phoneNumber: z.string().regex(/^\d+$/, 'Phone number must be numeric').min(10, 'Phone number must be at least 10 digits'),
   email: z.string().email('Invalid email address'),
   address: z.string().min(1, 'Address is required'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      'Password must include at least one lowercase letter, one uppercase letter, one number, and one special character'
+    ),
   confirmPassword: z.string().min(8, 'Confirm password must be at least 8 characters')
 });
 
@@ -27,9 +38,47 @@ export const RegisterForm = () => {
     resolver: zodResolver(schema)
   });
 
-  function onSubmit(values: z.infer<typeof schema>) {
-    console.log('Datos del formulario:', values);
+  const [createUser, { loading }] = useMutation(CREATE_NEW_USER);
+  const navigate = useNavigate();
+
+  async function onSubmit(values: z.infer<typeof schema>) {
+    const { confirmPassword, ...userInput } = values;
+    try {
+      await createUser({
+        variables: {
+          input: userInput
+        }
+      });
+
+      Swal.fire({
+        title: 'Registration successful',
+        text: '¡User created successfully',
+        icon: 'success'
+      });
+
+      navigate('/login');
+    } catch (err: any) {
+      console.error('Error al crear usuario:', err);
+
+      // Determina el icono y el mensaje según el tipo de error
+      let errorMessage = 'An unexpected error occurred';
+      let icon: SweetAlertIcon = 'error';
+
+      if (err.message.includes('already exists')) {
+        errorMessage = 'A user with this email already exists.';
+        icon = 'warning';
+      }
+
+      // Muestra el error usando Swal con el icono adecuado
+      Swal.fire({
+        title: `Oops... ${errorMessage}`,
+        text: 'Please try again',
+        icon: icon
+      });
+    }
   }
+
+  if (loading) return <LoadingProducts />;
 
   return (
     <>
@@ -50,7 +99,7 @@ export const RegisterForm = () => {
                   className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                   placeholder="First Name"
                 />
-                <p className="text-red-500 text-sm">{errors.firstName?.message}</p>
+                <p className="text-red-500 text-sm font-bold">{errors.firstName?.message}</p>
 
                 <input
                   {...register('lastName')}
@@ -58,7 +107,7 @@ export const RegisterForm = () => {
                   className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                   placeholder="Last Name"
                 />
-                <p className="text-red-500 text-sm">{errors.lastName?.message}</p>
+                <p className="text-red-500 text-sm font-bold">{errors.lastName?.message}</p>
 
                 <input
                   {...register('phoneNumber')}
@@ -66,7 +115,7 @@ export const RegisterForm = () => {
                   className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                   placeholder="Phone Number"
                 />
-                <p className="text-red-500 text-sm">{errors.phoneNumber?.message}</p>
+                <p className="text-red-500 text-sm font-bold">{errors.phoneNumber?.message}</p>
 
                 <input
                   {...register('email')}
@@ -74,7 +123,7 @@ export const RegisterForm = () => {
                   className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                   placeholder="Email"
                 />
-                <p className="text-red-500 text-sm">{errors.email?.message}</p>
+                <p className="text-red-500 text-sm font-bold">{errors.email?.message}</p>
               </div>
             </div>
 
@@ -86,7 +135,7 @@ export const RegisterForm = () => {
                   className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                   placeholder="Address"
                 />
-                <p className="text-red-500 text-sm">{errors.address?.message}</p>
+                <p className="text-red-500 text-sm font-bold">{errors.address?.message}</p>
               </div>
             </div>
 
@@ -98,7 +147,7 @@ export const RegisterForm = () => {
                   className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                   placeholder="Password"
                 />
-                <p className="text-red-500 text-sm">{errors.password?.message}</p>
+                <p className="text-red-500 text-sm font-bold">{errors.password?.message}</p>
 
                 <input
                   {...register('confirmPassword')}
@@ -106,7 +155,7 @@ export const RegisterForm = () => {
                   className="py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
                   placeholder="Confirm Password"
                 />
-                <p className="text-red-500 text-sm">{errors.confirmPassword?.message}</p>
+                <p className="text-red-500 text-sm font-bold">{errors.confirmPassword?.message}</p>
               </div>
             </div>
 

@@ -7,7 +7,7 @@ import { AiOutlineFilter } from 'react-icons/ai';
 import { useState, useContext } from 'react';
 import { Filters } from './Filters.tsx';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
-import { useProducts } from '../zustand/store.tsx';
+import { useProducts } from '../zustand/hooks/useProducts.tsx'; 
 import { LoadingProducts } from './LoadingProducts.tsx';
 import { NotFoundProducts } from './NotFoundProducts.tsx';
 import { Link } from 'react-router-dom';
