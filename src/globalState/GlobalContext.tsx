@@ -1,5 +1,6 @@
-import React, { createContext, useReducer, useMemo } from 'react';
-import { State, Action, reducer, initialState } from './reducer.tsx';
+import React, { createContext, useReducer, useMemo, useEffect } from 'react';
+import { State, Action, reducer, initialState, User } from './reducer.tsx';
+import { supabase } from '../supabaseClient/supabaseClient.tsx';
 
 type GlobalContextType = {
   state: State;
@@ -20,6 +21,44 @@ export const GlobalContext = createContext<GlobalContextType>(defaultContextValu
 
 export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    // Obtiene la sesión actual al montar el componente
+    const fetchSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data?.session?.user) {
+        const user: User = {
+          id: data.session.user.id,
+          email: data.session.user.email,
+          full_name: data.session.user.user_metadata.full_name,
+          avatar_url: data.session.user.user_metadata.avatar_url
+        };
+
+        dispatch({ type: 'SET_USER', payload: user });
+      }
+    };
+
+    fetchSession();
+
+    // Suscríbete a cambios en el estado de autenticación
+    const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN') {
+        const user: User = {
+          id: session?.user.id,
+          email: session?.user.email,
+          full_name: session?.user.user_metadata.full_name,
+          avatar_url: session?.user.user_metadata.avatar_url
+        };
+        dispatch({ type: 'SET_USER', payload: user });
+      } else if (event === 'SIGNED_OUT') {
+        dispatch({ type: 'CLEAR_USER' });
+      }
+    });
+
+    return () => {
+      subscription.subscription.unsubscribe();
+    };
+  }, []);
 
   const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 

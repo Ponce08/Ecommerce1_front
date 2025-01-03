@@ -1,7 +1,12 @@
 import '../../components/Styles.css';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 
 export const Footer = () => {
+  const token = localStorage.getItem('token');
+  const { state } = useContext(GlobalContext);
+
   const handleClick = (to: string) => {
     window.location.href = to;
   };
@@ -64,8 +69,11 @@ export const Footer = () => {
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <Link to={'/login'} className="mt-4 text-base font-semibold text-white hover:text-purple-600">
-                <span>Sign in</span>
+              <Link
+                to={token || state.user ? '/products/mobile-accessories' : '/login'}
+                className="mt-4 text-base font-semibold text-white hover:text-purple-600"
+              >
+                <span>{token || state.user ? 'Accessories' : 'Sign in'}</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">

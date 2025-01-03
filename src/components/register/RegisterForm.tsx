@@ -9,23 +9,28 @@ import { Footer } from '../header&footer/Footer.tsx';
 import { Header } from '../header&footer/Header.tsx';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { CREATE_NEW_USER } from '../zustand/graphql/mutations.tsx';
+import { CREATE_NEW_USER } from '../../zustand/graphql/mutations.tsx';
 
-const schema = z.object({
-  firstName: z.string().min(1, 'First name is required'),
-  lastName: z.string().min(1, 'Last name is required'),
-  phoneNumber: z.string().regex(/^\d+$/, 'Phone number must be numeric').min(10, 'Phone number must be at least 10 digits'),
-  email: z.string().email('Invalid email address'),
-  address: z.string().min(1, 'Address is required'),
-  password: z
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-      'Password must include at least one lowercase letter, one uppercase letter, one number, and one special character'
-    ),
-  confirmPassword: z.string().min(8, 'Confirm password must be at least 8 characters')
-});
+const schema = z
+  .object({
+    firstName: z.string().min(1, 'First name is required'),
+    lastName: z.string().min(1, 'Last name is required'),
+    phoneNumber: z.string().regex(/^\d+$/, 'Phone number must be numeric').min(10, 'Phone number must be at least 10 digits'),
+    email: z.string().email('Invalid email address'),
+    address: z.string().min(1, 'Address is required'),
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+        'Password must include at least one lowercase letter, one uppercase letter, one number, and one special character'
+      ),
+    confirmPassword: z.string().min(8, 'Confirm password must be at least 8 characters')
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords must match',
+    path: ['confirmPassword']
+  });
 
 type FormData = z.infer<typeof schema>;
 
@@ -53,7 +58,10 @@ export const RegisterForm = () => {
       Swal.fire({
         title: 'Registration successful',
         text: '¡User created successfully',
-        icon: 'success'
+        icon: 'success',
+        customClass: {
+          confirmButton: 'bg-purple-600'
+        }
       });
 
       navigate('/login');
@@ -73,7 +81,10 @@ export const RegisterForm = () => {
       Swal.fire({
         title: `Oops... ${errorMessage}`,
         text: 'Please try again',
-        icon: icon
+        icon: icon,
+        customClass: {
+          confirmButton: 'bg-purple-600'
+        }
       });
     }
   }

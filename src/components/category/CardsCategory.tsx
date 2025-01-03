@@ -1,4 +1,4 @@
-import '../Styles.css'
+import '../Styles.css';
 import { Header } from '../header&footer/Header.tsx';
 import { Footer } from '../header&footer/Footer.tsx';
 import { ErrorPage } from '../pageCards/ErrorPage.tsx';
@@ -8,13 +8,13 @@ import { Paginations } from '../pageCards/Paginations.tsx';
 import { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
-import { useProducts } from '../zustand/hooks/useProducts.tsx'; 
+import { useProducts } from '../../zustand/hooks/useProducts.tsx';
 import { Filters } from '../pageCards/Filters.tsx';
 import { AiOutlineFilter } from 'react-icons/ai';
-import { stateProductsPagination } from '../utils/ObjectCategorys.tsx';
+import { stateProductsPagination } from '../../utils/ObjectCategorys.tsx';
 import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/20/solid';
-import useStore from '../zustand/store.tsx';
+import useStore from '../../zustand/store.tsx';
 
 type Products = {
   id: number;

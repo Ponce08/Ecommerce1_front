@@ -2,7 +2,7 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import ContextCardsGlobal from './ContextCardsGlobal.tsx';
-import useStore from '../zustand/store.tsx';
+import useStore from '../../zustand/store.tsx';
 
 export const Paginations = () => {
   const { products } = useStore((state) => state);

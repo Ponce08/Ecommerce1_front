@@ -1,3 +1,10 @@
+export type User = {
+  id?: string;
+  email?: string;
+  full_name?: string;
+  avatar_url?: string;
+};
+
 export type State = {
   isTrue: boolean;
   isTrue_filters: boolean;
@@ -9,9 +16,11 @@ export type State = {
   priceMin: number | null;
   priceMax: number | null;
   ratingOrder: 'upward' | 'falling' | string;
+  user: User | null;
 };
 
 export const initialState: State = {
+  user: null,
   isTrue: false,
   isTrue_filters: false,
   page: 1,
@@ -25,6 +34,8 @@ export const initialState: State = {
 };
 
 export type Action =
+  | { type: 'SET_USER'; payload: User }
+  | { type: 'CLEAR_USER' }
   | { type: 'SET_TRUE' }
   | { type: 'SET_FALSE' }
   | { type: 'SET_TRUE_FILTERS' }
@@ -43,6 +54,10 @@ export type Action =
 // Reducer para manejar el estado
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
+    case 'SET_USER':
+      return { ...state, user: action.payload };
+    case 'CLEAR_USER':
+      return { ...state, user: null };
     case 'SET_TRUE':
       return { ...state, isTrue: true };
     case 'SET_FALSE':

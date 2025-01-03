@@ -9,7 +9,7 @@ import { FinishShopping } from './components/pageFinishShopping/FinishShopping.t
 import { Login } from './components/pageLogin/Login.tsx';
 import { PagePolicies } from './components/pagePolicies/PagePolicies.tsx';
 import { RegisterForm } from './components/register/RegisterForm.tsx';
-import ScrollToTop from './components/utils/ScrollToTop.tsx';
+import ScrollToTop from './utils/ScrollToTop.tsx';
 import { GlobalProvider } from './globalState/GlobalContext.tsx';
 import { CardsCategory } from './components/category/CardsCategory.tsx';
 
@@ -20,26 +20,6 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const sessionInactive = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiration');
-    localStorage.setItem('sessionInactive', 'true'); // Bandera
-    alert('Sesión cerrada automáticamente por tiempo de inactividad');
-    window.location.href = '/login';
-  };
-
-  const expiration = localStorage.getItem('expiration');
-  const sessionInactiveFlag = localStorage.getItem('sessionInactive');
-
-  if (!expiration || Date.now() > Number(expiration)) {
-    if (!sessionInactiveFlag) {
-      sessionInactive();
-    }
-  } else {
-    // Limpia la bandera si la sesión sigue activa
-    localStorage.removeItem('sessionInactive');
-  }
-
   return (
     <ApolloProvider client={client}>
       <GlobalProvider>

@@ -7,8 +7,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
-import { LOGIN } from '../zustand/graphql/mutations.tsx';
+import { LOGIN } from '../../zustand/graphql/mutations.tsx';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../supabaseClient/supabaseClient.tsx';
 
 const schema = z.object({
   email: z.string().email('Invalid email address'),
@@ -24,6 +25,24 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export const Login = () => {
+  const handleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google'
+    });
+
+    if (error) {
+      console.error('Error logging in with Google:', error.message);
+      Swal.fire({
+        title: 'Login failed',
+        text: 'Error logging in with Google',
+        icon: 'error',
+        customClass: {
+          confirmButton: 'bg-purple-600'
+        }
+      });
+    }
+  };
+
   const {
     register,
     handleSubmit,
@@ -45,17 +64,19 @@ export const Login = () => {
       });
 
       localStorage.setItem('token', user.data.login.user.token);
-      localStorage.setItem('expiration', (Date.now() + 60000).toString());
 
       Swal.fire({
         title: 'Login successful',
         text: `! Welcome ${user.data.login.user.firstName}`,
-        icon: 'success'
+        icon: 'success',
+        customClass: {
+          confirmButton: 'bg-purple-600'
+        }
       });
 
       navigate('/');
     } catch (err: any) {
-      console.error('Error al ingresar:', err);
+      console.error('Error entering:', err);
 
       // Determina el icono y el mensaje según el tipo de error
       let errorMessage = 'An unexpected error occurred';
@@ -73,7 +94,10 @@ export const Login = () => {
       Swal.fire({
         title: `Oops... ${errorMessage}`,
         text: 'Please try again',
-        icon: icon
+        icon: icon,
+        customClass: {
+          confirmButton: 'bg-purple-600'
+        }
       });
     }
   }
@@ -103,6 +127,7 @@ export const Login = () => {
               <button
                 type="button"
                 className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                onClick={handleLogin}
               >
                 <svg className="w-4 h-auto" width="46" height="47" viewBox="0 0 46 47" fill="none">
                   <path
@@ -190,23 +215,6 @@ export const Login = () => {
                     </div>
                     <p className="text-red-500 text-xs font-bold mt-2">{errors.password?.message}</p>
                   </div>
-
-                  <div className="flex items-center">
-                    <div className="flex">
-                      <input
-                        id="remember-me"
-                        name="remember-me"
-                        type="checkbox"
-                        className="shrink-0 mt-0.5 border-gray-200 rounded text-[#8c52ff] focus:ring-[#8c52ff]"
-                      />
-                    </div>
-                    <div className="ms-3">
-                      <label htmlFor="remember-me" className="text-sm">
-                        Remember me
-                      </label>
-                    </div>
-                  </div>
-
                   <button
                     type="submit"
                     className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-purple-500 text-white hover:bg-purple-600 focus:outline-none disabled:opacity-50 disabled:pointer-events-none"

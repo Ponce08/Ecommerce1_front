@@ -7,12 +7,12 @@ import { AiOutlineFilter } from 'react-icons/ai';
 import { useState, useContext } from 'react';
 import { Filters } from './Filters.tsx';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
-import { useProducts } from '../zustand/hooks/useProducts.tsx'; 
+import { useProducts } from '../../zustand/hooks/useProducts.tsx';
 import { LoadingProducts } from './LoadingProducts.tsx';
 import { NotFoundProducts } from './NotFoundProducts.tsx';
 import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/20/solid';
-import useStore from '../zustand/store.tsx';
+import useStore from '../../zustand/store.tsx';
 
 type Products = {
   id: number;

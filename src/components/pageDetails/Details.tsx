@@ -1,13 +1,15 @@
+import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from 'react-tooltip';
 import { Header } from '../header&footer/Header.tsx';
 import { Footer } from '../header&footer/Footer.tsx';
 import { ErrorPage } from '../pageCards/ErrorPage.tsx';
 import { useState } from 'react';
 import { ChevronLeft, Minus, Plus, Star } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useProductsById } from '../zustand/hooks/useProductsById.tsx';
+import { useProductsById } from '../../zustand/hooks/useProductsById.tsx';
 import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
 import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
-import useStore from '../zustand/store.tsx';
+import useStore from '../../zustand/store.tsx';
 import { HeartIcon } from '@heroicons/react/24/outline';
 
 export const Details = () => {
@@ -114,8 +116,13 @@ export const Details = () => {
               </button>
             </div>
             <button className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded flex-2">ADD TO CART</button>
-            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200">
-              <HeartIcon className="h-6 w-6 text-red-500" />
+            <div
+              className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer"
+              id="favorite"
+              data-tooltip-content="Add to Favorites"
+            >
+              <HeartIcon className="h-6 w-6 text-purple-700" />
+              <Tooltip anchorId="favorite" />
             </div>
           </div>
           <div className="mb-8 mt-10">

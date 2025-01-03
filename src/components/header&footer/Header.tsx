@@ -1,10 +1,15 @@
 'use client';
 import '../Styles.css';
+import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from 'react-tooltip';
 import img2 from '../imagenes/img2.png';
+import img8 from '../imagenes/img8.jpg';
 import { Link } from 'react-router-dom';
 import { Fragment, useState, useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { ShoppingCarts } from '../shoppingCart/ShoppingCarts.tsx';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../supabaseClient/supabaseClient.tsx';
 import {
   Dialog,
   DialogBackdrop,
@@ -116,12 +121,24 @@ const navigation = {
 export const Header = () => {
   const { state, dispatch } = useContext(GlobalContext);
 
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
 
   const token = localStorage.getItem('token');
 
   const handleClick = (to: string) => {
     window.location.href = to;
+  };
+
+  const signOut = async () => {
+    if (state.user) {
+      await supabase.auth.signOut();
+      dispatch({ type: 'CLEAR_USER' });
+      navigate('/login');
+    }
+    localStorage.removeItem('token');
+    navigate('/login');
   };
 
   return (
@@ -229,16 +246,63 @@ export const Header = () => {
             </div>
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-              <div className="flow-root">
-                <Link to={'/login'} className="-m-2 block p-2 font-bold text-bold hover:text-purple-600">
-                  <span>Sign in</span>
-                </Link>
-              </div>
-              <div className="flow-root">
-                <Link to={'/register'} className="-m-2 block p-2 font-bold text-bold hover:text-purple-600">
-                  <span>Create account</span>
-                </Link>
-              </div>
+              {token || state.user ? (
+                <div className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-gray-200">
+                  <HeartIcon className="h-6 w-6 text-purple-700" />
+                </div>
+              ) : (
+                <div className="flow-root">
+                  <Link to={'/login'} className="-m-2 block p-2 font-bold text-bold hover:text-purple-600">
+                    <span>Sign in</span>
+                  </Link>
+                </div>
+              )}
+              {token || state.user ? (
+                <Menu as="div" className="relative ml-1">
+                  <div>
+                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <span className="absolute -inset-1.5" />
+                      <span className="sr-only">Open user menu</span>
+                      <img alt="" src={state.user ? state.user.avatar_url : img8} className="size-8 rounded-full" />
+                    </MenuButton>
+                  </div>
+                  <MenuItems
+                    transition
+                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                  >
+                    <MenuItem>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                      >
+                        Your Profile
+                      </a>
+                    </MenuItem>
+                    <MenuItem>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                      >
+                        Your purchases
+                      </a>
+                    </MenuItem>
+                    <MenuItem>
+                      <a
+                        onClick={signOut}
+                        className="cursor-pointer block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                      >
+                        Sign out
+                      </a>
+                    </MenuItem>
+                  </MenuItems>
+                </Menu>
+              ) : (
+                <div className="flow-root">
+                  <Link to={'/register'} className="-m-2 block p-2 font-bold text-bold hover:text-purple-600">
+                    <span>Create account</span>
+                  </Link>
+                </div>
+              )}
             </div>
 
             <div className="border-t border-gray-200 px-4 py-6"></div>
@@ -363,9 +427,14 @@ export const Header = () => {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {token ? (
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200">
-                      <HeartIcon className="h-6 w-6 text-red-500" />
+                  {token || state.user ? (
+                    <div
+                      className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-gray-200"
+                      id="favorites"
+                      data-tooltip-content="Your Favorites"
+                    >
+                      <HeartIcon className="h-6 w-6 text-purple-700" />
+                      <Tooltip anchorId="favorites" />
                     </div>
                   ) : (
                     <Link to={'/login'} className="text-sm font-medium text-gray-700 hover:font-semibold">
@@ -373,17 +442,13 @@ export const Header = () => {
                     </Link>
                   )}
                   <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-                  {token ? (
+                  {token || state.user ? (
                     <Menu as="div" className="relative ml-3">
                       <div>
                         <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
-                          <img
-                            alt=""
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            className="size-8 rounded-full"
-                          />
+                          <img alt="" src={state.user ? state.user.avatar_url : img8} className="size-8 rounded-full" />
                         </MenuButton>
                       </div>
                       <MenuItems
@@ -403,13 +468,13 @@ export const Header = () => {
                             href="#"
                             className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                           >
-                            Settings
+                            Your purchases
                           </a>
                         </MenuItem>
                         <MenuItem>
                           <a
-                            href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                            onClick={signOut}
+                            className="cursor-pointer block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                           >
                             Sign out
                           </a>

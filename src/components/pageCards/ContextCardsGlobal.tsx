@@ -1,7 +1,7 @@
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { stateProductsPagination } from '../utils/ObjectCategorys.tsx';
+import { stateProductsPagination } from '../../utils/ObjectCategorys.tsx';
 
 const ContextCardsGlobal = () => {
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ const ContextCardsGlobal = () => {
       if (state.page > currentPage2) {
         dispatch({ type: 'SET_CURRENTPAGE', payload: state.currentPage + 1 });
       }
+      window.scrollTo(0, 0);
     },
 
     previousPage: (currentPage2: number) => {
@@ -20,20 +21,24 @@ const ContextCardsGlobal = () => {
       if (state.page < currentPage2) {
         dispatch({ type: 'SET_CURRENTPAGE', payload: state.currentPage - 1 });
       }
+      window.scrollTo(0, 0);
     },
 
     setCurrentPage: (currentPage: number) => {
       dispatch({ type: 'SET_PAGE', payload: currentPage });
+      window.scrollTo(0, 0);
     },
 
     firstPPage: () => {
       dispatch({ type: 'SET_PAGE', payload: state.firstPage });
       dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
+      window.scrollTo(0, 0);
     },
 
     lastPage: () => {
       dispatch({ type: 'SET_PAGE', payload: state.finalPage });
       dispatch({ type: 'SET_CURRENTPAGE', payload: state.finalPage - 3 });
+      window.scrollTo(0, 0);
     },
 
     stylePage: (currentPage: number) => {

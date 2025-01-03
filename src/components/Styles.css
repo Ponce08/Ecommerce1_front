@@ -136,7 +136,7 @@
   }
 }
 .class_transition_cart {
-  animation: fadeInScaleCart 1s ease-in-out;
+  animation: fadeInScaleCart 300ms ease-in-out;
 }
 /* ---------------------------------------------------------------------------------------------------------------------------- */
 /*! Styles Categorys*/
@@ -170,7 +170,7 @@
   }
 }
 .class_transition {
-  animation: fadeInScaleFilters 1s ease-in-out;
+  animation: fadeInScaleFilters 300ms ease-in-out;
 }
 /* ---------------------------------------------------------------------------------------------------------------------------- */
 /*! Styles Cards*/
