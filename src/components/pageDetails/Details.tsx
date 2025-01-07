@@ -13,7 +13,22 @@ import useStore from '../../zustand/store.tsx';
 import { HeartIcon } from '@heroicons/react/24/outline';
 
 export const Details = () => {
-  const { selectedProduct } = useStore();
+  const { selectedProduct, addToCart } = useStore();
+
+  const addCart = () => {
+    if (!selectedProduct) {
+      console.error('No product selected');
+      return; // Salir si no hay producto seleccionado
+    }
+    addToCart({
+      id: selectedProduct.id,
+      title: selectedProduct.title,
+      price: selectedProduct.price,
+      stock: selectedProduct.stock,
+      quantity,
+      images: selectedProduct.images[0]
+    });
+  };
 
   const navigate = useNavigate();
   const handleBack = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -115,7 +130,9 @@ export const Details = () => {
                 <Plus className="w-4 h-4 hover:text-purple-600" />
               </button>
             </div>
-            <button className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded flex-2">ADD TO CART</button>
+            <button onClick={addCart} className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded flex-2">
+              ADD TO CART
+            </button>
             <div
               className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer"
               id="favorite"
