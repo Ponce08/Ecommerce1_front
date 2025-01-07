@@ -10,6 +10,7 @@ import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
 import { LOGIN } from '../../zustand/graphql/mutations.tsx';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient/supabaseClient.tsx';
+// import useStore from '../../zustand/store.tsx';
 
 const schema = z.object({
   email: z.string().email('Invalid email address'),
@@ -25,6 +26,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export const Login = () => {
+  // const { shoppingCart } = useStore();
+
   const handleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google'

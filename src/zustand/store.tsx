@@ -59,8 +59,11 @@ const useStore = create<ProductsState>()(
   persist(
     (set) => ({
       shoppingCart: [],
+
       products: [],
+
       selectedProduct: null,
+
       setShoppingCart: (shoppingCart) => set({ shoppingCart }),
 
       // Agregar un producto al carrito
@@ -85,12 +88,16 @@ const useStore = create<ProductsState>()(
           shoppingCart: state.shoppingCart.filter((item) => item.id !== productId)
         })),
 
+      clearCart: () => set({ shoppingCart: [] }),
+
       // Actualizar cantidad de un producto en el carrito
       updateCartItem: (productId, quantity) =>
         set((state) => ({
           shoppingCart: state.shoppingCart.map((item) => (item.id === productId ? { ...item, quantity } : item))
         })),
+
       setProducts: (products) => set({ products }),
+
       setSelectedProduct: (product) => set({ selectedProduct: product })
     }),
     {

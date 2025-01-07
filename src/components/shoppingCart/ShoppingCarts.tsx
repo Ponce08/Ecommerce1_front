@@ -82,7 +82,12 @@ export const ShoppingCarts = () => {
           >
             Finish
           </button>
-          <button className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg">Keep Shopping</button>
+          <button
+            className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg"
+            onClick={() => contextGlobal.dispatch({ type: 'SET_FALSE' })}
+          >
+            Keep Shopping
+          </button>
         </div>
       </div>
     </div>

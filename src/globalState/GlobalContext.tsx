@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useMemo, useEffect } from 'react';
 import { State, Action, reducer, initialState, User } from './reducer.tsx';
 import { supabase } from '../supabaseClient/supabaseClient.tsx';
+// import useStore from '../zustand/store.tsx';
 
 type GlobalContextType = {
   state: State;
@@ -21,11 +22,13 @@ export const GlobalContext = createContext<GlobalContextType>(defaultContextValu
 
 export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  // const { setShoppingCart } = useStore();
 
   useEffect(() => {
     // Obtiene la sesión actual al montar el componente
     const fetchSession = async () => {
       const { data } = await supabase.auth.getSession();
+
       if (data?.session?.user) {
         const user: User = {
           id: data.session.user.id,

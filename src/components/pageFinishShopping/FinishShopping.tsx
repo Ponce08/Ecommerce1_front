@@ -6,7 +6,7 @@ export const FinishShopping = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-colorBackgroundMain p-4 md:p-6">
+      <div className="min-h-screen bg-colorBackgroundMain p-4 md:p-6 mt-[100px]">
         <div className="max-w-4xl mx-auto bg-[#d1c1fd] rounded-lg p-6">
           <div className="space-y-8">
             {/* Header */}
@@ -34,7 +34,7 @@ export const FinishShopping = () => {
                   <input
                     id={id}
                     type={type}
-                    className="w-full px-3 py-2 border rounded-md bg-[#E6E6FA] focus:outline-none focus:ring focus:ring-purple-400"
+                    className="w-full px-3 py-2 border rounded-md bg-[#E6E6FA] focus:outline-none focus:ring-purple-600"
                   />
                 </div>
               ))}
@@ -57,7 +57,7 @@ export const FinishShopping = () => {
             {/* Payment Method */}
             <div className="space-y-4">
               <h2 className="font-semibold text-center">PAYMENT METHOD</h2>
-              <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-12">
                 {[
                   { id: 'debit', label: 'DEBIT' },
                   { id: 'credit', label: 'CREDIT' },
@@ -65,7 +65,7 @@ export const FinishShopping = () => {
                 ].map(({ id, label }) => (
                   <div key={id} className="flex items-center space-x-2">
                     <input id={id} type="radio" name="payment-method" className="w-4 h-4 text-purple-600 focus:ring-purple-500" />
-                    <label htmlFor={id} className="text-sm font-medium text-blak-700">
+                    <label htmlFor={id} className="text-sm font-medium text-black-700">
                       {label}
                     </label>
                   </div>
@@ -84,7 +84,7 @@ export const FinishShopping = () => {
               </button>
               <div className="flex gap-4 text-sm">
                 {['REFUND POLICY', 'SHIPPING POLICY', 'PRIVACY POLICY'].map((text) => (
-                  <a key={text} href="#" className="text-purple-600 font-semibold hover:underline">
+                  <a key={text} href="#" className="text-purple-600 font-semibold hover:underline ml-4">
                     {text}
                   </a>
                 ))}

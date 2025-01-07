@@ -1,3 +1,4 @@
+import '../Styles.css';
 import 'react-tooltip/dist/react-tooltip.css';
 import { Tooltip } from 'react-tooltip';
 import { Header } from '../header&footer/Header.tsx';
@@ -11,6 +12,7 @@ import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
 import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
 import useStore from '../../zustand/store.tsx';
 import { HeartIcon } from '@heroicons/react/24/outline';
+import Swal from 'sweetalert2';
 
 export const Details = () => {
   const { selectedProduct, addToCart } = useStore();
@@ -27,6 +29,25 @@ export const Details = () => {
       stock: selectedProduct.stock,
       quantity,
       images: selectedProduct.images[0]
+    });
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon: 'success',
+      title: 'Product added to cart',
+      customClass: {
+        timerProgressBar: 'custom-progress-bar'
+      }
     });
   };
 

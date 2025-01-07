@@ -207,3 +207,10 @@
 .content_category_imgs {
   animation: fadeInScaleCategory 1s ease-in-out;
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------- */
+/*! Styles Details*/
+
+.custom-progress-bar {
+  background-color: blueviolet;
+}
