@@ -4,7 +4,7 @@ import 'react-tooltip/dist/react-tooltip.css';
 import { Tooltip } from 'react-tooltip';
 import img2 from '../imagenes/img2.png';
 import img8 from '../imagenes/img8.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Fragment, useState, useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { ShoppingCarts } from '../shoppingCart/ShoppingCarts.tsx';
@@ -121,6 +121,8 @@ const navigation = {
 
 export const Header = () => {
   const { state, dispatch } = useContext(GlobalContext);
+
+  const location = useLocation();
 
   const { shoppingCart } = useStore();
 
@@ -500,13 +502,15 @@ export const Header = () => {
                 <div className="ml-4 flow-root lg:ml-6">
                   {state.isTrue && <ShoppingCarts />}
 
-                  <a className="group -m-2 flex items-center p-2 cursor-pointer" onClick={() => dispatch({ type: 'SET_TRUE' })}>
-                    <ShoppingBagIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-purple-600" />
-                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      {shoppingCart.length}
-                    </span>
-                    <span className="sr-only">items in cart, view bag</span>
-                  </a>
+                  {!(location.pathname === '/finishshopping') && (
+                    <a className="group -m-2 flex items-center p-2 cursor-pointer" onClick={() => dispatch({ type: 'SET_TRUE' })}>
+                      <ShoppingBagIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-purple-600" />
+                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                        {shoppingCart.length}
+                      </span>
+                      <span className="sr-only">items in cart, view bag</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

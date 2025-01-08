@@ -15,9 +15,14 @@ import { HeartIcon } from '@heroicons/react/24/outline';
 import Swal from 'sweetalert2';
 
 export const Details = () => {
+  const { id } = useParams();
+
+  const { loading, error } = useProductsById(Number(id));
+  
   const { selectedProduct, addToCart } = useStore();
 
   const addCart = () => {
+
     if (!selectedProduct) {
       console.error('No product selected');
       return; // Salir si no hay producto seleccionado
@@ -63,9 +68,6 @@ export const Details = () => {
     setLoadedImages((prev) => ({ ...prev, [id]: true }));
   };
 
-  const { id } = useParams();
-
-  const { loading, error } = useProductsById(Number(id));
 
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);

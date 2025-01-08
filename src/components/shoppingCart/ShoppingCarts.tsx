@@ -2,6 +2,7 @@ import '../Styles.css';
 import { useContext } from 'react';
 import { X, Trash2, ShoppingCart, Plus, Minus } from 'lucide-react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
+import { Link } from 'react-router-dom';
 import useStore from '../../zustand/store.tsx';
 
 export const ShoppingCarts = () => {
@@ -38,7 +39,9 @@ export const ShoppingCarts = () => {
           ) : (
             shoppingCart.map((item, index) => (
               <div key={`${item.id}-${index}`} className="flex items-center gap-4 border-b pb-4">
-                <img src={item.images} alt={item.title} className="w-20 h-20 rounded-lg bg-gray-100" />
+                <Link to={`/product/${item.id}`} onClick={() => contextGlobal.dispatch({ type: 'SET_FALSE' })}>
+                  <img src={item.images} alt={item.title} className="w-20 h-20 rounded-lg bg-gray-100" />
+                </Link>
                 <div className="flex-1">
                   <h3 className="font-medium">{item.title}</h3>
                   <div className="flex items-center gap-2 mt-2">
@@ -76,12 +79,14 @@ export const ShoppingCarts = () => {
             <span>Total:</span>
             <span>${formattedTotal}</span>
           </div>
-          <button
-            className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg mb-2"
-            disabled={shoppingCart.length === 0}
-          >
-            Finish
-          </button>
+          <Link to={'/finishshopping'} onClick={() => contextGlobal.dispatch({ type: 'SET_FALSE' })}>
+            <button
+              className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg mb-2"
+              disabled={shoppingCart.length === 0}
+            >
+              Finish
+            </button>
+          </Link>
           <button
             className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg"
             onClick={() => contextGlobal.dispatch({ type: 'SET_FALSE' })}

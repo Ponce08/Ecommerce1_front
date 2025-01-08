@@ -1,8 +1,41 @@
+import '../Styles.css';
 import { Footer } from '../header&footer/Footer.tsx';
 import { Header } from '../header&footer/Header.tsx';
-import '../Styles.css';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const PagePolicies = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const handleScrollToHash = () => {
+      if (location.hash) {
+        const elementId = location.hash.replace('#', '');
+        const element = document.getElementById(elementId);
+
+        if (element) {
+          // Ajusta manualmente el desplazamiento (p. ej., para compensar un header fijo)
+          const offset = 110; // Altura del header fijo o desfase deseado
+          const elementPosition = element.getBoundingClientRect().top; // Posición del elemento relativa a la ventana
+          const scrollPosition = window.scrollY + elementPosition - offset;
+
+          // Aplica el ajuste
+          window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+        }
+      }
+    };
+
+    // Llama a la función inmediatamente después de renderizar el componente
+    handleScrollToHash();
+
+    // Escucha cambios en el hash de la URL
+    window.addEventListener('hashchange', handleScrollToHash);
+
+    return () => {
+      // Limpia el listener para evitar fugas de memoria
+      window.removeEventListener('hashchange', handleScrollToHash);
+    };
+  }, [location]);
+
   return (
     <>
       <Header />
@@ -14,21 +47,22 @@ export const PagePolicies = () => {
           hours.
           <br />
           <br />
-          <span>1. Shipping Policy Processing Time:</span> We process all orders within 1 to 3 business days. Shipping options:
-          Standard shipping (5-7 business days). Express shipping (2-3 business days). Cost: Free shipping on orders over $100
-          USD. Orders under this amount have a $10 USD fee for standard shipping. Coverage: We ship nationwide. For international
-          shipping, check the additional rates section. Delays: During high-demand periods, delivery times may slightly vary.{' '}
-          <br />
-          <br /> <span>2. Return and Refund Policy:</span> We accept returns for defective products or if you are not satisfied
-          with your purchase. Period: You can return any item within 30 days of receipt. Product condition: Fashion items must be
-          returned with original tags and without signs of use. Tech devices must be returned in their original packaging and
-          undamaged. Refunds: We will process your refund within 7 business days after receiving the returned product. Shipping
-          costs: Return shipping costs are the customer’s responsibility, except for defective products. <br />
-          <br /> <span>3. Privacy Policy:</span> We collect information such as your name, email, shipping address, and payment
-          details to process your order and personalize your experience. Protection: Your information is encrypted using SSL
-          protocols to ensure security. Third parties: We do not share your data with third parties, except for payment processors
-          and shipping services. Cookies: We use cookies to analyze traffic and improve navigation. You can disable them in your
-          browser settings. <br />
+          <span id="shipping_policy">1. Shipping Policy Processing Time:</span> We process all orders within 1 to 3 business days.
+          Shipping options: Standard shipping (5-7 business days). Express shipping (2-3 business days). Cost: Free shipping on
+          orders over $100 USD. Orders under this amount have a $10 USD fee for standard shipping. Coverage: We ship nationwide.
+          For international shipping, check the additional rates section. Delays: During high-demand periods, delivery times may
+          slightly vary. <br />
+          <br /> <span id="refund_policy">2. Return and Refund Policy:</span> We accept returns for defective products or if you
+          are not satisfied with your purchase. Period: You can return any item within 30 days of receipt. Product condition:
+          Fashion items must be returned with original tags and without signs of use. Tech devices must be returned in their
+          original packaging and undamaged. Refunds: We will process your refund within 7 business days after receiving the
+          returned product. Shipping costs: Return shipping costs are the customer’s responsibility, except for defective
+          products. <br />
+          <br /> <span id="privacy_policy">3. Privacy Policy:</span> We collect information such as your name, email, shipping
+          address, and payment details to process your order and personalize your experience. Protection: Your information is
+          encrypted using SSL protocols to ensure security. Third parties: We do not share your data with third parties, except
+          for payment processors and shipping services. Cookies: We use cookies to analyze traffic and improve navigation. You can
+          disable them in your browser settings. <br />
           <br /> <span>4. Terms and Conditions:</span> Customers must use the site exclusively to purchase legal products.
           Malicious use of the site is prohibited. Prices: Prices are subject to change without prior notice and may vary
           depending on promotions or discounts. Availability: Some tech products have limited stock and may sell out quickly.

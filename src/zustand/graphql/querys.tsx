@@ -9,6 +9,7 @@ export const GET_PRODUCTS = gql`
       images
       category
       price
+      stock
       rating
     }
   }
