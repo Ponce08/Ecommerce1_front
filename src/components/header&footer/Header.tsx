@@ -252,8 +252,13 @@ export const Header = () => {
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {token || state.user ? (
-                <div className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-gray-200">
+                <div
+                  className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-gray-200"
+                  id="favorites_responsive"
+                  data-tooltip-content="Your Favorites"
+                >
                   <HeartIcon className="h-6 w-6 text-purple-700" />
+                  <Tooltip anchorId="favorites_responsive" />
                 </div>
               ) : (
                 <div className="flow-root">

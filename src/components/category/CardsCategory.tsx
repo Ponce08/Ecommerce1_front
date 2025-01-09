@@ -1,4 +1,6 @@
 import '../Styles.css';
+import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from 'react-tooltip';
 import { Header } from '../header&footer/Header.tsx';
 import { Footer } from '../header&footer/Footer.tsx';
 import { ErrorPage } from '../pageCards/ErrorPage.tsx';
@@ -14,13 +16,17 @@ import { AiOutlineFilter } from 'react-icons/ai';
 import { stateProductsPagination } from '../../utils/ObjectCategorys.tsx';
 import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/20/solid';
+import { HeartIcon } from '@heroicons/react/24/outline';
+import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import useStore from '../../zustand/store.tsx';
+import Swal from 'sweetalert2';
 
 type Products = {
   id: number;
   title: string;
   category: string;
   price: number;
+  stock: number;
   rating: number;
   images: string[];
 };
@@ -38,7 +44,7 @@ export const CardsCategory = () => {
 
   const { loading, error } = useProducts({ page, category: categorys, priceMin, priceMax, ratingOrder });
 
-  const { products } = useStore();
+  const { products, addToCart } = useStore();
 
   useEffect(() => {
     if (categorys) {
@@ -53,6 +59,36 @@ export const CardsCategory = () => {
 
   const handleImageLoad = (id: number) => {
     setLoadedImages((prev) => ({ ...prev, [id]: true }));
+  };
+
+  const addCart = (id: number, title: string, price: number, stock: number, images: string) => {
+    addToCart({
+      id,
+      title,
+      price,
+      stock,
+      quantity: 1,
+      images
+    });
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon: 'success',
+      title: 'Product added to cart',
+      customClass: {
+        timerProgressBar: 'custom-progress-bar'
+      }
+    });
   };
 
   if (loading) return <LoadingProducts />;
@@ -78,9 +114,9 @@ export const CardsCategory = () => {
           <h2 className="sr-only">Products</h2>
 
           <div className="grid grid-cols-1 grid-rows-12 gap-x-6 gap-y-10 sm:grid-cols-2 sm:grid-rows-6 lg:grid-cols-3 xl:grid-cols-4 xl:grid-rows-3 xl:gap-x-8">
-            {products.map((product: Products) => {
-              return (
-                <Link to={`/product/${product.id}`} className="group" key={product.id}>
+            {products.map((product: Products) => (
+              <div className="group" key={product.id}>
+                <Link to={`/product/${product.id}`}>
                   <div className="relative aspect-square w-full rounded-lg bg-gray-200 xl:aspect-[7/8] content_category_imgs">
                     {!loadedImages[product.id] && (
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -100,19 +136,34 @@ export const CardsCategory = () => {
                     />
                   </div>
                   <h3 className="mt-4 text-lg text-gray-700 group-hover:text-purple-600">{product.title}</h3>
-                  <p className="mt-1 text-lg font-semibold text-gray-900">${product.price}</p>
-                  <div className="flex items-center">
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon
-                        key={rating}
-                        aria-hidden="true"
-                        className={classNames(product.rating > rating ? 'text-gray-900' : 'text-gray-200', 'size-5 shrink-0')}
-                      />
-                    ))}
-                  </div>
                 </Link>
-              );
-            })}
+                <p className="mt-1 text-lg font-semibold text-gray-900">${product.price}</p>
+                <div className="flex items-center">
+                  {[0, 1, 2, 3, 4].map((rating) => (
+                    <StarIcon
+                      key={rating}
+                      aria-hidden="true"
+                      className={classNames(product.rating > rating ? 'text-gray-900' : 'text-gray-200', 'size-5 shrink-0')}
+                    />
+                  ))}
+                  <div className="flex justify-end w-full h-10 rounded-full cursor-pointer mr-2">
+                    <HeartIcon
+                      className="mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 focus:outline-none"
+                      id={`favorite_category${product.id}`}
+                      data-tooltip-content="Add to Favorites"
+                    />
+                    <Tooltip anchorId={`favorite_category${product.id}`} />
+                    <ShoppingBagIcon
+                      className="mt-2 ml-2 size-6 shrink-0 text-gray-400 hover:text-purple-600 focus:outline-none"
+                      id={`add_cart_category${product.id}`}
+                      data-tooltip-content="Add to Cart"
+                      onClick={() => addCart(product.id, product.title, product.price, product.stock, product.images[0])}
+                    />
+                    <Tooltip anchorId={`add_cart_category${product.id}`} />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

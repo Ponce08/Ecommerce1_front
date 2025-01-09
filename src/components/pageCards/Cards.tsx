@@ -1,5 +1,6 @@
 import '../Styles.css';
 import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from 'react-tooltip';
 import { Header } from '../header&footer/Header.tsx';
 import { Footer } from '../header&footer/Footer.tsx';
 import { ErrorPage } from './ErrorPage.tsx';
@@ -14,7 +15,6 @@ import { NotFoundProducts } from './NotFoundProducts.tsx';
 import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { HeartIcon } from '@heroicons/react/24/outline';
-import { Tooltip } from 'react-tooltip';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import useStore from '../../zustand/store.tsx';
 import Swal from 'sweetalert2';
@@ -135,7 +135,7 @@ export const Cards = () => {
                   ))}
                   <div className="flex justify-end w-full h-10 rounded-full cursor-pointer mr-2">
                     <HeartIcon
-                      className="h-6 w-6 text-purple-700 mt-2 ml-2 focus:outline-none"
+                      className="mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 focus:outline-none"
                       id={`favorite${product.id}`}
                       data-tooltip-content="Add to Favorites"
                     />

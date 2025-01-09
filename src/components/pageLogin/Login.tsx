@@ -1,6 +1,7 @@
 import '../Styles.css';
 import { Footer } from '../header&footer/Footer.tsx';
 import { Header } from '../header&footer/Header.tsx';
+import { useEffect, useRef } from 'react';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -105,15 +106,30 @@ export const Login = () => {
     }
   }
 
+  const targetSectionRef = useRef<HTMLDivElement | null>(null);
+
+  const HEADER_HEIGHT = 150; // Ajusta según la altura de tu header fijo
+
+  useEffect(() => {
+    if (targetSectionRef.current) {
+      // Obtener la posición del elemento
+      const sectionTop = targetSectionRef.current.getBoundingClientRect().top;
+      const scrollPosition = window.scrollY + sectionTop - HEADER_HEIGHT;
+
+      // Desplazar el scroll con el desfase calculado
+      window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+    }
+  }, []); // [] asegura que esto solo ocurra al cargar la página
+
   if (loading) return <LoadingProducts />;
 
   return (
     <>
       <Header />
-      <div className="w-full px-4 py-4 bg-black mt-[100px] img_login">
+      <div className="px-4 py-16 sm:px-6 sm:py-36 md:py-[237px] lg:px-8 lg:py-[210px] bg-black mt-[100px] img_login">
         <div className="max-w-sm mx-auto mt-1 bg-white border border-gray-200 rounded-xl shadow-sm">
           <div className="p-4 sm:p-7">
-            <div className="text-center">
+            <div ref={targetSectionRef} className="text-center">
               <h1 className="block text-2xl font-bold text-gray-800">Sign in</h1>
               <p className="mt-2 text-sm text-gray-600">
                 Don't have an account yet?/

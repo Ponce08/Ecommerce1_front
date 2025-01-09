@@ -6,6 +6,10 @@ export const content = [
 ];
 export const theme = {
   extend: {
+    screens: {
+      xs: '300px', // Nuevo tamaño personalizado
+      '3xl': '1920px' // Tamaño extra grande
+    },
     colors: {
       colorFooter: '#8c52ff',
       colorText: '#c1ff72',

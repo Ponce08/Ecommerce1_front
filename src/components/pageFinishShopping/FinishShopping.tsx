@@ -19,7 +19,7 @@ export const FinishShopping = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-colorBackgroundMain p-4 md:p-6 mt-[100px]">
+      <div className="h-auto bg-colorBackgroundMain p-4 md:p-6 md:pb-32 mt-[100px]">
         <div className="max-w-4xl mx-auto bg-[#d1c1fd] rounded-lg p-6">
           <div className="space-y-8">
             {/* Header */}
@@ -54,17 +54,17 @@ export const FinishShopping = () => {
             </div>
 
             {/* Cart Items */}
-            <div className="space-y-4 p-10">
+            <div className="space-y-4 p-2">
               {shoppingCart.map((item, index) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <img src={item.images} alt={item.title} className="w-24 h-24 rounded-lg bg-gray-100" />
-                    <span>{item.title}</span>
+                    <img src={item.images} alt={item.title} className="w-20 h-20 lg:w-32 lg:h-32 rounded-lg bg-gray-100" />
+                    <span className='w-32 text-xs text-center'>{item.title}</span>
                   </div>
                   <span>{item.price}</span>
                 </div>
               ))}
-              <div className="text-right font-semibold">TOTAL : ${formattedTotal}</div>
+              <div className="text-right font-semibold">Total : ${formattedTotal}</div>
             </div>
 
             {/* Payment Method */}
@@ -91,18 +91,18 @@ export const FinishShopping = () => {
 
             {/* Footer */}
             <div className="flex items-center justify-between pt-4 border-t">
-              <button onClick={handleBack} className="flex items-center text-purple-600 font-semibold hover:underline">
+              <button onClick={handleBack} className="flex items-center text-xs text-purple-600 font-semibold hover:underline">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 BACK
               </button>
-              <div className="flex gap-4 text-sm">
+              <div className="flex gap-2 text-center text-sm ml-4">
                 {[
-                  { title: 'REFUND POLICY', href: '#refund_policy' },
-                  { title: 'SHIPPING POLICY', href: '#shipping_policy' },
-                  { title: 'PRIVACY POLICY', href: '#privacy_policy' }
+                  { title: 'Refund Policy', href: '#refund_policy' },
+                  { title: 'Shipping Policy', href: '#shipping_policy' },
+                  { title: 'Privacy Policy', href: '#privacy_policy' }
                 ].map((text, index) => (
-                  <Link to={`/policies/${text.href}`} key={index} className="text-purple-600 font-semibold hover:underline ml-4">
-                    <span>{text.title}</span>
+                  <Link to={`/policies/${text.href}`} key={index} className="text-purple-600 font-semibold hover:underline ml-2">
+                    <span className='text-xs'>{text.title}</span>
                   </Link>
                 ))}
               </div>

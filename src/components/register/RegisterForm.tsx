@@ -2,6 +2,7 @@ import '../Styles.css';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -89,14 +90,29 @@ export const RegisterForm = () => {
     }
   }
 
+    const targetSectionRef = useRef<HTMLDivElement | null>(null);
+  
+    const HEADER_HEIGHT = 150; // Ajusta según la altura de tu header fijo
+  
+    useEffect(() => {
+      if (targetSectionRef.current) {
+        // Obtener la posición del elemento
+        const sectionTop = targetSectionRef.current.getBoundingClientRect().top;
+        const scrollPosition = window.scrollY + sectionTop - HEADER_HEIGHT;
+  
+        // Desplazar el scroll con el desfase calculado
+        window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+      }
+    }, []); // [] asegura que esto solo ocurra al cargar la página
+
   if (loading) return <LoadingProducts />;
 
   return (
     <>
       <Header />
-      <div className="w-full px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-[100px] img_registerForm">
+      <div className="w-full px-4 py-10 sm:px-6 md:py-32 lg:px-8 lg:py-32 mx-auto mt-[100px] img_registerForm">
         <div className="max-w-2xl mx-auto bg-colorBackground/50 rounded-xl shadow p-4 sm:p-7">
-          <div className="text-center mb-8">
+          <div ref={targetSectionRef} className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Register</h2>
             <p className="text-sm text-gray-600">be part of our best offers.</p>
           </div>

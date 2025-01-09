@@ -12,9 +12,9 @@ export const Footer = () => {
   };
 
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
+    <div className="relative isolate overflow-hidden bg-gray-900 py-10 sm:py-12 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-2 lg:max-w-none lg:grid-cols-2">
           <div className="max-w-xl lg:max-w-lg">
             <h2 className="text-4xl font-semibold tracking-tight text-white">Subscribe to our newsletter</h2>
             <p className="mt-4 text-lg text-gray-300">Subscribe and take advantage of all our offers!!!</p>
@@ -39,30 +39,30 @@ export const Footer = () => {
               </button>
             </div>
           </div>
-          <dl className="grid grid-cols-1 gap-y-2 sm:grid-cols-2 lg:pt-2 dl_center">
+          <dl className="grid grid-cols-3 place-items-center sm:grid-cols-3 lg:grid-cols-2 lg:pt-2">
             <div className="flex flex-col items-start">
-              <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-purple-600">
+              <Link to={'/policies'} className="mt-4 text-xs lg:text-base sm:text-base text-white hover:text-purple-600">
                 <span>Policies</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link
                 to={'/products/laptops'}
-                className="mt-4 text-base font-semibold text-white hover:text-purple-600"
+                className="mt-4 text-xs lg:text-base sm:text-base text-white hover:text-purple-600"
                 onClick={() => handleClick('/products/laptops')}
               >
                 <span>Tecnology</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <Link to={'/register'} className="mt-4 text-base font-semibold text-white hover:text-purple-600">
+              <Link to={'/register'} className="mt-4 text-xs lg:text-base sm:text-base text-white hover:text-purple-600">
                 <span>Register</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
               <Link
                 to={'/products/womens-shoes'}
-                className="mt-4 text-base font-semibold text-white hover:text-purple-600"
+                className="mt-4 text-xs lg:text-base sm:text-base text-white hover:text-purple-600"
                 onClick={() => handleClick('/products/womens-shoes')}
               >
                 <span>Fashion</span>
@@ -71,13 +71,13 @@ export const Footer = () => {
             <div className="flex flex-col items-start">
               <Link
                 to={token || state.user ? '/products/mobile-accessories' : '/login'}
-                className="mt-4 text-base font-semibold text-white hover:text-purple-600"
+                className="mt-4 text-xs lg:text-base sm:text-base text-white hover:text-purple-600"
               >
                 <span>{token || state.user ? 'Accessories' : 'Sign in'}</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
-              <Link to={'/policies'} className="mt-4 text-base font-semibold text-white hover:text-purple-600">
+              <Link to={'/policies'} className="mt-4 text-xs lg:text-base sm:text-base text-white hover:text-purple-600">
                 <span>Contact</span>
               </Link>
             </div>

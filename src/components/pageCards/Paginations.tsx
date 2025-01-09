@@ -20,7 +20,7 @@ export const Paginations = () => {
       <nav className="flex items-center justify-center gap-2">
         {/* Botón de página anterior */}
         <button
-          className="flex items-center text-gray-500 text-xs lg:text-lg hover:text-purple-600 hover:font-bold px-2 py-1 rounded-lg"
+          className="flex items-center text-gray-500 xs:text-[10px] text-xs lg:text-lg hover:text-purple-600 hover:font-bold px-2 py-1 rounded-lg"
           onClick={() => previousPage(currentPage2)}
           disabled={state.page === 1}
         >
@@ -31,7 +31,7 @@ export const Paginations = () => {
 
         {!(currentPage1 === state.firstPage) && (
           <button
-            className="text-xs lg:text-lg px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border"
+            className="xs:text-[10px] xs:px-2 text-xs lg:text-lg px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border"
             onClick={firstPPage}
           >
             {state.firstPage}
@@ -59,7 +59,7 @@ export const Paginations = () => {
 
         {!(currentPage3 === state.finalPage || state.priceMax || state.finalPage < currentPage3) && (
           <button
-            className="text-xs lg:text-lg px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border"
+            className="xs:text-[10px] xs:px-1 text-xs lg:text-lg px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border"
             onClick={lastPage}
           >
             {state.finalPage}
@@ -69,7 +69,7 @@ export const Paginations = () => {
         {/* Botón de página siguiente */}
 
         <button
-          className="flex items-center text-gray-500 text-xs lg:text-lg hover:text-purple-600 hover:font-bold px-2 py-1 rounded-lg"
+          className="flex items-center text-gray-500 xs:text-[10px] text-xs lg:text-lg hover:text-purple-600 hover:font-bold px-2 py-1 rounded-lg"
           onClick={() => nextPage(currentPage2)}
           disabled={state.page === state.finalPage || products.length < 12}
         >

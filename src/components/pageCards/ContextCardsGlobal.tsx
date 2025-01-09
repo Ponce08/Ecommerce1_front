@@ -43,8 +43,8 @@ const ContextCardsGlobal = () => {
 
     stylePage: (currentPage: number) => {
       return state.page === currentPage
-        ? 'px-3 py-1 rounded-lg text-xs lg:text-lg text-white bg-[#8c52ff] hover:bg-[#8c52ff]/90'
-        : 'px-3 py-1 rounded-lg text-gray-700 text-xs lg:text-lg hover:text-[#8c52ff] hover:border-[#8c52ff] border';
+        ? 'px-3 py-1 rounded-lg text-xs xs:text-[10px] xs:px-2 lg:text-lg text-white bg-[#8c52ff] hover:bg-[#8c52ff]/90'
+        : 'px-3 py-1 rounded-lg text-gray-700 text-xs xs:text-[10px] xs:px-2 lg:text-lg hover:text-[#8c52ff] hover:border-[#8c52ff] border';
     },
     applyFilters: (category: string, minPrice: string, maxPrice: string, rating: string) => {
       const normalizedCategory = category.toLowerCase().replace(/\s+/g, '-');

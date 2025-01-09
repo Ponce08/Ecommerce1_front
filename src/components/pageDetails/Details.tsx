@@ -153,7 +153,7 @@ export const Details = () => {
                 <Plus className="w-4 h-4 hover:text-purple-600" />
               </button>
             </div>
-            <button onClick={addCart} className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded flex-2">
+            <button onClick={addCart} className="xs:px-2 xs:text-xs bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded flex-2">
               ADD TO CART
             </button>
             <div

@@ -78,7 +78,7 @@ export const Seccion1 = () => {
                 </div>
               </div>
               <Link
-                to={'/products/mens-shirts'}
+                to={'/products'}
                 className="inline-block rounded-md border border-transparent bg-purple-500 px-8 py-3 text-center font-medium text-white hover:bg-purple-600"
               >
                 <span>Shop Collection</span>
