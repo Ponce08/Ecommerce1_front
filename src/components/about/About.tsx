@@ -1,26 +1,13 @@
 import { Footer } from '../header&footer/Footer.tsx';
 import { Header } from '../header&footer/Header.tsx';
-import { useEffect, useRef } from 'react';
-import img4 from '../imagenes/img4.jpg';
-import img5 from '../imagenes/img5.png';
+import img4 from '@/imagenes/img4.jpg';
+import img5 from '@/imagenes/img5.png';
+import SectionRef from '@/utils/SectionRef.tsx';
 
 import { Link } from 'react-router-dom';
 
 export function About() {
-  const targetSectionRef = useRef<HTMLDivElement | null>(null);
-
-  const HEADER_HEIGHT = 150; // Ajusta según la altura de tu header fijo
-
-  useEffect(() => {
-    if (targetSectionRef.current) {
-      // Obtener la posición del elemento
-      const sectionTop = targetSectionRef.current.getBoundingClientRect().top;
-      const scrollPosition = window.scrollY + sectionTop - HEADER_HEIGHT;
-
-      // Desplazar el scroll con el desfase calculado
-      window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
-    }
-  }, []); // [] asegura que esto solo ocurra al cargar la página
+  const { targetSectionRef } = SectionRef();
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import img3 from '../imagenes/img3.jpg';
+import img3 from '../../../src/imagenes/img3.jpg';
 
 export const Seccion3 = () => {
   let stats = [

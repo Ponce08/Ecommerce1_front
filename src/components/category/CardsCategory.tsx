@@ -19,21 +19,8 @@ import { StarIcon } from '@heroicons/react/20/solid';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import useStore from '../../zustand/store.tsx';
-import Swal from 'sweetalert2';
-
-type Products = {
-  id: number;
-  title: string;
-  category: string;
-  price: number;
-  stock: number;
-  rating: number;
-  images: string[];
-};
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
-}
+import ContextCardsGlobal from '../../utils/ContextCardsGlobal.tsx';
+import { Products } from '../../utils/ContextCardsGlobal.tsx';
 
 export const CardsCategory = () => {
   const { categorys } = useParams();
@@ -44,7 +31,9 @@ export const CardsCategory = () => {
 
   const { loading, error } = useProducts({ page, category: categorys, priceMin, priceMax, ratingOrder });
 
-  const { products, addToCart } = useStore();
+  const { products } = useStore();
+
+  const { addCart, handleImageLoad, classNames } = ContextCardsGlobal();
 
   useEffect(() => {
     if (categorys) {
@@ -56,40 +45,6 @@ export const CardsCategory = () => {
   }, [categorys, dispatch]);
 
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
-
-  const handleImageLoad = (id: number) => {
-    setLoadedImages((prev) => ({ ...prev, [id]: true }));
-  };
-
-  const addCart = (id: number, title: string, price: number, stock: number, images: string) => {
-    addToCart({
-      id,
-      title,
-      price,
-      stock,
-      quantity: 1,
-      images
-    });
-
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      }
-    });
-    Toast.fire({
-      icon: 'success',
-      title: 'Product added to cart',
-      customClass: {
-        timerProgressBar: 'custom-progress-bar'
-      }
-    });
-  };
 
   if (loading) return <LoadingProducts />;
   if (products.length === 0) return <NotFoundProducts />;
@@ -132,7 +87,7 @@ export const CardsCategory = () => {
                       className={`aspect-square w-full rounded-lg object-cover group-hover:opacity-75 xl:aspect-[7/8] cursor-pointer ${
                         loadedImages[product.id] ? '' : 'hidden'
                       } transition-transform duration-300 ease-in-out transform group-hover:scale-105`}
-                      onLoad={() => handleImageLoad(product.id)}
+                      onLoad={() => handleImageLoad(product.id, setLoadedImages)}
                     />
                   </div>
                   <h3 className="mt-4 text-lg text-gray-700 group-hover:text-purple-600">{product.title}</h3>

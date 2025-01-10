@@ -2,15 +2,15 @@
 import '../Styles.css';
 import 'react-tooltip/dist/react-tooltip.css';
 import { Tooltip } from 'react-tooltip';
-import img2 from '../imagenes/img2.png';
-import img8 from '../imagenes/img8.jpg';
+import img2 from '../../../src/imagenes/img2.png';
+import img8 from '../../../src/imagenes/img8.jpg';
 import { Link, useLocation } from 'react-router-dom';
 import { Fragment, useState, useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { ShoppingCarts } from '../shoppingCart/ShoppingCarts.tsx';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../supabaseClient/supabaseClient.tsx';
 import useStore from '../../zustand/store.tsx';
+import FunctionsGlobalHeader from '../../utils/FunctionsGlobalHeader.tsx';
+import { Bars3Icon, ShoppingBagIcon, XMarkIcon, HeartIcon } from '@heroicons/react/24/outline';
 import {
   Dialog,
   DialogBackdrop,
@@ -29,122 +29,14 @@ import {
   MenuItem,
   MenuItems
 } from '@headlessui/react';
-import { Bars3Icon, ShoppingBagIcon, XMarkIcon, HeartIcon } from '@heroicons/react/24/outline';
-
-const navigation = {
-  categories: [
-    {
-      id: '1',
-      name: 'Fashion',
-      featured: [
-        {
-          name: 'New Arrivals',
-          category: 'womens-bags',
-          imageSrc: "https://cdn.dummyjson.com/products/images/womens-bags/Blue%20Women's%20Handbag/1.png",
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.'
-        },
-        {
-          name: 'Basic Dress',
-          category: 'womens-dresses',
-          imageSrc: 'https://cdn.dummyjson.com/products/images/womens-dresses/Dress%20Pea/1.png',
-          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.'
-        }
-      ],
-      sections: [
-        {
-          id: 'clothing',
-          name: 'Clothing',
-          items: [
-            { name: 'Tops', category: 'tops' },
-            { name: 'Dresses', category: 'womens-dresses' },
-            { name: 'T-Shirts', category: 'mens-shirts' },
-            { name: 'Browse All', category: '' }
-          ]
-        },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', category: 'womens-watches' },
-            { name: 'Bags', category: 'womens-bags' },
-            { name: 'Sunglasses', category: 'sunglasses' }
-          ]
-        }
-      ]
-    },
-    {
-      id: '2',
-      name: 'Tecnology',
-      featured: [
-        {
-          name: 'Latest in technology',
-          category: 'laptops',
-          imageSrc: 'https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/1.png',
-          imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.'
-        },
-        {
-          name: 'Creative tools',
-          category: 'mobile-accessories',
-          imageSrc: 'https://cdn.dummyjson.com/products/images/mobile-accessories/Selfie%20Stick%20Monopod/1.png',
-          imageAlt:
-            'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.'
-        }
-      ],
-      sections: [
-        {
-          id: 'clothing',
-          name: 'Clothing',
-          items: [
-            { name: 'Tops', category: 'tops' },
-            { name: 'Dresses', category: 'womens-dresses' },
-            { name: 'T-Shirts', category: 'mens-shirts' },
-            { name: 'Browse All', category: '' }
-          ]
-        },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', category: 'mens-watches' },
-            { name: 'Bags', category: 'womens-bags' },
-            { name: 'Sunglasses', category: 'sunglasses' }
-          ]
-        }
-      ]
-    }
-  ],
-  pages: [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' }
-  ]
-};
 
 export const Header = () => {
   const { state, dispatch } = useContext(GlobalContext);
-
   const location = useLocation();
-
   const { shoppingCart } = useStore();
-
-  const navigate = useNavigate();
-
   const [open, setOpen] = useState(false);
-
+  const { navigation, LoadPage, signOut } = FunctionsGlobalHeader();
   const token = localStorage.getItem('token');
-
-  const handleClick = (to: string) => {
-    window.location.href = to;
-  };
-
-  const signOut = async () => {
-    if (state.user) {
-      await supabase.auth.signOut();
-      dispatch({ type: 'CLEAR_USER' });
-      navigate('/login');
-    }
-    localStorage.removeItem('token');
-    navigate('/login');
-  };
 
   return (
     <div className="bg-colorBackgroundMain">
@@ -193,7 +85,7 @@ export const Header = () => {
                         <Link
                           to={`/products/${item.category}/`}
                           className="mt-6 block text-gray-900"
-                          onClick={() => handleClick(`/products/${item.category}`)}
+                          onClick={() => LoadPage(`/products/${item.category}`)}
                           key={item.name}
                         >
                           <div className="group relative text-sm">
@@ -225,7 +117,7 @@ export const Header = () => {
                             <li key={item.name} className="flow-root">
                               <Link
                                 to={item.category === '' ? '/products' : `/products/${item.category}`}
-                                onClick={() => handleClick(`/products/${item.category}`)}
+                                onClick={() => LoadPage(`/products/${item.category}`)}
                                 className="-m-2 block p-2 text-gray-500 hover:text-purple-600 hover:font-semibold"
                               >
                                 <span>{item.name}</span>
@@ -298,7 +190,7 @@ export const Header = () => {
                     </MenuItem>
                     <MenuItem>
                       <a
-                        onClick={signOut}
+                        onClick={() => signOut(state, dispatch)}
                         className="cursor-pointer block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                       >
                         Sign out
@@ -352,7 +244,7 @@ export const Header = () => {
                   {navigation.categories.map((category, index) => (
                     <Popover className="flex" key={`${category.name}-${index}`}>
                       <div className="relative flex">
-                        <PopoverButton className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:font-semibold data-[open]:border-purple-600 data-[open]:text-purple-600 data-[open]:font-semibold">
+                        <PopoverButton className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:font-semibold data-[open]:border-purple-600 data-[open]:text-purple-600 data-[open]:font-semibold focus:outline-none">
                           {category.name}
                         </PopoverButton>
                       </div>
@@ -371,7 +263,7 @@ export const Header = () => {
                                 {category.featured.map((item, index) => (
                                   <Link
                                     to={`/products/${item.category}`}
-                                    onClick={() => handleClick(`/products/${item.category}`)}
+                                    onClick={() => LoadPage(`/products/${item.category}`)}
                                     className="mt-6 block font-medium text-gray-900"
                                     key={`${item.name}-${index}`}
                                   >
@@ -405,7 +297,7 @@ export const Header = () => {
                                         <li key={`${item.name}-${index}`} className="flex">
                                           <Link
                                             to={item.category === '' ? '/products' : `/products/${item.category}`}
-                                            onClick={() => handleClick(`/products/${item.category}`)}
+                                            onClick={() => LoadPage(`/products/${item.category}`)}
                                             className="hover:text-purple-600 hover:font-semibold"
                                           >
                                             <span>{item.name}</span>
@@ -443,8 +335,10 @@ export const Header = () => {
                       id="favorites"
                       data-tooltip-content="Your Favorites"
                     >
-                      <HeartIcon className="h-6 w-6 text-purple-700" />
-                      <Tooltip anchorId="favorites" />
+                      <Link to={'/favorites'}>
+                        <HeartIcon className="h-6 w-6 text-purple-700" />
+                        <Tooltip anchorId="favorites" />
+                      </Link>
                     </div>
                   ) : (
                     <Link to={'/login'} className="text-sm font-medium text-gray-700 hover:font-semibold">
@@ -483,7 +377,7 @@ export const Header = () => {
                         </MenuItem>
                         <MenuItem>
                           <a
-                            onClick={signOut}
+                            onClick={() => signOut(state, dispatch)}
                             className="cursor-pointer block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                           >
                             Sign out

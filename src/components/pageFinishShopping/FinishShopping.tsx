@@ -41,7 +41,7 @@ export const FinishShopping = () => {
                 { id: 'region', label: 'Region' }
               ].map(({ id, label, type = 'text' }) => (
                 <div key={id} className="space-y-2">
-                  <label htmlFor={id} className="block text-sm font-semibold text-black-700">
+                  <label htmlFor={id} className="block text-sm font-semibold text-black-700 ml-4">
                     {label}
                   </label>
                   <input
@@ -61,7 +61,7 @@ export const FinishShopping = () => {
                     <img src={item.images} alt={item.title} className="w-20 h-20 lg:w-32 lg:h-32 rounded-lg bg-gray-100" />
                     <span className='w-32 text-xs text-center'>{item.title}</span>
                   </div>
-                  <span>{item.price}</span>
+                  <span>${item.price}</span>
                 </div>
               ))}
               <div className="text-right font-semibold">Total : ${formattedTotal}</div>

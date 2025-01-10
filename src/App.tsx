@@ -12,6 +12,7 @@ import { RegisterForm } from './components/register/RegisterForm.tsx';
 import ScrollToTop from './utils/ScrollToTop.tsx';
 import { GlobalProvider } from './globalState/GlobalContext.tsx';
 import { CardsCategory } from './components/category/CardsCategory.tsx';
+import { Favorites } from '@/components/favorites/Favorites.tsx';
 
 const client = new ApolloClient({
   uri: 'https://ecommerce1-back.onrender.com/graphql',
@@ -33,6 +34,7 @@ function App() {
             <Route path="/policies" element={<PagePolicies />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Cards />} />
+            <Route path="/favorites" element={<Favorites />} />
             <Route path="/product/:id" element={<Details />} />
             <Route path="/products/:categorys" element={<CardsCategory />} />
           </Routes>

@@ -2,14 +2,12 @@ import '../../components/Styles.css';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
+import FunctionsGlobalHeader from '../../utils/FunctionsGlobalHeader.tsx';
 
 export const Footer = () => {
   const token = localStorage.getItem('token');
   const { state } = useContext(GlobalContext);
-
-  const handleClick = (to: string) => {
-    window.location.href = to;
-  };
+  const { LoadPage } = FunctionsGlobalHeader();
 
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-10 sm:py-12 lg:py-24">
@@ -49,7 +47,7 @@ export const Footer = () => {
               <Link
                 to={'/products/laptops'}
                 className="mt-4 text-xs lg:text-base sm:text-base text-white hover:text-purple-600"
-                onClick={() => handleClick('/products/laptops')}
+                onClick={() => LoadPage('/products/laptops')}
               >
                 <span>Tecnology</span>
               </Link>
@@ -63,7 +61,7 @@ export const Footer = () => {
               <Link
                 to={'/products/womens-shoes'}
                 className="mt-4 text-xs lg:text-base sm:text-base text-white hover:text-purple-600"
-                onClick={() => handleClick('/products/womens-shoes')}
+                onClick={() => LoadPage('/products/womens-shoes')}
               >
                 <span>Fashion</span>
               </Link>

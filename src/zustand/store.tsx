@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface Product {
+export interface Product {
   id: number;
   title: string;
   description: string;
   category: string;
   price: number;
-  quantity?: number;
+  quantity: number;
   discountPercentage: number;
   rating: 0 | 1 | 2 | 3 | 4 | 5;
   stock: number;
@@ -42,13 +42,26 @@ export interface Cart {
   images: string;
 }
 
+export interface Favorite {
+  id: number;
+  title: string;
+  price: number;
+  rating: number;
+  stock: number;
+  images: string;
+}
+
 interface ProductsState {
+  favorites: Favorite[];
   shoppingCart: Cart[];
   products: Product[];
   selectedProduct: Product | null;
   setShoppingCart: (products: Cart[]) => void;
+  setFavorites: (products: Favorite[]) => void;
   addToCart: (product: Cart) => void;
+  addToFavorite: (product: Favorite) => void;
   removeFromCart: (productId: number) => void;
+  removeFavorite: (productId: number) => void;
   updateCartItem: (productId: number, quantity: number) => void;
   setProducts: (products: Product[]) => void;
   setSelectedProduct: (product: Product | null) => void;
@@ -58,6 +71,8 @@ interface ProductsState {
 const useStore = create<ProductsState>()(
   persist(
     (set) => ({
+      favorites: [],
+
       shoppingCart: [],
 
       products: [],
@@ -65,6 +80,8 @@ const useStore = create<ProductsState>()(
       selectedProduct: null,
 
       setShoppingCart: (shoppingCart) => set({ shoppingCart }),
+
+      setFavorites: (favorites) => set({ favorites }),
 
       // Agregar un producto al carrito
       addToCart: (product) =>
@@ -81,6 +98,17 @@ const useStore = create<ProductsState>()(
 
           return { shoppingCart: [...state.shoppingCart, product] };
         }),
+
+      addToFavorite: (product) => {
+        set((state) => {
+          return { favorites: [...state.favorites, product] };
+        });
+      },
+
+      removeFavorite: (productId) =>
+        set((state) => ({
+          favorites: state.favorites.filter((item) => item.id !== productId)
+        })),
 
       // Eliminar un producto del carrito
       removeFromCart: (productId) =>
@@ -101,7 +129,7 @@ const useStore = create<ProductsState>()(
       setSelectedProduct: (product) => set({ selectedProduct: product })
     }),
     {
-      name: 'shopping-cart-store', // Nombre en localStorage
+      name: 'fashion&tecnology-storage', // Nombre en localStorage
       partialize: (state) => ({ shoppingCart: state.shoppingCart }) // Guardar solo el carrito
     }
   )

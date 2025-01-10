@@ -1,63 +1,32 @@
-import '../Styles.css';
-import 'react-tooltip/dist/react-tooltip.css';
-import { Tooltip } from 'react-tooltip';
-import { Header } from '../header&footer/Header.tsx';
-import { Footer } from '../header&footer/Footer.tsx';
-import { ErrorPage } from './ErrorPage.tsx';
-import { Paginations } from './Paginations.tsx';
-import { AiOutlineFilter } from 'react-icons/ai';
-import { useState, useContext } from 'react';
-import { Filters } from './Filters.tsx';
-import { GlobalContext } from '../../globalState/GlobalContext.tsx';
-import { useProducts } from '../../zustand/hooks/useProducts.tsx';
-import { LoadingProducts } from './LoadingProducts.tsx';
-import { NotFoundProducts } from './NotFoundProducts.tsx';
+import { Header } from '@/components/header&footer/Header.tsx';
+import { Footer } from '@/components/header&footer/Footer.tsx';
+import useStore from '@/zustand/store.tsx';
+import ContextCardsGlobal, { FavoriteCard } from '@/utils/ContextCardsGlobal.tsx';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
-import ContextCardsGlobal, { Products } from '../../utils/ContextCardsGlobal.tsx';
-import useStore from '../../zustand/store.tsx';
+import 'react-tooltip/dist/react-tooltip.css';
+import '../Styles.css';
+import { Tooltip } from 'react-tooltip';
 
-export const Cards = () => {
-  const { state, dispatch } = useContext(GlobalContext);
-
-  const { page, category, priceMin, priceMax, ratingOrder } = state;
-
-  const { loading, error } = useProducts({ page, category, priceMin, priceMax, ratingOrder });
-
-  const { products, removeFavorite } = useStore();
-
-  const { addCart, handleImageLoad, classNames, addFavorite } = ContextCardsGlobal();
-
+export const Favorites = () => {
+  const { favorites } = useStore();
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
-
-  const [boleanfavorite, setBoleanFavorite] = useState<boolean>(false);
-
-  if (loading) return <LoadingProducts />;
-  if (products.length === 0) return <NotFoundProducts />;
-  if (error) return <ErrorPage messageError={error.message} />;
+  const { addCart, handleImageLoad, classNames } = ContextCardsGlobal();
 
   return (
     <>
       <Header />
       <div className="bg-colorBackground relative mt-[100px]">
-        <div>{state.isTrue_filters && <Filters />}</div>
+        <h1>Your Favorites</h1>
 
-        <div className="absolute w-full h-[1%] md:h-[3.5%] xl:h-[5%] sm:h-[3%] flex justify-center items-center">
-          <button
-            onClick={() => dispatch({ type: 'SET_TRUE_FILTERS' })}
-            className="flex items-center gap-2 px-4 py-2 bg-purple-500 text-sm text-white rounded hover:bg-purple-600 transition"
-          >
-            <AiOutlineFilter size={20} />
-            Filters
-          </button>
-        </div>
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="sr-only">Products</h2>
 
           <div className="grid grid-cols-1 grid-rows-12 gap-x-6 gap-y-10 sm:grid-cols-2 sm:grid-rows-6 lg:grid-cols-3 xl:grid-cols-4 xl:grid-rows-3 xl:gap-x-8">
-            {products.map((product: Products) => (
+            {favorites.map((product: FavoriteCard) => (
               <div key={product.id}>
                 <Link to={`/product/${product.id}`} className="group">
                   <div className="relative aspect-square w-full rounded-lg bg-gray-200 xl:aspect-[7/8] content_cards_imgs">
@@ -71,7 +40,7 @@ export const Cards = () => {
                     )}
                     <img
                       alt=""
-                      src={product.images[0]}
+                      src={product.images}
                       className={`aspect-square w-full rounded-lg object-cover group-hover:opacity-75 xl:aspect-[7/8] cursor-pointer ${
                         loadedImages[product.id] ? '' : 'hidden'
                       } transition-transform duration-300 ease-in-out transform group-hover:scale-105`}
@@ -91,26 +60,9 @@ export const Cards = () => {
                   ))}
                   <div className="flex justify-end w-full h-10 rounded-full cursor-pointer mr-2">
                     <HeartIcon
-                      className={
-                        boleanfavorite
-                          ? 'mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 focus:outline-none'
-                          : 'mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 fill-purple-700 focus:outline-none'
-                      }
+                      className="mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 focus:outline-none"
                       id={`favorite${product.id}`}
                       data-tooltip-content="Add to Favorites"
-                      onClick={() => {
-                        setBoleanFavorite(true),
-                          boleanfavorite
-                            ? addFavorite(
-                                product.id,
-                                product.title,
-                                product.price,
-                                product.stock,
-                                product.rating,
-                                product.images[0]
-                              )
-                            : removeFavorite(product.id);
-                      }}
                     />
                     <Tooltip anchorId={`favorite${product.id}`} />
                     <ShoppingBagIcon
@@ -127,7 +79,6 @@ export const Cards = () => {
           </div>
         </div>
       </div>
-      {products.length !== 0 && <Paginations />}
       <Footer />
     </>
   );

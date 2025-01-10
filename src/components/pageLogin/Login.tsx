@@ -1,52 +1,26 @@
 import '../Styles.css';
 import { Footer } from '../header&footer/Footer.tsx';
 import { Header } from '../header&footer/Header.tsx';
-import { useEffect, useRef } from 'react';
-import Swal, { SweetAlertIcon } from 'sweetalert2';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useMutation } from '@apollo/client';
 import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { schema } from '../../utils/FunctionsLogin.tsx';
+import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../zustand/graphql/mutations.tsx';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../supabaseClient/supabaseClient.tsx';
-// import useStore from '../../zustand/store.tsx';
-
-const schema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z
-    .string()
-    .min(8, 'Password must be at least 8 characters')
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-      'Password must include at least one lowercase letter, one uppercase letter, one number, and one special character'
-    )
-});
-
-type FormData = z.infer<typeof schema>;
+import { z } from 'zod';
+import { swalLogin, swalLoginError } from '../../utils/FunctionsLogin.tsx';
+import SectionRef from '../../utils/SectionRef.tsx';
+import { handleLogin } from '../../utils/FunctionsLogin.tsx';
 
 export const Login = () => {
-  // const { shoppingCart } = useStore();
+  const { targetSectionRef } = SectionRef();
 
-  const handleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google'
-    });
+  const [login, { loading }] = useMutation(LOGIN);
 
-    if (error) {
-      console.error('Error logging in with Google:', error.message);
-      Swal.fire({
-        title: 'Login failed',
-        text: 'Error logging in with Google',
-        icon: 'error',
-        customClass: {
-          confirmButton: 'bg-purple-600'
-        }
-      });
-    }
-  };
+  const navigate = useNavigate();
 
+  type FormData = z.infer<typeof schema>;
   const {
     register,
     handleSubmit,
@@ -55,10 +29,7 @@ export const Login = () => {
     resolver: zodResolver(schema)
   });
 
-  const [login, { loading }] = useMutation(LOGIN);
-  const navigate = useNavigate();
-
-  async function onSubmit(values: z.infer<typeof schema>) {
+  const onSubmit = async (values: z.infer<typeof schema>) => {
     try {
       const user = await login({
         variables: {
@@ -68,58 +39,13 @@ export const Login = () => {
       });
 
       localStorage.setItem('token', user.data.login.user.token);
-
-      Swal.fire({
-        title: 'Login successful',
-        text: `! Welcome ${user.data.login.user.firstName}`,
-        icon: 'success',
-        customClass: {
-          confirmButton: 'bg-purple-600'
-        }
-      });
-
+      swalLogin(user.data.login.user.firstName);
       navigate('/');
     } catch (err: any) {
       console.error('Error entering:', err);
-
-      // Determina el icono y el mensaje según el tipo de error
-      let errorMessage = 'An unexpected error occurred';
-      let icon: SweetAlertIcon = 'error';
-
-      if (err.message.includes('User not found')) {
-        errorMessage = 'User not found';
-        icon = 'warning';
-      } else if (err.message.includes('Wrong password')) {
-        errorMessage = 'Wrong password';
-        icon = 'error';
-      }
-
-      // Muestra el error usando Swal con el icono adecuado
-      Swal.fire({
-        title: `Oops... ${errorMessage}`,
-        text: 'Please try again',
-        icon: icon,
-        customClass: {
-          confirmButton: 'bg-purple-600'
-        }
-      });
+      swalLoginError(err);
     }
-  }
-
-  const targetSectionRef = useRef<HTMLDivElement | null>(null);
-
-  const HEADER_HEIGHT = 150; // Ajusta según la altura de tu header fijo
-
-  useEffect(() => {
-    if (targetSectionRef.current) {
-      // Obtener la posición del elemento
-      const sectionTop = targetSectionRef.current.getBoundingClientRect().top;
-      const scrollPosition = window.scrollY + sectionTop - HEADER_HEIGHT;
-
-      // Desplazar el scroll con el desfase calculado
-      window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
-    }
-  }, []); // [] asegura que esto solo ocurra al cargar la página
+  };
 
   if (loading) return <LoadingProducts />;
 

@@ -1,73 +1,29 @@
 import '../Styles.css';
 import 'react-tooltip/dist/react-tooltip.css';
 import { Tooltip } from 'react-tooltip';
-import { Header } from '../header&footer/Header.tsx';
-import { Footer } from '../header&footer/Footer.tsx';
+import { Header } from '@/components/header&footer/Header.tsx';
+import { Footer } from '@/components/header&footer/Footer.tsx';
 import { ErrorPage } from '../pageCards/ErrorPage.tsx';
 import { useState } from 'react';
 import { ChevronLeft, Minus, Plus, Star } from 'lucide-react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useProductsById } from '../../zustand/hooks/useProductsById.tsx';
-import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
-import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
-import useStore from '../../zustand/store.tsx';
+import { useParams } from 'react-router-dom';
+import { useProductsById } from '@/zustand/hooks/useProductsById.tsx';
+import { LoadingProducts } from '@/components/pageCards/LoadingProducts.tsx';
+import { NotFoundProducts } from '@/components/pageCards/NotFoundProducts.tsx';
 import { HeartIcon } from '@heroicons/react/24/outline';
-import Swal from 'sweetalert2';
+import useStore from '@/zustand/store.tsx';
+import FunctionsDetails from '@/utils/FunctionsDetails.tsx';
 
 export const Details = () => {
   const { id } = useParams();
 
   const { loading, error } = useProductsById(Number(id));
-  
-  const { selectedProduct, addToCart } = useStore();
 
-  const addCart = () => {
+  const { selectedProduct } = useStore();
 
-    if (!selectedProduct) {
-      console.error('No product selected');
-      return; // Salir si no hay producto seleccionado
-    }
-    addToCart({
-      id: selectedProduct.id,
-      title: selectedProduct.title,
-      price: selectedProduct.price,
-      stock: selectedProduct.stock,
-      quantity,
-      images: selectedProduct.images[0]
-    });
-
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      }
-    });
-    Toast.fire({
-      icon: 'success',
-      title: 'Product added to cart',
-      customClass: {
-        timerProgressBar: 'custom-progress-bar'
-      }
-    });
-  };
-
-  const navigate = useNavigate();
-  const handleBack = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    navigate(-1);
-  };
+  const { addCart, handleBack, handleImageLoad } = FunctionsDetails();
 
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
-
-  const handleImageLoad = (id: number) => {
-    setLoadedImages((prev) => ({ ...prev, [id]: true }));
-  };
-
 
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -94,7 +50,11 @@ export const Details = () => {
 
           <div className="space-y-4 mb-6 mt-10">
             <div className="relative aspect-[3/2] bg-gray-200 rounded-lg overflow-hidden">
-              <img src={selectedProduct.images[selectedImage]} alt="Product image" className="object-cover w-full h-full p-4" />
+              <img
+                src={selectedProduct.images[selectedImage]}
+                alt="Product image"
+                className="object-cover w-full h-full p-4"
+              />
             </div>
 
             <div className="grid grid-cols-4 gap-2">
@@ -118,7 +78,7 @@ export const Details = () => {
                     src={image}
                     alt={`Product thumbnail ${index + 1}`}
                     className={`object-cover w-full h-full ${loadedImages[index] ? '' : 'hidden'}`}
-                    onLoad={() => handleImageLoad(index)}
+                    onLoad={() => handleImageLoad(index, setLoadedImages)}
                   />
                 </button>
               ))}
@@ -153,7 +113,10 @@ export const Details = () => {
                 <Plus className="w-4 h-4 hover:text-purple-600" />
               </button>
             </div>
-            <button onClick={addCart} className="xs:px-2 xs:text-xs bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded flex-2">
+            <button
+              onClick={() => addCart(quantity)}
+              className="xs:px-2 xs:text-xs bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded flex-2"
+            >
               ADD TO CART
             </button>
             <div

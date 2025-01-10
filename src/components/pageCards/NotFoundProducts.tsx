@@ -1,6 +1,6 @@
 import { Header } from '../header&footer/Header.tsx';
 import { Footer } from '../header&footer/Footer.tsx';
-import ContextCardsGlobal from './ContextCardsGlobal.tsx';
+import ContextCardsGlobal from '../../utils/ContextCardsGlobal.tsx';
 import { useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 

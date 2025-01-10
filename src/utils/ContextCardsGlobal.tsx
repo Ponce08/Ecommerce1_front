@@ -1,13 +1,83 @@
-import { GlobalContext } from '../../globalState/GlobalContext.tsx';
+import { GlobalContext } from '../globalState/GlobalContext.tsx';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { stateProductsPagination } from '../../utils/ObjectCategorys.tsx';
+import { stateProductsPagination } from './ObjectCategorys.tsx';
+import useStore from '../zustand/store.tsx';
+import Swal from 'sweetalert2';
 
 const ContextCardsGlobal = () => {
   const navigate = useNavigate();
+  const { addToCart, addToFavorite } = useStore();
   const { state, dispatch } = useContext(GlobalContext);
 
   return {
+    classNames: (...classes: string[]) => {
+      return classes.filter(Boolean).join(' ');
+    },
+    handleImageLoad: (
+      id: number,
+      setLoadedImages: (updater: (prev: Record<number, boolean>) => Record<number, boolean>) => void
+    ) => {
+      setLoadedImages((prev) => ({ ...prev, [id]: true }));
+    },
+    addCart: (id: number, title: string, price: number, stock: number, images: string) => {
+      addToCart({
+        id,
+        title,
+        price,
+        stock,
+        quantity: 1,
+        images
+      });
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: 'success',
+        title: 'Product added to cart',
+        customClass: {
+          timerProgressBar: 'custom-progress-bar'
+        }
+      });
+    },
+    addFavorite: (id: number, title: string, price: number, stock: number, rating: number, images: string) => {
+      addToFavorite({
+        id,
+        title,
+        price,
+        stock,
+        rating,
+        images
+      });
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: 'success',
+        title: 'Product added to Favorites',
+        customClass: {
+          timerProgressBar: 'custom-progress-bar'
+        }
+      });
+    },
     nextPage: (currentPage2: number) => {
       dispatch({ type: 'INCREMENT_PAGE' });
       if (state.page > currentPage2) {
@@ -74,6 +144,25 @@ const ContextCardsGlobal = () => {
       dispatch({ type: 'SET_RATING_ORDER', payload: rating });
     }
   };
+};
+
+export type Products = {
+  id: number;
+  title: string;
+  category: string;
+  price: number;
+  stock: number;
+  rating: number;
+  images: string[];
+};
+
+export type FavoriteCard = {
+  id: number;
+  title: string;
+  price: number;
+  stock: number;
+  rating: number;
+  images: string;
 };
 
 export default ContextCardsGlobal;

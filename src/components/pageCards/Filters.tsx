@@ -2,7 +2,7 @@ import '../Styles.css';
 import { useState, useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { FiX, FiArrowRight } from 'react-icons/fi';
-import ContextCardsGlobal from './ContextCardsGlobal.tsx';
+import ContextCardsGlobal from '../../utils/ContextCardsGlobal.tsx';
 
 export const Filters = () => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -30,7 +30,7 @@ export const Filters = () => {
       >
         <div className="relative flex justify-center pb-4 border-b border-purple-300">
           <h2 className="text-xl font-bold text-purple-800">Filters</h2>
-          <div className='absolute right-2'>
+          <div className="absolute right-2">
             <button
               onClick={() => dispatch({ type: 'SET_FALSE_FILTERS' })}
               className="p-2 rounded-full bg-purple-500 text-white hover:bg-purple-600"
