@@ -130,7 +130,7 @@ const useStore = create<ProductsState>()(
     }),
     {
       name: 'fashion&tecnology-storage', // Nombre en localStorage
-      partialize: (state) => ({ shoppingCart: state.shoppingCart }) // Guardar solo el carrito
+      partialize: (state) => ({ shoppingCart: state.shoppingCart, favorites: state.favorites })
     }
   )
 );

@@ -4,6 +4,7 @@ import { X, Trash2, ShoppingCart, Plus, Minus } from 'lucide-react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { Link } from 'react-router-dom';
 import useStore from '../../zustand/store.tsx';
+import img9 from '@/imagenes/img9.png';
 
 export const ShoppingCarts = () => {
   const contextGlobal = useContext(GlobalContext);
@@ -35,7 +36,10 @@ export const ShoppingCarts = () => {
         {/* Items */}
         <div className="flex-1 overflow-auto p-4 space-y-4 cart-items">
           {shoppingCart.length === 0 ? (
-            <p className="text-center font-bold">Empty cart 😅</p>
+            <div className="flex flex-col items-center">
+              <p className="text-center font-bold">Empty cart 😅</p>
+              <img className="w-24 h-24 m-4" src={img9} alt="" />
+            </div>
           ) : (
             shoppingCart.map((item, index) => (
               <div key={`${item.id}-${index}`} className="flex items-center gap-4 border-b pb-4">

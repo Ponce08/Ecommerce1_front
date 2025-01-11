@@ -2,6 +2,7 @@ import { Header } from '@/components/header&footer/Header.tsx';
 import { Footer } from '@/components/header&footer/Footer.tsx';
 import useStore from '@/zustand/store.tsx';
 import ContextCardsGlobal, { FavoriteCard } from '@/utils/ContextCardsGlobal.tsx';
+import img10 from '@/imagenes/img10.png';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
@@ -14,18 +15,32 @@ import { Tooltip } from 'react-tooltip';
 export const Favorites = () => {
   const { favorites } = useStore();
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
-  const { addCart, handleImageLoad, classNames } = ContextCardsGlobal();
+  const { addCart, handleImageLoad, classNames, addFavorite } = ContextCardsGlobal();
 
   return (
     <>
       <Header />
       <div className="bg-colorBackground relative mt-[100px]">
-        <h1>Your Favorites</h1>
+        <h1 className="text-center text-2xl text-purple-600 p-8">Your Favorites</h1>
+        {favorites.length === 0 && (
+          <div className="flex justify-center items-center w-full">
+            <img src={img10} className="img10_favorite" />
+            <div className="flex flex-col items-center">
+              <h1 className="text-center text-2xl p-8">You don't have favorites!!</h1>
+              <button className="w-16 xs:px-2 xs:text-xs bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded">
+                ADD
+              </button>
+            </div>
+          </div>
+        )}
 
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-24 sm:py-8 lg:max-w-7xl lg:px-8 lg:py-8">
           <h2 className="sr-only">Products</h2>
 
-          <div className="grid grid-cols-1 grid-rows-12 gap-x-6 gap-y-10 sm:grid-cols-2 sm:grid-rows-6 lg:grid-cols-3 xl:grid-cols-4 xl:grid-rows-3 xl:gap-x-8">
+          <div
+            className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:grid-rows-6 lg:grid-cols-3 xl:grid-cols-4
+             xl:grid-rows-3 xl:gap-x-8"
+          >
             {favorites.map((product: FavoriteCard) => (
               <div key={product.id}>
                 <Link to={`/product/${product.id}`} className="group">
@@ -60,16 +75,23 @@ export const Favorites = () => {
                   ))}
                   <div className="flex justify-end w-full h-10 rounded-full cursor-pointer mr-2">
                     <HeartIcon
-                      className="mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 focus:outline-none"
+                      className={`mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 ${
+                        favorites.some((fav) => fav.id === product.id) ? 'fill-purple-700' : ''
+                      } focus:outline-none`}
                       id={`favorite${product.id}`}
-                      data-tooltip-content="Add to Favorites"
+                      data-tooltip-content={
+                        favorites.some((fav) => fav.id === product.id) ? 'Remove from favorites' : 'Add to Favorites'
+                      }
+                      onClick={() => {
+                        addFavorite(product.id, product.title, product.price, product.stock, product.rating, product.images[0]);
+                      }}
                     />
                     <Tooltip anchorId={`favorite${product.id}`} />
                     <ShoppingBagIcon
                       className="mt-2 ml-2 size-6 shrink-0 text-gray-400 hover:text-purple-600 focus:outline-none"
                       id={`add_cart${product.id}`}
                       data-tooltip-content="Add to Cart"
-                      onClick={() => addCart(product.id, product.title, product.price, product.stock, product.images[0])}
+                      onClick={() => addCart(product.id, product.title, product.price, product.stock, product.images)}
                     />
                     <Tooltip anchorId={`add_cart${product.id}`} />
                   </div>

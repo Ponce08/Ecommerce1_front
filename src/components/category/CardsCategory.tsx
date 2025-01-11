@@ -31,9 +31,9 @@ export const CardsCategory = () => {
 
   const { loading, error } = useProducts({ page, category: categorys, priceMin, priceMax, ratingOrder });
 
-  const { products } = useStore();
+  const { products, favorites } = useStore();
 
-  const { addCart, handleImageLoad, classNames } = ContextCardsGlobal();
+  const { addCart, handleImageLoad, classNames, addFavorite } = ContextCardsGlobal();
 
   useEffect(() => {
     if (categorys) {
@@ -103,9 +103,16 @@ export const CardsCategory = () => {
                   ))}
                   <div className="flex justify-end w-full h-10 rounded-full cursor-pointer mr-2">
                     <HeartIcon
-                      className="mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 focus:outline-none"
+                      className={`mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 ${
+                        favorites.some((fav) => fav.id === product.id) ? 'fill-purple-700' : ''
+                      } focus:outline-none`}
                       id={`favorite_category${product.id}`}
-                      data-tooltip-content="Add to Favorites"
+                      data-tooltip-content={
+                        favorites.some((fav) => fav.id === product.id) ? 'Remove from favorites' : 'Add to Favorites'
+                      }
+                      onClick={() => {
+                        addFavorite(product.id, product.title, product.price, product.stock, product.rating, product.images[0]);
+                      }}
                     />
                     <Tooltip anchorId={`favorite_category${product.id}`} />
                     <ShoppingBagIcon

@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 const ContextCardsGlobal = () => {
   const navigate = useNavigate();
-  const { addToCart, addToFavorite } = useStore();
+  const { addToCart, favorites, addToFavorite, removeFavorite } = useStore();
   const { state, dispatch } = useContext(GlobalContext);
 
   return {
@@ -50,6 +50,10 @@ const ContextCardsGlobal = () => {
       });
     },
     addFavorite: (id: number, title: string, price: number, stock: number, rating: number, images: string) => {
+      const existingItem = favorites.find((item) => item.id === id);
+      if (existingItem) {
+        return removeFavorite(id);
+      }
       addToFavorite({
         id,
         title,
