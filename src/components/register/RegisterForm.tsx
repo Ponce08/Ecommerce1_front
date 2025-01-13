@@ -14,7 +14,7 @@ import { swalRegister } from '../../utils/FunctionsRegister.tsx';
 import { schema } from '../../utils/FunctionsRegister.tsx';
 
 export const RegisterForm = () => {
-  const { targetSectionRef } = SectionRef();
+  const targetSectionRef = SectionRef(150);
   const { successSwal, errorSwal } = swalRegister();
 
   type FormData = z.infer<typeof schema>;

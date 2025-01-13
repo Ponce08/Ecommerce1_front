@@ -2,8 +2,8 @@ import { Header } from '@/components/header&footer/Header.tsx';
 import { Footer } from '@/components/header&footer/Footer.tsx';
 import useStore from '@/zustand/store.tsx';
 import ContextCardsGlobal, { FavoriteCard } from '@/utils/ContextCardsGlobal.tsx';
-import img10 from '@/imagenes/img10.png';
 import { Link } from 'react-router-dom';
+import img10 from '@/imagenes/img10.png';
 import { useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { HeartIcon } from '@heroicons/react/24/outline';
@@ -17,19 +17,23 @@ export const Favorites = () => {
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
   const { addCart, handleImageLoad, classNames, addFavorite } = ContextCardsGlobal();
 
+  if (favorites.length === 0) window.scrollTo(0, 0);
+
   return (
     <>
       <Header />
-      <div className="bg-colorBackground relative mt-[100px]">
+      <div className="bg-colorBackground relative mt-[100px] md:pb-32 lg:pb-[225px]">
         <h1 className="text-center text-2xl text-purple-600 p-8">Your Favorites</h1>
         {favorites.length === 0 && (
-          <div className="flex justify-center items-center w-full">
+          <div className="flex flex-col items-center lg:flex-row lg:justify-center content_cards_imgs">
             <img src={img10} className="img10_favorite" />
             <div className="flex flex-col items-center">
-              <h1 className="text-center text-2xl p-8">You don't have favorites!!</h1>
-              <button className="w-16 xs:px-2 xs:text-xs bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded">
-                ADD
-              </button>
+              <h1 className="text-center text-xl p-8">You don't have favorites!!</h1>
+              <Link to={'/products'}>
+                <button className="w-16 xs:px-2 xs:text-xs bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded">
+                  ADD
+                </button>
+              </Link>
             </div>
           </div>
         )}
@@ -74,19 +78,21 @@ export const Favorites = () => {
                     />
                   ))}
                   <div className="flex justify-end w-full h-10 rounded-full cursor-pointer mr-2">
-                    <HeartIcon
-                      className={`mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 ${
-                        favorites.some((fav) => fav.id === product.id) ? 'fill-purple-700' : ''
-                      } focus:outline-none`}
-                      id={`favorite${product.id}`}
-                      data-tooltip-content={
-                        favorites.some((fav) => fav.id === product.id) ? 'Remove from favorites' : 'Add to Favorites'
-                      }
-                      onClick={() => {
-                        addFavorite(product.id, product.title, product.price, product.stock, product.rating, product.images[0]);
-                      }}
-                    />
-                    <Tooltip anchorId={`favorite${product.id}`} />
+                    <div>
+                      <HeartIcon
+                        className={`mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 ${
+                          favorites.some((fav) => fav.id === product.id) ? 'fill-purple-700' : ''
+                        } focus:outline-none animate-scale`}
+                        id={`favorite${product.id}`}
+                        data-tooltip-content={
+                          favorites.some((fav) => fav.id === product.id) ? 'Remove from favorites' : 'Add to Favorites'
+                        }
+                        onClick={() => {
+                          addFavorite(product.id, product.title, product.price, product.stock, product.rating, product.images[0]);
+                        }}
+                      />
+                      <Tooltip anchorId={`favorite${product.id}`} />
+                    </div>
                     <ShoppingBagIcon
                       className="mt-2 ml-2 size-6 shrink-0 text-gray-400 hover:text-purple-600 focus:outline-none"
                       id={`add_cart${product.id}`}

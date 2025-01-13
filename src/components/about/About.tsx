@@ -7,7 +7,7 @@ import SectionRef from '@/utils/SectionRef.tsx';
 import { Link } from 'react-router-dom';
 
 export function About() {
-  const { targetSectionRef } = SectionRef();
+  const targetSectionRef = SectionRef(150);
 
   return (
     <>

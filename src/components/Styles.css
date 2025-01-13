@@ -218,8 +218,25 @@
 /* ---------------------------------------------------------------------------------------------------------------------------- */
 /*! Styles Favorites*/
 
-.img10_favorite{
-  width: 500px;
+.img10_favorite {
+  width: 25rem;
+  height: auto;
   padding: 10px;
   margin: 20px;
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-scale {
+  animation: scaleUp 0.3s ease-in-out;
 }

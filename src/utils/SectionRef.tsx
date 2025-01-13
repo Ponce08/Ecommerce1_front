@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 
-const SectionRef = () => {
+const SectionRef = (value: number) => {
   const targetSectionRef = useRef<HTMLDivElement | null>(null);
 
-  const HEADER_HEIGHT = 150; // Ajusta según la altura de tu header fijo
+  const HEADER_HEIGHT = value; // Ajusta según la altura de tu header fijo
 
   useEffect(() => {
     if (targetSectionRef.current) {
@@ -16,7 +16,7 @@ const SectionRef = () => {
     }
   }, []); // [] asegura que esto solo ocurra al cargar la página
 
-  return { targetSectionRef };
+  return targetSectionRef;
 };
 
 export default SectionRef;

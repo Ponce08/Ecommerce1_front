@@ -33,7 +33,7 @@ export const CardsCategory = () => {
 
   const { products, favorites } = useStore();
 
-  const { addCart, handleImageLoad, classNames, addFavorite } = ContextCardsGlobal();
+  const { addCart, handleImageLoad, classNames, addFavorite, animationHeart } = ContextCardsGlobal();
 
   useEffect(() => {
     if (categorys) {
@@ -102,19 +102,21 @@ export const CardsCategory = () => {
                     />
                   ))}
                   <div className="flex justify-end w-full h-10 rounded-full cursor-pointer mr-2">
-                    <HeartIcon
-                      className={`mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 ${
-                        favorites.some((fav) => fav.id === product.id) ? 'fill-purple-700' : ''
-                      } focus:outline-none`}
-                      id={`favorite_category${product.id}`}
-                      data-tooltip-content={
-                        favorites.some((fav) => fav.id === product.id) ? 'Remove from favorites' : 'Add to Favorites'
-                      }
-                      onClick={() => {
-                        addFavorite(product.id, product.title, product.price, product.stock, product.rating, product.images[0]);
-                      }}
-                    />
-                    <Tooltip anchorId={`favorite_category${product.id}`} />
+                    <div onClick={animationHeart}>
+                      <HeartIcon
+                        className={`mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 ${
+                          favorites.some((fav) => fav.id === product.id) ? 'fill-purple-700' : ''
+                        } focus:outline-none`}
+                        id={`favorite_category${product.id}`}
+                        data-tooltip-content={
+                          favorites.some((fav) => fav.id === product.id) ? 'Remove from favorites' : 'Add to Favorites'
+                        }
+                        onClick={() => {
+                          addFavorite(product.id, product.title, product.price, product.stock, product.rating, product.images[0]);
+                        }}
+                      />
+                      <Tooltip anchorId={`favorite_category${product.id}`} />
+                    </div>
                     <ShoppingBagIcon
                       className="mt-2 ml-2 size-6 shrink-0 text-gray-400 hover:text-purple-600 focus:outline-none"
                       id={`add_cart_category${product.id}`}

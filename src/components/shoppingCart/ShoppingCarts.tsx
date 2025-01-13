@@ -36,7 +36,7 @@ export const ShoppingCarts = () => {
         {/* Items */}
         <div className="flex-1 overflow-auto p-4 space-y-4 cart-items">
           {shoppingCart.length === 0 ? (
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center content_cards_imgs">
               <p className="text-center font-bold">Empty cart 😅</p>
               <img className="w-24 h-24 m-4" src={img9} alt="" />
             </div>

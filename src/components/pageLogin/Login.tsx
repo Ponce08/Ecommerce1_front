@@ -14,7 +14,7 @@ import SectionRef from '../../utils/SectionRef.tsx';
 import { handleLogin } from '../../utils/FunctionsLogin.tsx';
 
 export const Login = () => {
-  const { targetSectionRef } = SectionRef();
+  const  targetSectionRef  = SectionRef(150);
 
   const [login, { loading }] = useMutation(LOGIN);
 

@@ -59,9 +59,11 @@ export const FinishShopping = () => {
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <img src={item.images} alt={item.title} className="w-20 h-20 lg:w-32 lg:h-32 rounded-lg bg-gray-100" />
-                    <span className='w-32 text-xs text-center'>{item.title}</span>
+                    <span className="w-32 text-xs text-center">
+                      {item.title} <span className="font-bold">(x {item.quantity})</span>
+                    </span>
                   </div>
-                  <span>${item.price}</span>
+                  <span className='text-xs lg:text-xl'>${item.price}</span>
                 </div>
               ))}
               <div className="text-right font-semibold">Total : ${formattedTotal}</div>
@@ -102,7 +104,7 @@ export const FinishShopping = () => {
                   { title: 'Privacy Policy', href: '#privacy_policy' }
                 ].map((text, index) => (
                   <Link to={`/policies/${text.href}`} key={index} className="text-purple-600 font-semibold hover:underline ml-2">
-                    <span className='text-xs'>{text.title}</span>
+                    <span className="text-xs">{text.title}</span>
                   </Link>
                 ))}
               </div>

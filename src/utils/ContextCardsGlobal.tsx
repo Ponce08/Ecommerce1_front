@@ -9,6 +9,7 @@ const ContextCardsGlobal = () => {
   const navigate = useNavigate();
   const { addToCart, favorites, addToFavorite, removeFavorite } = useStore();
   const { state, dispatch } = useContext(GlobalContext);
+  const token = localStorage.getItem('token');
 
   return {
     classNames: (...classes: string[]) => {
@@ -51,6 +52,19 @@ const ContextCardsGlobal = () => {
     },
     addFavorite: (id: number, title: string, price: number, stock: number, rating: number, images: string) => {
       const existingItem = favorites.find((item) => item.id === id);
+
+      if (!token) {
+        Swal.fire({
+          title: 'Please log in',
+          icon: 'warning',
+          customClass: {
+            confirmButton: 'bg-purple-600'
+          }
+        });
+        navigate('/login');
+        return;
+      }
+
       if (existingItem) {
         return removeFavorite(id);
       }
@@ -82,6 +96,16 @@ const ContextCardsGlobal = () => {
         }
       });
     },
+
+    animationHeart: (e: React.MouseEvent<HTMLDivElement>) => {
+      const target = e.currentTarget;
+      target.classList.add('animate-scale');
+
+      setTimeout(() => {
+        target.classList.remove('animate-scale');
+      }, 300);
+    },
+
     nextPage: (currentPage2: number) => {
       dispatch({ type: 'INCREMENT_PAGE' });
       if (state.page > currentPage2) {

@@ -149,8 +149,10 @@ export const Header = () => {
                   id="favorites_responsive"
                   data-tooltip-content="Your Favorites"
                 >
-                  <HeartIcon className="h-6 w-6 text-purple-700" />
-                  <Tooltip anchorId="favorites_responsive" />
+                  <Link to={'/favorites'}>
+                    <HeartIcon className="h-6 w-6 text-purple-700" />
+                    <Tooltip anchorId="favorites_responsive" />
+                  </Link>
                 </div>
               ) : (
                 <div className="flow-root">
