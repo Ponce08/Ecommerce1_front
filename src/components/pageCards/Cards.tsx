@@ -26,7 +26,7 @@ export const Cards = () => {
 
   const { loading, error } = useProducts({ page, category, priceMin, priceMax, ratingOrder });
 
-  const { products, favorites } = useStore();
+  const { products, favorites, userLogin } = useStore();
 
   const { addCart, handleImageLoad, classNames, addFavorite, animationHeart } = ContextCardsGlobal();
 
@@ -91,11 +91,15 @@ export const Cards = () => {
                     <div onClick={animationHeart}>
                       <HeartIcon
                         className={`mr-4 h-6 w-6 text-purple-700 mt-2 ml-2 ${
-                          favorites.some((fav) => fav.id === product.id) ? 'fill-purple-700' : ''
+                          userLogin && (favorites[userLogin.id] || []).some((fav) => fav.id === product.id)
+                            ? 'fill-purple-700'
+                            : ''
                         } focus:outline-none`}
                         id={`favorite${product.id}`}
                         data-tooltip-content={
-                          favorites.some((fav) => fav.id === product.id) ? 'Remove from favorites' : 'Add to Favorites'
+                          userLogin && (favorites[userLogin.id] || []).some((fav) => fav.id === product.id)
+                            ? 'Remove from favorites'
+                            : 'Add to Favorites'
                         }
                         onClick={() => {
                           addFavorite(product.id, product.title, product.price, product.stock, product.rating, product.images[0]);

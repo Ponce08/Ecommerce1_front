@@ -12,9 +12,12 @@ import { z } from 'zod';
 import { swalLogin, swalLoginError } from '../../utils/FunctionsLogin.tsx';
 import SectionRef from '../../utils/SectionRef.tsx';
 import { handleLogin } from '../../utils/FunctionsLogin.tsx';
+import useStore from '@/zustand/store.tsx';
 
 export const Login = () => {
-  const  targetSectionRef  = SectionRef(150);
+  const targetSectionRef = SectionRef(150);
+
+  const { setUserLogin } = useStore();
 
   const [login, { loading }] = useMutation(LOGIN);
 
@@ -38,7 +41,17 @@ export const Login = () => {
         }
       });
 
-      localStorage.setItem('token', user.data.login.user.token);
+      const user_login = {
+        id: user.data.login.user.id,
+        firstName: user.data.login.user.firstName,
+        lastName: user.data.login.user.lastName,
+        email: user.data.login.user.email
+      };
+
+      setUserLogin(user_login);
+
+      localStorage.setItem('token', user.data.login.token);
+
       swalLogin(user.data.login.user.firstName);
       navigate('/');
     } catch (err: any) {

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { UserLogin } from '@/globalState/reducer.tsx';
 
 export interface Product {
   id: number;
@@ -51,17 +52,23 @@ export interface Favorite {
   images: string;
 }
 
+interface UserFavorites {
+  [userId: string]: Favorite[];
+}
+
 interface ProductsState {
-  favorites: Favorite[];
+  favorites: UserFavorites;
+  setFavorites: (userId: string, products: Favorite[]) => void;
+  addToFavorite: (userId: string, product: Favorite) => void;
+  removeFavorite: (userId: string, productId: number) => void;
+  userLogin: UserLogin | null;
   shoppingCart: Cart[];
   products: Product[];
   selectedProduct: Product | null;
+  setUserLogin: (userLogin: UserLogin | null) => void;
   setShoppingCart: (products: Cart[]) => void;
-  setFavorites: (products: Favorite[]) => void;
   addToCart: (product: Cart) => void;
-  addToFavorite: (product: Favorite) => void;
   removeFromCart: (productId: number) => void;
-  removeFavorite: (productId: number) => void;
   updateCartItem: (productId: number, quantity: number) => void;
   setProducts: (products: Product[]) => void;
   setSelectedProduct: (product: Product | null) => void;
@@ -71,7 +78,11 @@ interface ProductsState {
 const useStore = create<ProductsState>()(
   persist(
     (set) => ({
-      favorites: [],
+      userLogin: null,
+
+      setUserLogin: (userLogin) => set(() => ({ userLogin })),
+
+      favorites: {},
 
       shoppingCart: [],
 
@@ -81,7 +92,10 @@ const useStore = create<ProductsState>()(
 
       setShoppingCart: (shoppingCart) => set({ shoppingCart }),
 
-      setFavorites: (favorites) => set({ favorites }),
+      setFavorites: (userId, products) =>
+        set((state) => ({
+          favorites: { ...state.favorites, [userId]: products }
+        })),
 
       // Agregar un producto al carrito
       addToCart: (product) =>
@@ -99,16 +113,25 @@ const useStore = create<ProductsState>()(
           return { shoppingCart: [...state.shoppingCart, product] };
         }),
 
-      addToFavorite: (product) => {
+      addToFavorite: (userId, product) =>
         set((state) => {
-          return { favorites: [...state.favorites, product] };
-        });
-      },
+          const userFavorites = state.favorites[userId] || [];
+          const updatedFavorites = [...userFavorites, product];
 
-      removeFavorite: (productId) =>
-        set((state) => ({
-          favorites: state.favorites.filter((item) => item.id !== productId)
-        })),
+          return {
+            favorites: { ...state.favorites, [userId]: updatedFavorites }
+          };
+        }),
+
+      removeFavorite: (userId, productId) =>
+        set((state) => {
+          const userFavorites = state.favorites[userId] || [];
+          const updatedFavorites = userFavorites.filter((item) => item.id !== productId);
+
+          return {
+            favorites: { ...state.favorites, [userId]: updatedFavorites }
+          };
+        }),
 
       // Eliminar un producto del carrito
       removeFromCart: (productId) =>

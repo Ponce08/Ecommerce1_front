@@ -13,13 +13,16 @@ import { NotFoundProducts } from '@/components/pageCards/NotFoundProducts.tsx';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import useStore from '@/zustand/store.tsx';
 import FunctionsDetails from '@/utils/FunctionsDetails.tsx';
+import ContextCardsGlobal from '@/utils/ContextCardsGlobal.tsx';
 
 export const Details = () => {
   const { id } = useParams();
 
+  const { addFavorite, animationHeart } = ContextCardsGlobal();
+
   const { loading, error } = useProductsById(Number(id));
 
-  const { selectedProduct } = useStore();
+  const { selectedProduct, favorites, userLogin } = useStore();
 
   const { addCart, handleBack, handleImageLoad } = FunctionsDetails();
 
@@ -50,11 +53,7 @@ export const Details = () => {
 
           <div className="space-y-4 mb-6 mt-10">
             <div className="relative aspect-[3/2] bg-gray-200 rounded-lg overflow-hidden">
-              <img
-                src={selectedProduct.images[selectedImage]}
-                alt="Product image"
-                className="object-cover w-full h-full p-4"
-              />
+              <img src={selectedProduct.images[selectedImage]} alt="Product image" className="object-cover w-full h-full p-4" />
             </div>
 
             <div className="grid grid-cols-4 gap-2">
@@ -122,9 +121,30 @@ export const Details = () => {
             <div
               className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer"
               id="favorite"
-              data-tooltip-content="Add to Favorites"
+              data-tooltip-content={
+                userLogin && (favorites[userLogin.id] || []).some((fav) => fav.id === selectedProduct.id)
+                  ? 'Remove from favorites'
+                  : 'Add to Favorites'
+              }
+              onClick={animationHeart}
             >
-              <HeartIcon className="h-6 w-6 text-purple-700" />
+              <HeartIcon
+                className={`h-6 w-6 text-purple-700 ${
+                  userLogin && (favorites[userLogin.id] || []).some((fav) => fav.id === selectedProduct.id)
+                    ? 'fill-purple-700'
+                    : ''
+                }`}
+                onClick={() => {
+                  addFavorite(
+                    selectedProduct.id,
+                    selectedProduct.title,
+                    selectedProduct.price,
+                    selectedProduct.stock,
+                    selectedProduct.rating,
+                    selectedProduct.images[0]
+                  );
+                }}
+              />
               <Tooltip anchorId="favorite" />
             </div>
           </div>

@@ -5,6 +5,13 @@ export type User = {
   avatar_url?: string;
 };
 
+export type UserLogin = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+};
+
 export type State = {
   isTrue: boolean;
   isTrue_filters: boolean;

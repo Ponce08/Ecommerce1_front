@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useMemo, useEffect } from 'react';
-import { State, Action, reducer, initialState, User } from './reducer.tsx';
+import { State, Action, reducer, initialState, User, UserLogin } from './reducer.tsx';
 import { supabase } from '../supabaseClient/supabaseClient.tsx';
-// import useStore from '../zustand/store.tsx';
+import useStore from '@/zustand/store.tsx';
 
 type GlobalContextType = {
   state: State;
@@ -22,7 +22,7 @@ export const GlobalContext = createContext<GlobalContextType>(defaultContextValu
 
 export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // const { setShoppingCart } = useStore();
+  const { setUserLogin } = useStore();
 
   useEffect(() => {
     // Obtiene la sesión actual al montar el componente
@@ -36,8 +36,17 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
           full_name: data.session.user.user_metadata.full_name,
           avatar_url: data.session.user.user_metadata.avatar_url
         };
+        console.log(data.session.user.user_metadata.avatar_url);
 
         dispatch({ type: 'SET_USER', payload: user });
+
+        const userLogin: UserLogin = {
+          id: data.session.user.id,
+          firstName: data.session.user.user_metadata.full_name,
+          lastName: data.session.user.user_metadata.full_name,
+          email: data.session.user.email === undefined ? '' : data.session.user.email
+        };
+        setUserLogin(userLogin);
       }
     };
 

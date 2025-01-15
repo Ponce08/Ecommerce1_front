@@ -7,9 +7,8 @@ import Swal from 'sweetalert2';
 
 const ContextCardsGlobal = () => {
   const navigate = useNavigate();
-  const { addToCart, favorites, addToFavorite, removeFavorite } = useStore();
+  const { addToCart, favorites, addToFavorite, removeFavorite, userLogin } = useStore();
   const { state, dispatch } = useContext(GlobalContext);
-  const token = localStorage.getItem('token');
 
   return {
     classNames: (...classes: string[]) => {
@@ -51,9 +50,39 @@ const ContextCardsGlobal = () => {
       });
     },
     addFavorite: (id: number, title: string, price: number, stock: number, rating: number, images: string) => {
-      const existingItem = favorites.find((item) => item.id === id);
+      if (userLogin) {
+        const existingItem = (favorites[userLogin.id] || []).find((item) => item.id === id);
+        if (existingItem) {
+          return removeFavorite(userLogin.id, id);
+        }
 
-      if (!token) {
+        addToFavorite(userLogin.id, {
+          id,
+          title,
+          price,
+          stock,
+          rating,
+          images
+        });
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+        Toast.fire({
+          icon: 'success',
+          title: 'Product added to Favorites',
+          customClass: {
+            timerProgressBar: 'custom-progress-bar'
+          }
+        });
+      } else {
         Swal.fire({
           title: 'Please log in',
           icon: 'warning',
@@ -64,37 +93,6 @@ const ContextCardsGlobal = () => {
         navigate('/login');
         return;
       }
-
-      if (existingItem) {
-        return removeFavorite(id);
-      }
-      addToFavorite({
-        id,
-        title,
-        price,
-        stock,
-        rating,
-        images
-      });
-
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        }
-      });
-      Toast.fire({
-        icon: 'success',
-        title: 'Product added to Favorites',
-        customClass: {
-          timerProgressBar: 'custom-progress-bar'
-        }
-      });
     },
 
     animationHeart: (e: React.MouseEvent<HTMLDivElement>) => {
