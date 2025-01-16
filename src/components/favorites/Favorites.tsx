@@ -11,11 +11,22 @@ import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import 'react-tooltip/dist/react-tooltip.css';
 import '../Styles.css';
 import { Tooltip } from 'react-tooltip';
+import { useEffect } from 'react';
 
 export const Favorites = () => {
-  const { favorites, userLogin } = useStore();
+  const { favorites, userLogin, listenToFavorites, unsubscribeFromFavorites } = useStore();
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
   const { addCart, handleImageLoad, classNames, addFavorite } = ContextCardsGlobal();
+
+  useEffect(() => {
+    if (!userLogin) return;
+
+    listenToFavorites(userLogin.id); // Inicia la suscripción
+
+    return () => {
+      unsubscribeFromFavorites(); // Limpia la suscripción
+    };
+  }, [userLogin, listenToFavorites, unsubscribeFromFavorites]);
 
   if (userLogin && (favorites[userLogin.id] || []).length === 0) window.scrollTo(0, 0);
 
