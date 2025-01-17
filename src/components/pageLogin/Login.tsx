@@ -50,8 +50,6 @@ export const Login = () => {
 
       setUserLogin(user_login);
 
-      localStorage.setItem('token', user.data.login.token);
-
       swalLogin(user.data.login.user.firstName);
       navigate('/');
     } catch (err: any) {

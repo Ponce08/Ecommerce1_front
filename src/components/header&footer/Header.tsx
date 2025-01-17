@@ -33,10 +33,9 @@ import {
 export const Header = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const location = useLocation();
-  const { shoppingCart } = useStore();
+  const { userLogin, shoppingCart } = useStore();
   const [open, setOpen] = useState(false);
   const { navigation, LoadPage, signOut } = FunctionsGlobalHeader();
-  const token = localStorage.getItem('token');
 
   return (
     <div className="bg-colorBackgroundMain">
@@ -143,7 +142,7 @@ export const Header = () => {
             </div>
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-              {token || state.user ? (
+              {userLogin ? (
                 <div
                   className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-gray-200"
                   id="favorites_responsive"
@@ -161,13 +160,13 @@ export const Header = () => {
                   </Link>
                 </div>
               )}
-              {token || state.user ? (
+              {userLogin ? (
                 <Menu as="div" className="relative ml-1">
                   <div>
                     <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
-                      <img alt="" src={state.user ? state.user.avatar_url : img8} className="size-8 rounded-full" />
+                      <img alt="" src={userLogin.avatar_url ? userLogin.avatar_url : img8} className="size-8 rounded-full" />
                     </MenuButton>
                   </div>
                   <MenuItems
@@ -192,7 +191,7 @@ export const Header = () => {
                     </MenuItem>
                     <MenuItem>
                       <a
-                        onClick={() => signOut(state, dispatch)}
+                        onClick={signOut}
                         className="cursor-pointer block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                       >
                         Sign out
@@ -331,7 +330,7 @@ export const Header = () => {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {token || state.user ? (
+                  {userLogin ? (
                     <div
                       className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-gray-200"
                       id="favorites"
@@ -348,13 +347,13 @@ export const Header = () => {
                     </Link>
                   )}
                   <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-                  {token || state.user ? (
+                  {userLogin ? (
                     <Menu as="div" className="relative ml-3">
                       <div>
                         <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
-                          <img alt="" src={state.user ? state.user.avatar_url : img8} className="size-8 rounded-full" />
+                          <img alt="" src={userLogin.avatar_url ? userLogin.avatar_url : img8} className="size-8 rounded-full" />
                         </MenuButton>
                       </div>
                       <MenuItems
@@ -379,7 +378,7 @@ export const Header = () => {
                         </MenuItem>
                         <MenuItem>
                           <a
-                            onClick={() => signOut(state, dispatch)}
+                            onClick={signOut}
                             className="cursor-pointer block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                           >
                             Sign out

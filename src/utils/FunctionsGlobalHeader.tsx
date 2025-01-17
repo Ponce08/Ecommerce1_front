@@ -1,19 +1,16 @@
-import { State, Action } from '../globalState/reducer.tsx';
 import { supabase } from '../supabaseClient/supabaseClient.tsx';
 import { useNavigate } from 'react-router-dom';
+import useStore from '@/zustand/store.tsx';
 
 const FunctionsGlobalHeader = () => {
   const navigate = useNavigate();
+  const { setUserLogin } = useStore();
 
   return {
-    signOut: async (state: State, dispatch: (action: Action) => void): Promise<void> => {
-      if (state.user) {
+    signOut: async (): Promise<void> => {
         await supabase.auth.signOut();
-        dispatch({ type: 'CLEAR_USER' });
-        navigate('/login');
-      }
-      localStorage.removeItem('token');
-      navigate('/login');
+        setUserLogin(null);
+        navigate('/login')
     },
     LoadPage: (to: string) => {
       window.location.href = to;

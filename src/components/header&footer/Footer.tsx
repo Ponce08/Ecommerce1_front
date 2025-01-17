@@ -1,12 +1,10 @@
 import '../../components/Styles.css';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import FunctionsGlobalHeader from '../../utils/FunctionsGlobalHeader.tsx';
+import useStore from '@/zustand/store.tsx';
 
 export const Footer = () => {
-  const token = localStorage.getItem('token');
-  const { state } = useContext(GlobalContext);
+  const { userLogin } = useStore();
   const { LoadPage } = FunctionsGlobalHeader();
 
   return (
@@ -68,10 +66,10 @@ export const Footer = () => {
             </div>
             <div className="flex flex-col items-start">
               <Link
-                to={token || state.user ? '/products/mobile-accessories' : '/login'}
+                to={userLogin ? '/products/mobile-accessories' : '/login'}
                 className="mt-4 text-xs lg:text-base sm:text-base text-white hover:text-purple-600"
               >
-                <span>{token || state.user ? 'Accessories' : 'Sign in'}</span>
+                <span>{userLogin ? 'Accessories' : 'Sign in'}</span>
               </Link>
             </div>
             <div className="flex flex-col items-start">
