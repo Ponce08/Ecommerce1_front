@@ -8,9 +8,9 @@ const FunctionsGlobalHeader = () => {
 
   return {
     signOut: async (): Promise<void> => {
-        await supabase.auth.signOut();
-        setUserLogin(null);
-        navigate('/login')
+      await supabase.auth.signOut();
+      setUserLogin(null);
+      navigate('/login');
     },
     LoadPage: (to: string) => {
       window.location.href = to;
@@ -61,7 +61,7 @@ const FunctionsGlobalHeader = () => {
           name: 'Tecnology',
           featured: [
             {
-              name: 'Latest in technology',
+              name: 'New Arrivals',
               category: 'laptops',
               imageSrc:
                 'https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/1.png',

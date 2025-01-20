@@ -41,9 +41,11 @@ export const Details = () => {
       <Header />
       <div className="min-h-screen bg-colorBackground p-4 mt-[100px]">
         <div className="max-w-2xl mx-auto">
-          <a onClick={handleBack} className="flex items-center text-purple-600 mb-4 cursor-pointer hover:font-bold">
+          <a className="flex items-center text-purple-600 mb-4">
             <ChevronLeft className="w-6 h-6" />
-            <span>BACK</span>
+            <span className="cursor-pointer hover:font-bold" onClick={handleBack}>
+              BACK
+            </span>
           </a>
 
           <div className="space-y-2 mb-4">

@@ -25,8 +25,8 @@ export function About() {
                 React, TypeScript y Node.js (v16+).
               </p>
             </blockquote>
-            <figcaption className="mt-10">
-              <Link to={'https://www.linkedin.com/in/yonathan-ponce/'} target="_blank">
+            <figcaption className="mt-10 text-center">
+              <Link className='inline-block' to={'https://www.linkedin.com/in/yonathan-ponce'} target="_blank">
                 <img
                   alt=""
                   src={img4}

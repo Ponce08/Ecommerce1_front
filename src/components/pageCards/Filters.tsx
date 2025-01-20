@@ -128,16 +128,16 @@ export const Filters = () => {
               Apply
             </button>
             <button
-              onClick={handleClean}
-              className="flex-1 border border-purple-500 text-purple-800 py-2 rounded hover:bg-purple-100"
-            >
-              Clean
-            </button>
-            <button
               onClick={() => allProducts(rating)}
               className="flex-1 bg-purple-500 text-white py-2 rounded hover:bg-purple-600"
             >
               All Products
+            </button>
+            <button
+              onClick={handleClean}
+              className="flex-1 border border-purple-500 text-purple-800 py-2 rounded hover:bg-gray-200"
+            >
+              Clean
             </button>
           </div>
         </div>

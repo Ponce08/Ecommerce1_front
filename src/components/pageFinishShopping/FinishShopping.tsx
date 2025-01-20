@@ -3,6 +3,7 @@ import { Header } from '../header&footer/Header.tsx';
 import { ShoppingCart, ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import useStore from '../../zustand/store.tsx';
+import Swal from 'sweetalert2';
 
 export const FinishShopping = () => {
   const { shoppingCart } = useStore();
@@ -16,6 +17,16 @@ export const FinishShopping = () => {
     navigate(-1);
   };
 
+  const inProcess = () => {
+    Swal.fire({
+      title: 'Mil disculpas!!😅',
+      text: 'Aun estamos trabajando en estas funcionalidades',
+      icon: 'warning',
+      customClass: {
+        confirmButton: 'bg-purple-600'
+      }
+    });
+  };
   return (
     <>
       <Header />
@@ -60,10 +71,11 @@ export const FinishShopping = () => {
                   <div className="flex items-center gap-4">
                     <img src={item.images} alt={item.title} className="w-20 h-20 lg:w-32 lg:h-32 rounded-lg bg-gray-100" />
                     <span className="w-32 text-xs text-center">
-                      {item.title} <span className="font-bold">(x {item.quantity})</span>
+                      {item.title} <br />
+                      <span className="font-bold">(x {item.quantity})</span>
                     </span>
                   </div>
-                  <span className='text-xs lg:text-xl'>${item.price}</span>
+                  <span className="text-xs lg:text-xl">${item.price}</span>
                 </div>
               ))}
               <div className="text-right font-semibold">Total : ${formattedTotal}</div>
@@ -87,7 +99,12 @@ export const FinishShopping = () => {
                 ))}
               </div>
               <div className="flex justify-center">
-                <button className="bg-green-400 hover:bg-green-500 text-black font-semibold px-8 py-2 rounded-md">PAY</button>
+                <button
+                  onClick={inProcess}
+                  className="bg-green-400 hover:bg-green-500 text-black font-semibold px-8 py-2 rounded-md"
+                >
+                  PAY
+                </button>
               </div>
             </div>
 

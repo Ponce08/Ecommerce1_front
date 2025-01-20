@@ -30,8 +30,9 @@ export const NotFoundProducts = () => {
             <a
               onClick={() => allProducts(ratingOrder)}
               className="mt-6 inline-block rounded bg-purple-500 px-5 py-3 text-sm font-medium text-white hover:bg-purple-600 focus:outline-none focus:ring cursor-pointer"
+              href="/"
             >
-              Go Back
+              Go Home
             </a>
           </div>
         </div>
