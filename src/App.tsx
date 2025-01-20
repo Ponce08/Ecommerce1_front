@@ -15,8 +15,8 @@ import { CardsCategory } from './components/category/CardsCategory.tsx';
 import { Favorites } from '@/components/favorites/Favorites.tsx';
 
 const client = new ApolloClient({
-  uri: 'https://ecommerce1-back.onrender.com/graphql',
-  // uri: 'http://localhost:4000/graphql',
+  // uri: 'https://ecommerce1-back.onrender.com/graphql',
+  uri: 'http://localhost:4000/graphql',
   cache: new InMemoryCache()
 });
 
