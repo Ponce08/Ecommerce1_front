@@ -79,7 +79,7 @@ export const ProductsDashboard = () => {
       <div className="w-full flex justify-center">
         {/* Contenedor con scroll */}
         <div className="w-[90%] h-[550px] lg:h-[350px] overflow-y-auto shadow-md bg-white rounded-lg m-4">
-          <table className="w-full divide-y divide-gray-200">
+          <table className="w-full h-full divide-y divide-gray-200">
             <thead className="bg-purple-600 text-center sticky top-0 z-10">
               <tr>
                 <th className="px-4 py-2 text-sm font-semibold text-white">ID</th>
@@ -106,18 +106,17 @@ export const ProductsDashboard = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="px-4 py-[80px] text-2xl text-gray-700 text-center font-semibold">
+                  <td colSpan={5} className="h-64">
                     {products.length === 0 && loading ? (
                       // Animación de carga
-                      <div className="inset-0 flex items-center justify-center">
+                      <div className="flex items-center justify-center h-full">
                         <div className="relative">
                           <div className="h-32 w-32 rounded-full border-t-4 border-b-4 border-gray-200"></div>
                           <div className="absolute top-0 left-0 h-32 w-32 rounded-full border-t-4 border-b-4 border-purple-500 animate-spin"></div>
                         </div>
                       </div>
                     ) : (
-                      // Mensaje de "No products found"
-                      <span>!!No products found 😅</span>
+                      <span className="font-semibold text-2xl">!!No products found 😅</span>
                     )}
                   </td>
                 </tr>
