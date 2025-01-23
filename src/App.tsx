@@ -16,6 +16,7 @@ import { Favorites } from '@/components/favorites/Favorites.tsx';
 import Dashboard from '@/components/dashboard/Dashboard.tsx';
 import { ProductsDashboard } from '@/components/dashboard/ProductsDashboard.tsx';
 import { EditProductAdmin } from '@/components/dashboard/EditProductAdmin.tsx';
+// import ImageUploader from '@/components/dashboard/Ensayo.tsx';
 
 const client = new ApolloClient({
   uri: 'https://ecommerce1-back.onrender.com/graphql',
@@ -43,6 +44,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products_dashboard" element={<ProductsDashboard />} />
             <Route path="/products_dashboard/:id" element={<EditProductAdmin />} />
+            {/* <Route path="/ensayo" element={<ImageUploader />} /> */}
           </Routes>
         </Router>
       </GlobalProvider>

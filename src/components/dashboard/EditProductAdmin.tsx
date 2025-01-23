@@ -3,6 +3,10 @@ import FunctionsDetails from '@/utils/FunctionsDetails.tsx';
 import { supabase } from '@/supabaseClient/supabaseClient.tsx';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
+import { Trash2 } from 'lucide-react';
+import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from 'react-tooltip';
+import img12 from '@/imagenes/img12.svg';
 
 interface Product {
   title: string;
@@ -81,6 +85,8 @@ export const EditProductAdmin = () => {
         fetchProductById(Number(id)).then((product) => {
           if (product) {
             setLoadedProduct(product);
+            // Restaurar la selección de la imagen principal
+            setSelectedImage(product.images.length > 0 ? 0 : -1);
             setIsDisabled(true);
           }
         });
@@ -95,18 +101,66 @@ export const EditProductAdmin = () => {
     }, 0);
   };
 
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+
+    // Validar si ya hay 4 imágenes cargadas
+    if (loadedProduct.images.length >= 4) {
+      alert('You can only upload up to 4 images.');
+      event.target.value = ''; // Limpiar el input para evitar comportamientos inesperados
+      return;
+    }
+
+    if (files) {
+      const newImages = Array.from(files).map((file) => URL.createObjectURL(file));
+
+      setLoadedProduct((prevProduct) => {
+        const updatedImages = [...prevProduct.images, ...newImages];
+
+        // Asegurarse de que no se exceda el límite de 4 imágenes
+        if (updatedImages.length > 4) {
+          alert('You can only upload up to 4 images. Excess files were ignored.');
+        }
+
+        return {
+          ...prevProduct,
+          images: updatedImages.slice(0, 4)
+        };
+      });
+
+      // Limpiar el input después de cargar los archivos
+      event.target.value = '';
+    }
+  };
+
+  const removeImage = (imageUrl: string) => {
+    setLoadedProduct((prevProduct) => {
+      const updatedImages = prevProduct.images.filter((img) => img !== imageUrl);
+
+      // Asegurar que el índice selectedImage sea válido
+      const newSelectedImage = updatedImages.length === 0 ? -1 : Math.min(selectedImage, updatedImages.length - 1);
+
+      setSelectedImage(newSelectedImage); // Actualizar el índice seleccionado
+
+      return {
+        ...prevProduct,
+        images: updatedImages
+      };
+    });
+  };
+
   return (
-    <div className="bg-colorBackground p-4 h-screen">
-      <a className="flex items-center text-purple-600 mb-4 mx-16">
+    <div className="min-h-screen bg-colorBackground p-4">
+      <a className="flex items-center text-purple-600 mb-4 lg:mx-16">
         <ChevronLeft className="w-6 h-6" />
         <span className="cursor-pointer hover:font-bold" onClick={handleBack}>
           BACK
         </span>
       </a>
 
-      <div className="flex flex-col lg:flex-row mx-16">
-        <div className="w-[550px] mb-6 mt-2 flex">
-          <div className="relative bg-gray-200 rounded-lg w-[430px] h-[430px] overflow-hidden">
+      <div className="flex flex-col lg:flex-row lg:mx-16">
+        <div className="w-full flex xs:justify-start sm:justify-center lg:w-[550px] md:justify-center lg:justify-start">
+          <div className="relative w-[300px] h-[300px] xs:w-[260px] xs:h-[260px] md:w-[430px] md:h-[430px] lg:w-[430px] lg:h-[430px] bg-gray-200 rounded-lg overflow-hidden">
             {!loadedImages[0] && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative">
@@ -115,41 +169,63 @@ export const EditProductAdmin = () => {
                 </div>
               </div>
             )}
-            <img
-              src={loadedProduct.images[selectedImage]}
-              className={`object-cover w-[430px] h-[430px] p-4 ${loadedImages[0] ? '' : 'hidden'}`}
-            />
+            {loadedProduct.images.length === 0 ? (
+              <div className={`h-full flex flex-col items-center justify-center ${loadedImages[0] ? '' : 'hidden'}`}>
+                <img src={img12} className="w-32 h-auto" />
+                <h2 className="text-base">!!Opps.. Nothing there</h2>
+              </div>
+            ) : (
+              <img
+                src={loadedProduct.images[selectedImage]}
+                className={`object-cover w-full h-ful lg:p-4 ${loadedImages[selectedImage] ? '' : 'hidden'}`}
+              />
+            )}
           </div>
 
           <div className="flex flex-col">
             {loadedProduct.images.map((image, index) => (
-              <button
+              <div
                 key={index}
-                onClick={() => setSelectedImage(index)}
-                className={`w-[96px] h-[96px] rounded-lg bg-gray-200 p-2 overflow-hidden ml-4 mb-4 ${
-                  selectedImage === index ? 'ring-2 ring-purple-600' : ''
-                }`}
+                className="relative w-[69px] h-[69px] xs:w-[59px] xs:h-[59px] md:w-[101px] md:h-[101px] lg:w-[96px] lg:h-[96px] mb-2 ml-2 lg:ml-4 lg:mb-4"
               >
-                {!loadedImages[index] && (
-                  <div className="inset-0 flex items-center justify-center">
-                    <div className="relative">
-                      <div className="h-10 w-10 rounded-full border-t-4 border-b-4 border-gray-200"></div>
-                      <div className="absolute top-0 left-0 h-10 w-10 rounded-full border-t-4 border-b-4 border-purple-500 animate-spin"></div>
+                {/* Contenedor de la imagen con selección */}
+                <button
+                  onClick={() => setSelectedImage(index)}
+                  className={`w-full h-full rounded-lg bg-gray-200 lg:p-2 overflow-hidden ${
+                    selectedImage === index ? 'ring-2 ring-purple-600' : ''
+                  }`}
+                >
+                  {/* Indicador de carga */}
+                  {!loadedImages[index] && (
+                    <div className="inset-0 flex items-center justify-center">
+                      <div className="relative">
+                        <div className="h-10 w-10 rounded-full border-t-4 border-b-4 border-gray-200"></div>
+                        <div className="absolute top-0 left-0 h-10 w-10 rounded-full border-t-4 border-b-4 border-purple-500 animate-spin"></div>
+                      </div>
                     </div>
-                  </div>
+                  )}
+                  {/* Imagen */}
+                  <img
+                    src={image}
+                    alt={`Product thumbnail ${index + 1}`}
+                    className={`object-cover w-full h-full ${loadedImages[index] ? '' : 'hidden'}`}
+                    onLoad={() => handleImageLoad(index, setLoadedImages)}
+                  />
+                </button>
+
+                {/* Botón de eliminar (independiente del contenedor de la imagen) */}
+                {!isDisabled && (
+                  <button onClick={() => removeImage(image)} className="absolute top-2 right-2 text-red-500 hover:text-red-700">
+                    <Trash2 className="w-4 h-4 focus:outline-none" data-tooltip-content="Remove" id={`Remove${index}`} />
+                    <Tooltip anchorId={`Remove${index}`} />
+                  </button>
                 )}
-                <img
-                  src={image}
-                  alt={`Product thumbnail ${index + 1}`}
-                  className={`object-cover w-full h-full ${loadedImages[index] ? '' : 'hidden'}`}
-                  onLoad={() => handleImageLoad(index, setLoadedImages)}
-                />
-              </button>
+              </div>
             ))}
           </div>
         </div>
 
-        <form className="w-[50%] ml-4">
+        <form className="w-full lg:w-[50%] lg:ml-4">
           <span className="text-xs font-semibold ml-2">Title</span>
           <input
             ref={inputRef}
@@ -175,7 +251,7 @@ export const EditProductAdmin = () => {
             } mb-2 py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]`}
           />
 
-          <div className="inline-flex flex-col">
+          <div className="inline-flex flex-col w-[49%]">
             <span className="text-xs font-semibold ml-2">Price</span>
             <input
               onChange={handleChange}
@@ -190,7 +266,7 @@ export const EditProductAdmin = () => {
             />
           </div>
 
-          <div className="inline-flex flex-col ml-4">
+          <div className="inline-flex flex-col ml-2 xl:ml-4 w-[48%]">
             <span className="text-xs font-semibold ml-2">Stock</span>
             <input
               onChange={handleChange}
@@ -228,13 +304,12 @@ export const EditProductAdmin = () => {
               isDisabled ? 'cursor-not-allowed' : ''
             } mb-2 py-2 px-3 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]`}
           />
-
-          <input
-            value={''}
-            type="file"
-            disabled={isDisabled}
-            className="mb-2 py-2 px-3 inline-block border-gray-200 shadow-sm text-xs rounded-lg focus:border-[#8c52ff] focus:ring-[#8c52ff]"
-          />
+          <div className="flex items-center">
+            <label className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+              Select image
+              <input accept="image/*" onChange={handleFileSelect} type="file" disabled={isDisabled} className="hidden" />
+            </label>
+          </div>
 
           {/* botones */}
           <div>
