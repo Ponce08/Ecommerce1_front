@@ -14,7 +14,6 @@ export interface Product {
   discountPercentage: number;
   rating: 0 | 1 | 2 | 3 | 4 | 5;
   stock: number;
-  tags: string[];
   brand: string;
   sku: string;
   weight: number;

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Home, ShoppingCart, Users, BarChart } from 'lucide-react';
+import { Home, Users, PackageSearch } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { Menu as MenuIcon, X as CloseIcon } from 'react-feather';
+import img7 from '@/imagenes/img7.png';
 
 type TitleMain = {
   title: string;
@@ -39,16 +40,16 @@ export function Sidebar({ title }: TitleMain) {
             Dashboard
           </Link>
           <Link to="/products_dashboard" className="block py-2.5 px-4 rounded hover:bg-gray-700 hover:text-white">
-            <ShoppingCart className="inline-block mr-2" size={20} />
-            Pedidos
+            <PackageSearch className="inline-block mr-2" size={20} />
+            Productos
           </Link>
           <Link to="" className="block py-2.5 px-4 rounded hover:bg-gray-700 hover:text-white">
             <Users className="inline-block mr-2" size={20} />
             Clientes
           </Link>
-          <Link to="" className="block py-2.5 px-4 rounded hover:bg-gray-700 hover:text-white">
-            <BarChart className="inline-block mr-2" size={20} />
-            Análisis
+          <Link to="/" className="block py-2.5 px-3 rounded hover:bg-gray-700 hover:text-white">
+            <img src={img7} className="w-6 h-6 inline-block mr-2" />
+            Back F&T
           </Link>
         </nav>
       </div>

@@ -22,18 +22,39 @@ export const ProductsDashboard = () => {
   const fetchProducts = async (title = '') => {
     setLoading(true);
     try {
-      const query = supabase.from('products').select('*');
-      if (title) {
-        query.ilike('title', `%${title}%`); // Filtro por título
-      }
-      const { data, error } = await query;
+      let allProducts: Product[] = [];
+      let start = 0;
+      const pageSize = 1000; // Número de filas por página
 
-      if (error) {
-        console.error('Error fetching products:', error.message);
-        return;
+      while (true) {
+        let query = supabase
+          .from('products')
+          .select('*')
+          .range(start, start + pageSize - 1);
+
+        if (title) {
+          query = query.ilike('title', `%${title}%`); // Filtro por título si aplica
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+          console.error('Error fetching products:', error.message);
+          break;
+        }
+
+        if (data && data.length > 0) {
+          allProducts = [...allProducts, ...data]; // Acumula los productos
+          start += pageSize; // Avanza al siguiente rango
+        }
+
+        if (data.length < pageSize) {
+          break; // Si la página tiene menos filas, ya no hay más datos
+        }
       }
 
-      setProducts(data); // Actualiza el estado con los productos
+      setProducts(allProducts); // Actualiza el estado con todos los productos cargados
+      console.log('Total productos cargados:', allProducts.length);
     } catch (err) {
       console.error('Unexpected error:', err);
     } finally {
@@ -72,12 +93,11 @@ export const ProductsDashboard = () => {
             Search
           </button>
           <h1 className="lg:inline-block font-semibold ml-4">
-            RESULT: <span className="font-normal">{products.length} / 1000</span>
+            RESULT: <span className="font-normal">{products.length} / 1014</span>
           </h1>
         </form>
       </div>
       <div className="w-full flex justify-center">
-        {/* Contenedor con scroll */}
         <div className="w-[90%] h-[550px] lg:h-[350px] overflow-y-auto shadow-md bg-white rounded-lg m-4">
           <table className="w-full h-full divide-y divide-gray-200">
             <thead className="bg-purple-600 text-center sticky top-0 z-10">
