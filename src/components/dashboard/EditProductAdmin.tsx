@@ -435,6 +435,7 @@ export const EditProductAdmin = () => {
             <button
               type="submit"
               className="mt-2 py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg bg-white text-gray-800 border border-2 border-green-600 hover:bg-colorBackgroundMain hover:border-green-400"
+              disabled={isDisabled}
             >
               Save
             </button>
