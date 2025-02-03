@@ -53,17 +53,17 @@ export const Details = () => {
             <p className="text-lg">${selectedProduct.price}</p>
           </div>
 
-          <div className="space-y-4 mb-6 mt-10">
-            <div className="relative aspect-[3/2] bg-gray-200 rounded-lg overflow-hidden">
-              <img src={selectedProduct.images[selectedImage]} alt="Product image" className="object-cover w-full h-full p-4" />
+          <div className="space-y-4 mb-6 mt-6">
+            <div className="relative w-[90%] h-auto bg-gray-200 rounded-lg overflow-hidden">
+              <img src={selectedProduct.images[selectedImage]} alt="Product image" className="object-cover w-full h-full p-2" />
             </div>
 
-            <div className="grid grid-cols-4 gap-2">
+            <div className="flex gap-4">
               {selectedProduct.images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`relative aspect-[3/2] rounded-lg bg-gray-200 p-2 overflow-hidden mt-8 ${
+                  className={`relative w-[15%] h-auto rounded-lg bg-gray-200 overflow-hidden ${
                     selectedImage === index ? 'ring-2 ring-purple-600' : ''
                   }`}
                 >

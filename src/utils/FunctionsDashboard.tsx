@@ -1,6 +1,12 @@
 //Supabase Client
 import { supabase } from '@/supabaseClient/supabaseClient.tsx';
 
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+import { LoadingProducts } from '@/components/pageCards/LoadingProducts.tsx';
+import useStore from '@/zustand/store.tsx';
+
 export interface ProductAdmin {
   title: string;
   category: string;
@@ -69,11 +75,8 @@ export const updateProduct = async (updatedProduct: ProductAdmin, id: number) =>
 
 export const deleteProductById = async (productId: number) => {
   try {
-    // Realiza la eliminación en la tabla 'products' 
-    const { error } = await supabase
-      .from('products') 
-      .delete()
-      .eq('id', productId);
+    // Realiza la eliminación en la tabla 'products'
+    const { error } = await supabase.from('products').delete().eq('id', productId);
 
     if (error) {
       console.error('Error al eliminar el producto:', error.message);
@@ -85,4 +88,47 @@ export const deleteProductById = async (productId: number) => {
     console.error('Error inesperado:', err);
     return { success: false, message: 'Ocurrió un error inesperado.' };
   }
+};
+
+export const createProduct = async (loadedProduct: ProductAdmin) => {
+  const { data, error } = await supabase.from('products').insert([{ ...loadedProduct }]);
+
+  if (error) {
+    console.error('Error al crear el producto:', error.message);
+    return { data: null, error };
+  }
+
+  return { data, error: null };
+};
+
+export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isChecking, setIsChecking] = useState(true);
+  const { userLogin } = useStore();
+
+  useEffect(() => {
+    // Definir las rutas protegidas
+    const protectedRoutes = ['/dashboard', '/products_dashboard', '/add_product_admin'];
+
+    // Verificar si la ruta actual coincide con una protegida
+    const isProtectedRoute = protectedRoutes.includes(location.pathname) || location.pathname.startsWith('/products_dashboard/'); // Soporta rutas dinámicas
+
+    if (isProtectedRoute && !userLogin) {
+      navigate('/login');
+      Swal.fire({
+        title: 'Please log in',
+        icon: 'warning',
+        customClass: {
+          confirmButton: 'bg-purple-600'
+        }
+      });
+    } else {
+      setIsChecking(false); // Permitir renderizado cuando termine la validación
+    }
+  }, [location.pathname, navigate]);
+
+  if (isChecking) return <LoadingProducts />; // Mostrar carga mientras se valida
+
+  return <>{children}</>; // Renderizar el contenido solo si está autenticado
 };

@@ -16,11 +16,14 @@ import { Favorites } from '@/components/favorites/Favorites.tsx';
 import Dashboard from '@/components/dashboard/Dashboard.tsx';
 import { ProductsDashboard } from '@/components/dashboard/ProductsDashboard.tsx';
 import { EditProductAdmin } from '@/components/dashboard/EditProductAdmin.tsx';
+import { AddProductAdmin } from '@/components/dashboard/AddProductAdmin.tsx';
+import { ProtectedRoute } from '@/utils/FunctionsDashboard.tsx';
+
 // import ImageUploader from '@/components/dashboard/Ensayo.tsx';
 
 const client = new ApolloClient({
-  uri: 'https://ecommerce1-back.onrender.com/graphql',
-  // uri: 'http://localhost:4000/graphql',
+  // uri: 'https://ecommerce1-back.onrender.com/graphql',
+  uri: 'http://localhost:4000/graphql',
   cache: new InMemoryCache()
 });
 
@@ -41,9 +44,39 @@ function App() {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/product/:id" element={<Details />} />
             <Route path="/products/:categorys" element={<CardsCategory />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/products_dashboard" element={<ProductsDashboard />} />
-            <Route path="/products_dashboard/:id" element={<EditProductAdmin />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/products_dashboard"
+              element={
+                <ProtectedRoute>
+                  <ProductsDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/products_dashboard/:id"
+              element={
+                <ProtectedRoute>
+                  <EditProductAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/add_product_admin"
+              element={
+                <ProtectedRoute>
+                  <AddProductAdmin />
+                </ProtectedRoute>
+              }
+            />
+
             {/* <Route path="/ensayo" element={<ImageUploader />} /> */}
           </Routes>
         </Router>

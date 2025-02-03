@@ -146,7 +146,10 @@ export const ProductsDashboard = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <button className="m-2 py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg bg-purple-500 text-white hover:bg-purple-600">
+        <button
+          className="m-2 py-2 px-3 inline-flex items-center text-sm font-medium rounded-lg bg-purple-500 text-white hover:bg-purple-600"
+          onClick={() => navigate('/add_product_admin')}
+        >
           Agregar Producto
         </button>
       </div>
