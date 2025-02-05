@@ -11,16 +11,9 @@ export interface Product {
   category: string;
   price: number;
   quantity: number;
-  discountPercentage: number;
   rating: 0 | 1 | 2 | 3 | 4 | 5;
   stock: number;
   brand: string;
-  sku: string;
-  weight: number;
-  dimensions: { width: number; height: number; depth: number };
-  warrantyInformation?: string;
-  shippingInformation?: string;
-  availabilityStatus?: string;
   reviews: {
     rating: number;
     comment: string;
@@ -28,11 +21,7 @@ export interface Product {
     reviewerName: string;
     reviewerEmail: string;
   }[];
-  returnPolicy?: string;
-  minimumOrderQuantity: number;
-  meta: { createdAt: string; updatedAt: string; barcode: string; qrCode: string };
   images: string[];
-  thumbnail: string;
 }
 
 export interface Cart {

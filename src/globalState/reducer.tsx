@@ -25,7 +25,7 @@ export const initialState: State = {
   page: 1,
   currentPage: 0,
   firstPage: 1,
-  finalPage: 85,
+  finalPage: 0,
   category: null,
   priceMin: null,
   priceMax: null,

@@ -1,22 +1,33 @@
-import { useEffect } from 'react';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
+// import { GET_PRODUCTS_BY_ID } from '../graphql/querys.tsx';
+
+import { useEffect, useState } from 'react';
 import useStore from '../store.tsx';
-import { GET_PRODUCTS_BY_ID } from '../graphql/querys.tsx';
+import { supabase } from '@/supabaseClient/supabaseClient.tsx';
 
 export const useProductsById = (id: number | null) => {
-  // Llamar al resolver con todas las variables
-  const { data, loading, error } = useQuery(GET_PRODUCTS_BY_ID, {
-    variables: { id }
-  });
-
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const setProduct = useStore((state) => state.setSelectedProduct);
 
-  // Sincronizar datos de Apollo con Zustand
   useEffect(() => {
-    if (data?.getProductById) {
-      setProduct(data.getProductById);
-    }
-  }, [data, setProduct]);
+    const fetchProduct = async () => {
+      if (!id) return;
+      setLoading(true);
+      setError(null);
+
+      const { data, error } = await supabase.from('products').select('*').eq('id', id).single();
+
+      if (error) {
+        setError(error.message);
+      } else {
+        setProduct(data);
+      }
+      setLoading(false);
+    };
+
+    fetchProduct();
+  }, [id, setProduct]);
 
   return { selectedProduct: useStore((state) => state.selectedProduct), loading, error };
 };

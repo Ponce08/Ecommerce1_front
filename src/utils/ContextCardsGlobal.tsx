@@ -1,9 +1,21 @@
 import { GlobalContext } from '../globalState/GlobalContext.tsx';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { stateProductsPagination } from './ObjectCategorys.tsx';
+// import { stateProductsPagination } from './ObjectCategorys.tsx';
 import useStore from '../zustand/store.tsx';
 import Swal from 'sweetalert2';
+import { supabase } from '@/supabaseClient/supabaseClient.tsx';
+
+export const getTotalProducts = async (): Promise<number> => {
+  const { count, error } = await supabase.from('products').select('*', { count: 'exact', head: true });
+
+  if (error) {
+    console.error('Error fetching total products:', error);
+    throw error;
+  }
+
+  return count ?? 0;
+};
 
 const ContextCardsGlobal = () => {
   const navigate = useNavigate();
@@ -142,28 +154,30 @@ const ContextCardsGlobal = () => {
         ? 'px-3 py-1 rounded-lg text-xs xs:text-[10px] xs:px-2 lg:text-lg text-white bg-[#8c52ff] hover:bg-[#8c52ff]/90'
         : 'px-3 py-1 rounded-lg text-gray-700 text-xs xs:text-[10px] xs:px-2 lg:text-lg hover:text-[#8c52ff] hover:border-[#8c52ff] border';
     },
-    applyFilters: (category: string, minPrice: string, maxPrice: string, rating: string) => {
+    applyFilters: async (category: string, minPrice: string, maxPrice: string, rating: string) => {
+      // const numberTotal = Math.ceil((await getTotalProducts()) / 12);
       const normalizedCategory = category.toLowerCase().replace(/\s+/g, '-');
       navigate(`/products/${normalizedCategory}`);
       dispatch({ type: 'SET_FALSE_FILTERS' });
       dispatch({ type: 'SET_PAGE', payload: 1 });
       dispatch({ type: 'SET_CATEGORY', payload: category === '' ? null : normalizedCategory });
       dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
-      dispatch({
-        type: 'SET_FINALPAGE',
-        payload: stateProductsPagination(category) === 0 ? 85 : stateProductsPagination(category)
-      });
+      // dispatch({
+      //   type: 'SET_FINALPAGE',
+      //   payload: stateProductsPagination(category) === 0 ? numberTotal : stateProductsPagination(category)
+      // });
       dispatch({ type: 'SET_MINPRICE', payload: Number(minPrice) === 0 ? null : Number(minPrice) });
       dispatch({ type: 'SET_MAXPRICE', payload: Number(maxPrice) === 0 ? null : Number(maxPrice) });
       dispatch({ type: 'SET_RATING_ORDER', payload: rating });
     },
 
-    allProducts: (rating: string) => {
+    allProducts: async (rating: string) => {
+      // const numberTotal = Math.ceil((await getTotalProducts()) / 12);
       navigate('/products');
       dispatch({ type: 'SET_CATEGORY', payload: null });
       dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
       dispatch({ type: 'SET_PAGE', payload: 1 });
-      dispatch({ type: 'SET_FINALPAGE', payload: 85 });
+      // dispatch({ type: 'SET_FINALPAGE', payload: numberTotal });
       dispatch({ type: 'SET_FALSE_FILTERS' });
       dispatch({ type: 'SET_MINPRICE', payload: null });
       dispatch({ type: 'SET_MAXPRICE', payload: null });

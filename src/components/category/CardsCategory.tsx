@@ -36,12 +36,15 @@ export const CardsCategory = () => {
   const { addCart, handleImageLoad, classNames, addFavorite, animationHeart } = ContextCardsGlobal();
 
   useEffect(() => {
-    if (categorys) {
-      dispatch({
-        type: 'SET_FINALPAGE',
-        payload: stateProductsPagination(categorys)
-      });
-    }
+    const getFinalPage = async () => {
+      if (categorys) {
+        dispatch({
+          type: 'SET_FINALPAGE',
+          payload: await stateProductsPagination(categorys)
+        });
+      }
+    };
+    getFinalPage();
   }, [categorys, dispatch]);
 
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});

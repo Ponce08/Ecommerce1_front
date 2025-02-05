@@ -42,13 +42,12 @@ export const Paginations = () => {
         <button className={stylePage(currentPage1)} onClick={() => setCurrentPage(currentPage1)}>
           {currentPage1}
         </button>
-        {!(state.priceMax && products.length < 12) && (
-          <button className={stylePage(currentPage2)} onClick={() => setCurrentPage(currentPage2)}>
-            {currentPage2}
-          </button>
-        )}
 
-        {!(state.finalPage < currentPage3 || (state.priceMax && products.length < 12)) && (
+        <button className={stylePage(currentPage2)} onClick={() => setCurrentPage(currentPage2)}>
+          {currentPage2}
+        </button>
+
+        {!(state.finalPage < currentPage3 || products.length < 12) && (
           <button className={stylePage(currentPage3)} onClick={() => setCurrentPage(currentPage3)}>
             {currentPage3}
           </button>
@@ -57,7 +56,7 @@ export const Paginations = () => {
         {/* Elipsis 2 */}
         <span className="px-1 py-1 text-gray-500">{!(currentPage3 === state.finalPage) && '...'}</span>
 
-        {!(currentPage3 === state.finalPage || state.priceMax || state.finalPage < currentPage3) && (
+        {!(currentPage3 === state.finalPage || state.finalPage < currentPage3) && (
           <button
             className="xs:text-[10px] xs:px-1 text-xs lg:text-lg px-3 py-1 rounded-lg text-gray-700 hover:text-[#8c52ff] hover:border-[#8c52ff] border"
             onClick={lastPage}

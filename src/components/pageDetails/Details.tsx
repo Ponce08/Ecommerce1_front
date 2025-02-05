@@ -33,8 +33,8 @@ export const Details = () => {
   const [showReviews, setShowReviews] = useState(false);
 
   if (loading) return <LoadingProducts />;
+  if (error) return <ErrorPage messageError={error} />;
   if (!selectedProduct) return <NotFoundProducts />;
-  if (error) return <ErrorPage messageError={error.message} />;
 
   return (
     <>

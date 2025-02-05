@@ -6,7 +6,7 @@ import { Footer } from '../header&footer/Footer.tsx';
 import { ErrorPage } from './ErrorPage.tsx';
 import { Paginations } from './Paginations.tsx';
 import { AiOutlineFilter } from 'react-icons/ai';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Filters } from './Filters.tsx';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { useProducts } from '../../zustand/hooks/useProducts.tsx';
@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
-import ContextCardsGlobal, { Products } from '../../utils/ContextCardsGlobal.tsx';
+import ContextCardsGlobal, { Products, getTotalProducts } from '../../utils/ContextCardsGlobal.tsx';
 import useStore from '../../zustand/store.tsx';
 
 export const Cards = () => {
@@ -31,6 +31,12 @@ export const Cards = () => {
   const { addCart, handleImageLoad, classNames, addFavorite, animationHeart } = ContextCardsGlobal();
 
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
+
+  useEffect(() => {
+    getTotalProducts().then((total) => {
+      dispatch({ type: 'SET_FINALPAGE', payload: Math.ceil(total / 12) });
+    });
+  }, []);
 
   if (loading) return <LoadingProducts />;
   if (products.length === 0) return <NotFoundProducts />;
