@@ -281,8 +281,10 @@ export const AddProductAdmin = () => {
           />
 
           <div className="inline-flex flex-col w-[49%]">
-            <span className="text-xs font-semibold ml-2">Price</span>
-            {errors.price && <p className="text-red-500 text-xs ml-2 font-semibold">{errors.price.message}</p>}
+            <div className='flex'>
+              <span className="text-xs font-semibold ml-2">Price</span>
+              {errors.price && <p className="text-red-500 text-xs ml-2 font-semibold">{errors.price.message}</p>}
+            </div>
             <input
               {...register('price', {
                 required: 'Price is required',

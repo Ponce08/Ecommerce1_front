@@ -16,6 +16,7 @@ export const ProductsDashboard = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [searchTitle, setSearchTitle] = useState('');
   const [loading, setLoading] = useState(true);
+  const [totalCount, setTotalCount] = useState(0);
   const navigate = useNavigate();
 
   // Función para obtener productos desde Supabase
@@ -29,14 +30,14 @@ export const ProductsDashboard = () => {
       while (true) {
         let query = supabase
           .from('products')
-          .select('*')
+          .select('*', { count: 'exact' })
           .range(start, start + pageSize - 1);
 
         if (title) {
           query = query.ilike('title', `%${title}%`); // Filtro por título si aplica
         }
 
-        const { data, error } = await query;
+        const { data, error, count } = await query;
 
         if (error) {
           console.error('Error fetching products:', error.message);
@@ -46,6 +47,7 @@ export const ProductsDashboard = () => {
         if (data && data.length > 0) {
           allProducts = [...allProducts, ...data]; // Acumula los productos
           start += pageSize; // Avanza al siguiente rango
+          setTotalCount(count || 0);
         }
 
         if (data.length < pageSize) {
@@ -54,7 +56,6 @@ export const ProductsDashboard = () => {
       }
 
       setProducts(allProducts); // Actualiza el estado con todos los productos cargados
-      console.log('Total productos cargados:', allProducts.length);
     } catch (err) {
       console.error('Unexpected error:', err);
     } finally {
@@ -93,7 +94,10 @@ export const ProductsDashboard = () => {
             Search
           </button>
           <h1 className="lg:inline-block font-semibold ml-4">
-            RESULT: <span className="font-normal">{products.length} / 1014</span>
+            RESULT:{' '}
+            <span className="font-normal">
+              {products.length} / {totalCount}
+            </span>
           </h1>
         </form>
       </div>

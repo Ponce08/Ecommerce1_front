@@ -7,13 +7,12 @@ import { ErrorPage } from '../pageCards/ErrorPage.tsx';
 import { NotFoundProducts } from '../pageCards/NotFoundProducts.tsx';
 import { LoadingProducts } from '../pageCards/LoadingProducts.tsx';
 import { Paginations } from '../pageCards/Paginations.tsx';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import { useProducts } from '../../zustand/hooks/useProducts.tsx';
 import { Filters } from '../pageCards/Filters.tsx';
 import { AiOutlineFilter } from 'react-icons/ai';
-import { stateProductsPagination } from '../../utils/ObjectCategorys.tsx';
 import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/20/solid';
 import { HeartIcon } from '@heroicons/react/24/outline';
@@ -29,23 +28,11 @@ export const CardsCategory = () => {
 
   const { page, priceMin, priceMax, ratingOrder } = state;
 
-  const { loading, error } = useProducts({ page, category: categorys, priceMin, priceMax, ratingOrder });
+  const { loading, error, totalCount } = useProducts({ page, category: categorys, priceMin, priceMax, ratingOrder });
 
   const { products, favorites, userLogin } = useStore();
 
   const { addCart, handleImageLoad, classNames, addFavorite, animationHeart } = ContextCardsGlobal();
-
-  useEffect(() => {
-    const getFinalPage = async () => {
-      if (categorys) {
-        dispatch({
-          type: 'SET_FINALPAGE',
-          payload: await stateProductsPagination(categorys)
-        });
-      }
-    };
-    getFinalPage();
-  }, [categorys, dispatch]);
 
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
 
@@ -138,7 +125,7 @@ export const CardsCategory = () => {
           </div>
         </div>
       </div>
-      {products.length !== 0 && <Paginations />}
+      {products.length !== 0 && <Paginations totalCount={totalCount} />}
       <Footer />
     </>
   );

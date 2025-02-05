@@ -4,7 +4,11 @@ import { GlobalContext } from '../../globalState/GlobalContext.tsx';
 import ContextCardsGlobal from '../../utils/ContextCardsGlobal.tsx';
 import useStore from '../../zustand/store.tsx';
 
-export const Paginations = () => {
+type TotalCount = {
+  totalCount: number;
+};
+
+export const Paginations = ({ totalCount }: TotalCount) => {
   const { products } = useStore((state) => state);
 
   const { nextPage, previousPage, setCurrentPage, firstPPage, lastPage, stylePage } = ContextCardsGlobal();
@@ -43,18 +47,20 @@ export const Paginations = () => {
           {currentPage1}
         </button>
 
-        <button className={stylePage(currentPage2)} onClick={() => setCurrentPage(currentPage2)}>
-          {currentPage2}
-        </button>
+        {!(totalCount <= 12) && (
+          <button className={stylePage(currentPage2)} onClick={() => setCurrentPage(currentPage2)}>
+            {currentPage2}
+          </button>
+        )}
 
-        {!(state.finalPage < currentPage3 || products.length < 12) && (
+        {!(state.finalPage < currentPage3) && (
           <button className={stylePage(currentPage3)} onClick={() => setCurrentPage(currentPage3)}>
             {currentPage3}
           </button>
         )}
 
         {/* Elipsis 2 */}
-        <span className="px-1 py-1 text-gray-500">{!(currentPage3 === state.finalPage) && '...'}</span>
+        <span className="px-1 py-1 text-gray-500">{!(currentPage3 === state.finalPage) && !(totalCount <= 12) && '...'}</span>
 
         {!(currentPage3 === state.finalPage || state.finalPage < currentPage3) && (
           <button
