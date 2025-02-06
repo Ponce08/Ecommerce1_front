@@ -267,7 +267,7 @@ export const EditProductAdmin = () => {
               // Imagen principal, es decir la mas grande
               <img
                 src={loadedProduct.images[selectedImage]}
-                className={`object-cover w-full h-ful lg:p-4 ${loadedImages[selectedImage] ? '' : 'hidden'}`}
+                className={`object-cover w-full lg:p-4 ${loadedImages[selectedImage] ? '' : 'hidden'}`}
               />
             )}
 

@@ -17,11 +17,11 @@ export const ShoppingCarts = () => {
     <div
       className={
         contextGlobal.state.isTrue
-          ? 'z-10 fixed inset-0 bg-gray-800/50 backdrop-blur-sm flex items-center justify-center'
+          ? 'mt-24 absolute flex items-center justify-center'
           : 'display_none'
       }
     >
-      <div className="w-[400px] bg-white rounded-lg shadow-lg flex flex-col class_transition_cart">
+      <div className="w-[330px] md:w-[430px] bg-white rounded-lg shadow-lg flex flex-col class_transition_cart">
         {/* Header */}
         <div className="p-4 border-b flex items-center justify-between">
           <div className="flex items-center gap-2 text-lg font-semibold">

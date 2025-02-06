@@ -155,29 +155,22 @@ const ContextCardsGlobal = () => {
         : 'px-3 py-1 rounded-lg text-gray-700 text-xs xs:text-[10px] xs:px-2 lg:text-lg hover:text-[#8c52ff] hover:border-[#8c52ff] border';
     },
     applyFilters: async (category: string, minPrice: string, maxPrice: string, rating: string) => {
-      // const numberTotal = Math.ceil((await getTotalProducts()) / 12);
       const normalizedCategory = category.toLowerCase().replace(/\s+/g, '-');
       navigate(`/products/${normalizedCategory}`);
       dispatch({ type: 'SET_FALSE_FILTERS' });
       dispatch({ type: 'SET_PAGE', payload: 1 });
       dispatch({ type: 'SET_CATEGORY', payload: category === '' ? null : normalizedCategory });
       dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
-      // dispatch({
-      //   type: 'SET_FINALPAGE',
-      //   payload: stateProductsPagination(category) === 0 ? numberTotal : stateProductsPagination(category)
-      // });
       dispatch({ type: 'SET_MINPRICE', payload: Number(minPrice) === 0 ? null : Number(minPrice) });
       dispatch({ type: 'SET_MAXPRICE', payload: Number(maxPrice) === 0 ? null : Number(maxPrice) });
       dispatch({ type: 'SET_RATING_ORDER', payload: rating });
     },
 
     allProducts: async (rating: string) => {
-      // const numberTotal = Math.ceil((await getTotalProducts()) / 12);
       navigate('/products');
       dispatch({ type: 'SET_CATEGORY', payload: null });
       dispatch({ type: 'SET_CURRENTPAGE', payload: 0 });
       dispatch({ type: 'SET_PAGE', payload: 1 });
-      // dispatch({ type: 'SET_FINALPAGE', payload: numberTotal });
       dispatch({ type: 'SET_FALSE_FILTERS' });
       dispatch({ type: 'SET_MINPRICE', payload: null });
       dispatch({ type: 'SET_MAXPRICE', payload: null });

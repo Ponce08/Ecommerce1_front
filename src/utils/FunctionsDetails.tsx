@@ -49,6 +49,25 @@ const FunctionsDetails = () => {
       setLoadedImages: (updater: (prev: Record<number, boolean>) => Record<number, boolean>) => void
     ) => {
       setLoadedImages((prev) => ({ ...prev, [id]: true }));
+    },
+    reviewsFunction: (e: { preventDefault: () => void }, setShowReviews: (updater: (prev: boolean) => boolean) => void) => {
+      e.preventDefault();
+
+      setShowReviews((prev) => {
+        const newState = !prev;
+
+        if (newState) {
+          // Si se activan las reseñas, hacer scroll a la sección
+          setTimeout(() => {
+            document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        } else {
+          // Si se ocultan, hacer scroll al inicio
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        return newState;
+      });
     }
   };
 };

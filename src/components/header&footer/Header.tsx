@@ -7,10 +7,10 @@ import img8 from '../../../src/imagenes/img8.jpg';
 import { Link, useLocation } from 'react-router-dom';
 import { Fragment, useState, useContext } from 'react';
 import { GlobalContext } from '../../globalState/GlobalContext.tsx';
-import { ShoppingCarts } from '../shoppingCart/ShoppingCarts.tsx';
 import useStore from '../../zustand/store.tsx';
 import FunctionsGlobalHeader from '../../utils/FunctionsGlobalHeader.tsx';
 import { Bars3Icon, ShoppingBagIcon, XMarkIcon, HeartIcon } from '@heroicons/react/24/outline';
+import { ShoppingCarts } from '@/components/shoppingCart/ShoppingCarts.tsx';
 import {
   Dialog,
   DialogBackdrop,
@@ -399,9 +399,7 @@ export const Header = () => {
                 <div className="flex lg:ml-6"></div>
 
                 {/* Cart */}
-                <div className="ml-4 flow-root lg:ml-6">
-                  {state.isTrue && <ShoppingCarts />}
-
+                <div className="ml-4 lg:ml-6">
                   {!(location.pathname === '/finishshopping') && (
                     <a className="group -m-2 flex items-center p-2 cursor-pointer" onClick={() => dispatch({ type: 'SET_TRUE' })}>
                       <ShoppingBagIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400 group-hover:text-purple-600" />
@@ -417,6 +415,11 @@ export const Header = () => {
           </div>
         </nav>
       </header>
+      {state.isTrue && (
+        <div className="fixed min-h-sreen inset-0 z-30 w-full overflow-auto flex justify-center py-4 bg-gray-800/50 backdrop-blur-sm">
+          <ShoppingCarts />
+        </div>
+      )}
     </div>
   );
 };

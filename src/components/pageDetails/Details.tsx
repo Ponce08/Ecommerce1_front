@@ -24,7 +24,7 @@ export const Details = () => {
 
   const { selectedProduct, favorites, userLogin } = useStore();
 
-  const { addCart, handleBack, handleImageLoad } = FunctionsDetails();
+  const { addCart, handleBack, handleImageLoad, reviewsFunction } = FunctionsDetails();
 
   const [loadedImages, setLoadedImages] = useState<{ [key: number]: boolean }>({});
 
@@ -39,31 +39,26 @@ export const Details = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-colorBackground p-4 mt-[100px]">
-        <div className="max-w-2xl mx-auto">
-          <a className="flex items-center text-purple-600 mb-4">
-            <ChevronLeft className="w-6 h-6" />
-            <span className="cursor-pointer hover:font-bold" onClick={handleBack}>
-              BACK
-            </span>
-          </a>
+      <div className="min-h-screen bg-colorBackground p-4 mt-[100px] px-6">
+        <a className="flex items-center text-purple-600 mb-4">
+          <ChevronLeft className="w-6 h-6" />
+          <span className="cursor-pointer hover:font-bold" onClick={handleBack}>
+            BACK
+          </span>
+        </a>
 
-          <div className="space-y-2 mb-4">
-            <h1 className="text-xl font-semibold">{selectedProduct.title}</h1>
-            <p className="text-lg">${selectedProduct.price}</p>
-          </div>
-
-          <div className="space-y-4 mb-6 mt-6">
-            <div className="relative w-[90%] h-auto bg-gray-200 rounded-lg overflow-hidden">
-              <img src={selectedProduct.images[selectedImage]} alt="Product image" className="object-cover w-full h-full p-2" />
+        <div className="flex flex-col lg:flex-row">
+          <div className="flex">
+            <div className="relative flex justify-center items-center w-[400px] h-[300px] lg:h-[400px] bg-gray-200 rounded-lg overflow-hidden">
+              <img src={selectedProduct.images[selectedImage]} alt="Product image" className="object-cover w-full h-full" />
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 ml-4">
               {selectedProduct.images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`relative w-[15%] h-auto rounded-lg bg-gray-200 overflow-hidden ${
+                  className={`relative flex justify-center items-center w-14 h-14 rounded-lg bg-gray-200 overflow-hidden ${
                     selectedImage === index ? 'ring-2 ring-purple-600' : ''
                   }`}
                 >
@@ -78,7 +73,7 @@ export const Details = () => {
                   <img
                     src={image}
                     alt={`Product thumbnail ${index + 1}`}
-                    className={`object-cover w-full h-full ${loadedImages[index] ? '' : 'hidden'}`}
+                    className={`object-cover w-full h-ful ${loadedImages[index] ? '' : 'hidden'}`}
                     onLoad={() => handleImageLoad(index, setLoadedImages)}
                   />
                 </button>
@@ -86,7 +81,11 @@ export const Details = () => {
             </div>
           </div>
 
-          <div className="space-y-4 mb-6">
+          <div className="space-y-4 mt-4 lg:mt-0 lg:ml-4">
+            <div className="space-y-2 mb-4">
+              <h1 className="text-xl font-semibold">{selectedProduct.title}</h1>
+              <p className="text-lg">${selectedProduct.price}</p>
+            </div>
             <div>
               <h2 className="font-semibold mb-2">Descripcion</h2>
               <p className="text-gray-600">{selectedProduct.description}</p>
@@ -98,88 +97,91 @@ export const Details = () => {
             </div>
 
             <p className="text-gray-600 font-semibold">{selectedProduct.stock} available</p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="flex items-center">
-              <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="rounded-l-full bg-gray-200 px-4 py-2">
-                <Minus className="w-4 h-4 hover:text-purple-600" />
-              </button>
-              <div className="flex items-center justify-center w-12 h-8 bg-white">{quantity}</div>
-              <button
-                onClick={() => setQuantity(quantity + 1)}
-                className="rounded-r-full bg-gray-200 px-4 py-2"
-                disabled={quantity >= selectedProduct.stock}
-              >
-                <Plus className="w-4 h-4 hover:text-purple-600" />
-              </button>
-            </div>
-            <button
-              onClick={() => addCart(quantity)}
-              className="xs:px-2 xs:text-xs bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded flex-2"
-            >
-              ADD TO CART
-            </button>
-            <div
-              className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer"
-              id="favorite"
-              data-tooltip-content={
-                userLogin && (favorites[userLogin.id] || []).some((fav) => fav.id === selectedProduct.id)
-                  ? 'Remove from favorites'
-                  : 'Add to Favorites'
-              }
-              onClick={animationHeart}
-            >
-              <HeartIcon
-                className={`h-6 w-6 text-purple-700 ${
-                  userLogin && (favorites[userLogin.id] || []).some((fav) => fav.id === selectedProduct.id)
-                    ? 'fill-purple-700'
-                    : ''
-                }`}
-                onClick={() => {
-                  addFavorite(
-                    selectedProduct.id,
-                    selectedProduct.title,
-                    selectedProduct.price,
-                    selectedProduct.stock,
-                    selectedProduct.rating,
-                    selectedProduct.images[0]
-                  );
-                }}
-              />
-              <Tooltip anchorId="favorite" />
-            </div>
-          </div>
-          <div className="mb-8 mt-10">
-            <div className="flex justify-between items-center mb-4">
-              <button onClick={() => setShowReviews(!showReviews)} className="text-purple-600 ml-2 font-bold hover:underline">
-                {showReviews ? 'Hide Reviews' : 'Show Reviews'}
-              </button>
-            </div>
-            <div
-              className={`overflow-hidden transition-[max-height,opacity] duration-[1000ms] ease-in-out ${
-                showReviews ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-              }`}
-            >
-              <div className="space-y-4">
-                {selectedProduct.reviews?.map((review, index) => (
-                  <div key={index} className="space-y-2 bg-gray-200 rounded-lg p-4">
-                    <p className="text-purple-600 font-bold">{review.reviewerName}</p>
-                    <p className="text-gray-600 font-bold">{review.reviewerEmail}</p>
-                    <p className="text-gray-600">
-                      <span className="font-bold">Coment :</span> {review.comment}
-                    </p>
-                    <div className="flex">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-4 h-4 ${i < review.rating ? 'fill-purple-600 text-purple-600' : 'text-gray-300'}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
+            <div className="flex items-center gap-4">
+              <div className="flex items-center">
+                <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="rounded-l-full bg-gray-200 px-4 py-2">
+                  <Minus className="w-4 h-4 hover:text-purple-600" />
+                </button>
+                <div className="flex items-center justify-center w-12 h-8 bg-white">{quantity}</div>
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="rounded-r-full bg-gray-200 px-4 py-2"
+                  disabled={quantity >= selectedProduct.stock}
+                >
+                  <Plus className="w-4 h-4 hover:text-purple-600" />
+                </button>
               </div>
+              <button
+                onClick={() => addCart(quantity)}
+                className="xs:px-2 xs:text-xs bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded flex-2"
+              >
+                ADD TO CART
+              </button>
+              <div
+                className="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer"
+                id="favorite"
+                data-tooltip-content={
+                  userLogin && (favorites[userLogin.id] || []).some((fav) => fav.id === selectedProduct.id)
+                    ? 'Remove from favorites'
+                    : 'Add to Favorites'
+                }
+                onClick={animationHeart}
+              >
+                <HeartIcon
+                  className={`h-6 w-6 text-purple-700 ${
+                    userLogin && (favorites[userLogin.id] || []).some((fav) => fav.id === selectedProduct.id)
+                      ? 'fill-purple-700'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    addFavorite(
+                      selectedProduct.id,
+                      selectedProduct.title,
+                      selectedProduct.price,
+                      selectedProduct.stock,
+                      selectedProduct.rating,
+                      selectedProduct.images[0]
+                    );
+                  }}
+                />
+                <Tooltip anchorId="favorite" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="w-full lg:w-[50%] mb-8 mt-4">
+          <div className="flex justify-between items-center mb-4">
+            <a
+              onClick={(e) => reviewsFunction(e, setShowReviews)}
+              role="button"
+              className="text-purple-600 ml-2 font-bold cursor-pointer hover:underline"
+            >
+              {showReviews ? 'Hide Reviews' : 'Show Reviews'}
+            </a>
+          </div>
+          <div
+            className={`overflow-hidden transition-[max-height,opacity] duration-[1000ms] ease-in-out ${
+              showReviews ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+            }`}
+          >
+            <div className="space-y-4">
+              {selectedProduct.reviews?.map((review, index) => (
+                <div id="reviews" key={index} className="space-y-2 bg-gray-200 rounded-lg p-4">
+                  <p className="text-purple-600 font-bold">{review.reviewerName}</p>
+                  <p className="text-gray-600 font-bold">{review.reviewerEmail}</p>
+                  <p className="text-gray-600">
+                    <span className="font-bold">Coment :</span> {review.comment}
+                  </p>
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${i < review.rating ? 'fill-purple-600 text-purple-600' : 'text-gray-300'}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

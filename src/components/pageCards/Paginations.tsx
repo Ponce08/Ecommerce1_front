@@ -60,7 +60,7 @@ export const Paginations = ({ totalCount }: TotalCount) => {
         )}
 
         {/* Elipsis 2 */}
-        <span className="px-1 py-1 text-gray-500">{!(currentPage3 === state.finalPage) && !(totalCount <= 12) && '...'}</span>
+        <span className="px-1 py-1 text-gray-500">{!(totalCount <= 12) && !(state.finalPage < currentPage3) && '...'}</span>
 
         {!(currentPage3 === state.finalPage || state.finalPage < currentPage3) && (
           <button
