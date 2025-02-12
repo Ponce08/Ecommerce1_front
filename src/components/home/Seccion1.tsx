@@ -23,37 +23,14 @@ export const Seccion1 = () => {
                       <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                         <img
                           alt=""
-                          src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
+                          src="https://res.cloudinary.com/dm7llqul3/image/upload/v1738686443/Ecommerce_FyT/ewai2tf4jvcvmnca7izr.webp"
                           className="size-full object-cover"
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <img
                           alt=""
-                          src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
-                          className="size-full object-cover"
-                        />
-                      </div>
-                    </div>
-                    <div className="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                      <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <img
-                          alt=""
-                          src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg"
-                          className="size-full object-cover"
-                        />
-                      </div>
-                      <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <img
-                          alt=""
-                          src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg"
-                          className="size-full object-cover"
-                        />
-                      </div>
-                      <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <img
-                          alt=""
-                          src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
+                          src="https://res.cloudinary.com/dm7llqul3/image/upload/v1738686407/Ecommerce_FyT/ywlfxcps9geyjoyejhhs.webp"
                           className="size-full object-cover"
                         />
                       </div>
@@ -62,14 +39,37 @@ export const Seccion1 = () => {
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <img
                           alt=""
-                          src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
+                          src="https://res.cloudinary.com/dm7llqul3/image/upload/v1738686344/Ecommerce_FyT/nviwh0r0hdijokachdlq.webp"
                           className="size-full object-cover"
                         />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
                         <img
                           alt=""
-                          src="https://tailwindui.com/plus/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
+                          src="https://res.cloudinary.com/dm7llqul3/image/upload/v1738686321/Ecommerce_FyT/loowhjan6jptkyvmx0lo.webp"
+                          className="size-full object-cover"
+                        />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <img
+                          alt=""
+                          src="https://res.cloudinary.com/dm7llqul3/image/upload/v1738686265/Ecommerce_FyT/fnveur0rgg8d024hgivu.webp"
+                          className="size-full object-cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <img
+                          alt=""
+                          src="https://res.cloudinary.com/dm7llqul3/image/upload/v1738686177/Ecommerce_FyT/pc6f1ux9ww3jnf2fyfmr.webp"
+                          className="size-full object-cover"
+                        />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <img
+                          alt=""
+                          src="https://res.cloudinary.com/dm7llqul3/image/upload/v1738686151/Ecommerce_FyT/jbgl1e41vavxxnypz0ga.webp"
                           className="size-full object-cover"
                         />
                       </div>

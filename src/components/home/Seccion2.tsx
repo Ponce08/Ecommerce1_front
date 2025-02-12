@@ -4,21 +4,21 @@ const callouts = [
   {
     name: 'Desk and Office',
     description: 'Work from home accessories',
-    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-01.jpg',
+    imageSrc: 'https://res.cloudinary.com/dm7llqul3/image/upload/v1738685858/Ecommerce_FyT/kiwyzzvbfvh54k8csr0o.webp',
     imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
     category: 'laptops'
   },
   {
     name: 'Self-Improvement',
     description: 'Journals and note-taking',
-    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-02.jpg',
+    imageSrc: 'https://res.cloudinary.com/dm7llqul3/image/upload/v1738686172/Ecommerce_FyT/bkkfmr3xolyay4lfmcvl.webp',
     imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
     category: 'tablets'
   },
   {
     name: 'Travel',
     description: 'Daily commute essentials',
-    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/home-page-02-edition-03.jpg',
+    imageSrc: 'https://res.cloudinary.com/dm7llqul3/image/upload/v1738686075/Ecommerce_FyT/t0xbdxbcxwc05ahihyex.webp',
     imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
     category: 'mobile-accessories'
   }
